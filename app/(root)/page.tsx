@@ -177,6 +177,9 @@ const Page = () => {
       {
         id: "budget",
         accessorKey: "budget",
+        meta: {
+          label: "Budget",
+        },
         header: ({ column }: { column: Column<Project, unknown> }) => (
           <DataTableColumnHeader column={column} title="Budget" />
         ),
@@ -307,12 +310,6 @@ const Page = () => {
   return (
     <div>
       <DataTable table={table}>
-        <DataTableToolbar table={table} />
-      </DataTable>
-            <DataTable table={table}>
-        <DataTableToolbar table={table} />
-      </DataTable>
-            <DataTable table={table}>
         <DataTableToolbar table={table} />
       </DataTable>
     </div>

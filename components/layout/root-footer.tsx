@@ -1,10 +1,6 @@
-import DiscordIcon from "@/assets/discord.svg";
-import GitHubIcon from "@/assets/github.svg";
-import Logo from "@/assets/logo.svg";
-import TwitterIcon from "@/assets/twitter.svg";
 import { PanelsTopLeft } from "lucide-react";
 import Link from "next/link";
-
+import { GitHubIcon } from "../common/icons";
 export const RootFooter = () => {
   return (
     <footer className="bg-background/95 backdrop-blur-sm border-t w-full">
@@ -16,30 +12,17 @@ export const RootFooter = () => {
               <span>basecn</span>
             </Link>
             <p className="text-muted-foreground text-sm">
-                A Next.js with shadcn/ui project base to build mordern web applications.
+              A Next.js with shadcn/ui project base to build mordern web
+              applications.
             </p>
             <div className="flex gap-4">
-              {/* <a
-                href="https://github.com/jnsahaj/tweakcn"
+              <a
+                href="https://github.com/daFoggo/basecn"
                 className="text-muted-foreground hover:text-foreground transition-colors"
+                target="_blank"
               >
                 <GitHubIcon className="size-5" />
-                <span className="sr-only">GitHub</span>
               </a>
-              <a
-                href="https://discord.gg/Phs4u2NM3n"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <DiscordIcon className="size-5" />
-                <span className="sr-only">Discord</span>
-              </a>
-              <a
-                href="https://x.com/iamsahaj_xyz"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <TwitterIcon className="size-5" />
-                <span className="sr-only">Twitter</span>
-              </a> */}
             </div>
           </div>
           <div className="space-y-4">
@@ -76,23 +59,16 @@ export const RootFooter = () => {
             <ul className="space-y-2 text-sm">
               <li>
                 <a
-                  href="https://github.com/jnsahaj/tweakcn"
+                  href="https://github.com/daFoggo/basecn"
                   className="text-muted-foreground hover:text-foreground transition-colors"
+                  target="_blank"
                 >
                   GitHub
                 </a>
               </li>
               <li>
                 <a
-                  href="https://discord.gg/Phs4u2NM3n"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  Discord
-                </a>
-              </li>
-              <li>
-                <a
-                  href="https://x.com/messages/compose?recipient_id=1426676644152889345"
+                  href="mailto:ntgiang141105@gmail.com"
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Contact
@@ -104,7 +80,7 @@ export const RootFooter = () => {
 
         <div className="flex sm:flex-row flex-col justify-between items-center gap-4 pt-8 border-t border-border/40">
           <p className="text-muted-foreground text-xs">
-            &copy; {new Date().getFullYear()} tweakcn. All rights reserved.
+            &copy; {new Date().getFullYear()} basecn. All rights reserved.
           </p>
           <p className="text-muted-foreground text-xs">
             <Link href="/privacy-policy">Privacy Policy</Link>
