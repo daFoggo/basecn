@@ -1,7 +1,7 @@
 import { PanelsTopLeft } from "lucide-react";
 import Link from "next/link";
 import { GitHubIcon } from "../common/icons";
-import { APP_CONFIG } from "@/config/app";
+import { APP_CONFIG } from "@/lib/config/app";
 export const RootFooter = () => {
   return (
     <footer className="bg-background/95 backdrop-blur-sm border-t w-full">

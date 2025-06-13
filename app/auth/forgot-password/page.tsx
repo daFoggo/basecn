@@ -1,11 +1,11 @@
-import { LoaderPage } from "@/components/common/loaderPage";
-import { ForgotPasswordForm } from "@/features/auth/components/forgot-password-form";
+import { PageLoader } from "@/components/common/page-loader";
+import { ForgotPasswordForm } from "@/features/auth";
 import { Suspense } from "react";
 
 const ForgotPasswordPage = () => {
   return (
-    <Suspense fallback={<LoaderPage variant="bars" />}>
-      <div className="flex flex-col justify-center items-center bg-muted p-6 min-h-svh">
+    <Suspense fallback={<PageLoader variant="bars" />}>
+      <div className="flex flex-col justify-center items-center bg-muted min-h-svh">
         <div className="w-full max-w-sm md:max-w-3xl">
           <ForgotPasswordForm />
         </div>

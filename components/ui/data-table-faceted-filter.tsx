@@ -1,6 +1,6 @@
 "use client";
 
-import { Option } from "@/types/data-table";
+import { Option } from "@/lib/types/data-table";
 import type { Column } from "@tanstack/react-table";
 import { Check, PlusCircle, XCircle } from "lucide-react";
 

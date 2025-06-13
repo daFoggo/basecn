@@ -1,20 +1,14 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { formatCompactNumber } from "@/lib/format";
-import { useGithubStars } from "@/lib/hooks/use-github-stars";
 import { cn } from "@/lib/utils";
-import { motion } from "framer-motion";
 import { PanelsTopLeft } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { GitHubIcon } from "../common/icons";
-import { ThemeSwitcher } from "../common/theme-switcher";
-import { APP_CONFIG } from "@/config/app";
+import HeaderActionButtons from "./header-action-buttons";
+import { APP_CONFIG } from "@/lib/config/app";
 
 export const NoNavHeader = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const { stargazersCount } = useGithubStars("daFoggo", "basecn");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -29,39 +23,6 @@ export const NoNavHeader = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Function to render GitHub button and theme switcher
-  const renderHeaderControls = () => {
-    return (
-      <>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3, delay: 0.45 }}
-        >
-          <Button variant="ghost" asChild>
-            <a
-              href={APP_CONFIG.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold"
-            >
-              <GitHubIcon className="size-4" />
-              {stargazersCount > 0 && formatCompactNumber(stargazersCount)}
-            </a>
-          </Button>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3, delay: 0.4 }}
-        >
-          <ThemeSwitcher />
-        </motion.div>
-      </>
-    );
-  };
-
   return (
     <header
       className={cn(
@@ -73,15 +34,11 @@ export const NoNavHeader = () => {
         <Link href="/">
           <div className="flex items-center gap-2 font-bold">
             <PanelsTopLeft className="size-4" />
-            <span>basecn</span>
+            <span>{APP_CONFIG.name}</span>
           </div>
         </Link>
-        <div className="hidden md:flex items-center gap-4">
-          {renderHeaderControls()}
-        </div>
-
-        <div className="md:hidden flex items-center gap-4">
-          {renderHeaderControls()}
+        <div className="flex items-center gap-4">
+          <HeaderActionButtons showNavigationButton={false} />
         </div>
       </div>
     </header>

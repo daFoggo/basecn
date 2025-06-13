@@ -1,10 +1,12 @@
 import { Toaster } from "@/components/ui/sonner";
+import { AuthProvider } from "@/features/auth/contexts/auth-provider";
+import { APP_CONFIG } from "@/lib/config/app";
 import { ThemeProvider } from "@/lib/contexts/theme-context";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { SWRConfig } from "swr";
 import "./globals.css";
-import { APP_CONFIG } from "@/config/app";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,8 +35,12 @@ export default function RootLayout({
       >
         <ThemeProvider>
           <NuqsAdapter>
-            {children}
-            <Toaster position="top-center" richColors />
+            <SWRConfig>
+              <AuthProvider>
+                {children}
+                <Toaster position="top-center" richColors />
+              </AuthProvider>
+            </SWRConfig>
           </NuqsAdapter>
         </ThemeProvider>
       </body>

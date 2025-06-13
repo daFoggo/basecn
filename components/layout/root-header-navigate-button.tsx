@@ -1,11 +1,12 @@
 "use client";
 
+import { useAuthContext } from "@/features/auth";
 import { ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 
-export const RootHeaderActionButton = () => {
-  const isAuthenticated = false;
+export const RootHeaderNavigateButton = () => {
+  const { isAuthenticated } = useAuthContext();
   const router = useRouter();
 
   const handleClick = () => {

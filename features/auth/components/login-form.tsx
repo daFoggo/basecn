@@ -5,7 +5,7 @@ import { GoogleIcon } from "@/components/common/icons";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
-import { APP_CONFIG } from "@/config/app";
+import { APP_CONFIG } from "@/lib/config/app";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";

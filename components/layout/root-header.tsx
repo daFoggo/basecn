@@ -1,23 +1,19 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { APP_CONFIG } from "@/config/app";
-import { formatCompactNumber } from "@/lib/format";
 import { handleScrollToSection } from "@/lib/functions";
-import { useGithubStars } from "@/lib/hooks/use-github-stars";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
 import { Menu, PanelsTopLeft, X } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { GitHubIcon } from "../common/icons";
-import { ThemeSwitcher } from "../common/theme-switcher";
-import { RootHeaderActionButton } from "./root-header-action-button";
+import HeaderActionButtons from "./header-action-buttons";
+import { RootHeaderNavigateButton } from "./root-header-navigate-button";
+import { APP_CONFIG } from "@/lib/config/app";
 
 export const RootHeader = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { stargazersCount } = useGithubStars("daFoggo", "basecn");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,49 +28,6 @@ export const RootHeader = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Function to render GitHub button and theme switcher
-  const renderHeaderControls = (showActionButton = true) => {
-    return (
-      <>
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3, delay: 0.45 }}
-        >
-          <Button variant="ghost" asChild>
-            <a
-              href={APP_CONFIG.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold"
-            >
-              <GitHubIcon className="size-4" />
-              {stargazersCount > 0 && formatCompactNumber(stargazersCount)}
-            </a>
-          </Button>
-        </motion.div>
-
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.3, delay: 0.4 }}
-        >
-          <ThemeSwitcher />
-        </motion.div>
-
-        {showActionButton && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.3, delay: 0.5 }}
-          >
-            <RootHeaderActionButton />
-          </motion.div>
-        )}
-      </>
-    );
-  };
-
   return (
     <header
       className={cn(
@@ -86,7 +39,7 @@ export const RootHeader = () => {
         <Link href="/">
           <div className="flex items-center gap-2 font-bold">
             <PanelsTopLeft className="size-4" />
-            <span>basecn</span>
+            <span>{APP_CONFIG.name}</span>
           </div>
         </Link>
         <nav className="hidden md:flex items-center gap-4 lg:gap-8">
@@ -107,11 +60,11 @@ export const RootHeader = () => {
         </nav>
 
         <div className="hidden md:flex items-center gap-4">
-          {renderHeaderControls(true)}
+          <HeaderActionButtons showNavigationButton={true} />
         </div>
 
         <div className="md:hidden flex items-center gap-4">
-          {renderHeaderControls(false)}
+          <HeaderActionButtons showNavigationButton={false} />
           <Button
             variant="ghost"
             size="icon"
@@ -159,7 +112,7 @@ export const RootHeader = () => {
               transition={{ duration: 0.3, delay: 0.3 }}
               className="mt-2 pt-2 border-t border-border/30"
             >
-              <RootHeaderActionButton />
+              <RootHeaderNavigateButton />
             </motion.div>
           </div>
         </motion.div>

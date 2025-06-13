@@ -81,7 +81,7 @@ const FeatureCard = ({ feature }: { feature: IFeature }) => {
       }}
       className="h-full"
     >
-      <Card className="hover:shadow-lg hover:shadow-primary/10 backdrop-blur-xl p-0 border hover:border-primary/100 border-border/70 rounded-none h-full overflow-hidden transition-all duration-300">
+      <Card className="hover:shadow-lg hover:shadow-primary/10 backdrop-blur-xl p-0 border hover:border-primary/100 border-border/70 rounded-none h-full overflow-hidden transition-all duration-300 cursor-pointer">
         <div className="relative p-4 h-full">
           <div className="-top-10 -right-10 absolute bg-gradient-to-b from-primary/20 to-primary/5 opacity-80 blur-3xl w-32 h-32 pointer-events-none" />
           <div className="z-10 relative">
