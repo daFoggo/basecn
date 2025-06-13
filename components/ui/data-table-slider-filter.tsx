@@ -72,11 +72,13 @@ export function DataTableSliderFilter<TData>({
 
     const rangeSize = maxValue - minValue;
     const step =
-      rangeSize <= 20
+      rangeSize <= 5
+        ? 0.1
+        : rangeSize <= 20
         ? 1
         : rangeSize <= 100
-          ? Math.ceil(rangeSize / 20)
-          : Math.ceil(rangeSize / 50);
+        ? Math.ceil(rangeSize / 20)
+        : Math.ceil(rangeSize / 50);
 
     return { min: minValue, max: maxValue, step };
   }, [column, defaultRange]);
@@ -85,9 +87,17 @@ export function DataTableSliderFilter<TData>({
     return columnFilterValue ?? [min, max];
   }, [columnFilterValue, min, max]);
 
-  const formatValue = React.useCallback((value: number) => {
-    return value.toLocaleString(undefined, { maximumFractionDigits: 0 });
-  }, []);
+  const rangeSize = max - min;
+
+  const formatValue = React.useCallback(
+    (value: number) => {
+      // Show decimal places for small ranges like ratings
+      return rangeSize <= 5
+        ? value.toLocaleString(undefined, { maximumFractionDigits: 1 })
+        : value.toLocaleString(undefined, { maximumFractionDigits: 0 });
+    },
+    [rangeSize]
+  );
 
   const onFromInputChange = React.useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -96,7 +106,7 @@ export function DataTableSliderFilter<TData>({
         column.setFilterValue([numValue, range[1]]);
       }
     },
-    [column, min, range],
+    [column, min, range]
   );
 
   const onToInputChange = React.useCallback(
@@ -106,7 +116,7 @@ export function DataTableSliderFilter<TData>({
         column.setFilterValue([range[0], numValue]);
       }
     },
-    [column, max, range],
+    [column, max, range]
   );
 
   const onSliderValueChange = React.useCallback(
@@ -115,7 +125,7 @@ export function DataTableSliderFilter<TData>({
         column.setFilterValue(value);
       }
     },
-    [column],
+    [column]
   );
 
   const onReset = React.useCallback(
@@ -125,7 +135,7 @@ export function DataTableSliderFilter<TData>({
       }
       column.setFilterValue(undefined);
     },
-    [column],
+    [column]
   );
 
   return (

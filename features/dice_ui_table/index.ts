@@ -1,0 +1,1 @@
+export * from "./components/dice-ui-table"
