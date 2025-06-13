@@ -9,7 +9,7 @@ export const RootHeaderActionButton = () => {
   const router = useRouter();
 
   const handleClick = () => {
-    router.push(isAuthenticated ? "/dashboard" : "/auth");
+    router.push(isAuthenticated ? "/dashboard" : "/auth/login");
   };
 
   return (

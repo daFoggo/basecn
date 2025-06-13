@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import { APP_CONFIG } from "@/config/app";
 import { formatCompactNumber } from "@/lib/format";
 import { handleScrollToSection } from "@/lib/functions";
 import { useGithubStars } from "@/lib/hooks/use-github-stars";
@@ -42,7 +43,7 @@ export const RootHeader = () => {
         >
           <Button variant="ghost" asChild>
             <a
-              href="https://github.com/daFoggo/basecn"
+              href={APP_CONFIG.github}
               target="_blank"
               rel="noopener noreferrer"
               className="font-semibold"
@@ -89,22 +90,20 @@ export const RootHeader = () => {
           </div>
         </Link>
         <nav className="hidden md:flex items-center gap-4 lg:gap-8">
-          {["Examples", "Features"].map(
-            (item, i) => (
-              <motion.a
-                key={item}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.1 + i * 0.05 }}
-                href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
-                onClick={handleScrollToSection}
-                className="group relative font-medium text-muted-foreground hover:text-foreground text-xs lg:text-sm transition-colors"
-              >
-                {item}
-                <span className="-bottom-1 left-0 absolute bg-primary w-0 group-hover:w-full h-0.5 transition-all duration-300"></span>
-              </motion.a>
-            )
-          )}
+          {["Examples", "Features"].map((item, i) => (
+            <motion.a
+              key={item}
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: 0.1 + i * 0.05 }}
+              href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
+              onClick={handleScrollToSection}
+              className="group relative font-medium text-muted-foreground hover:text-foreground text-xs lg:text-sm transition-colors"
+            >
+              {item}
+              <span className="-bottom-1 left-0 absolute bg-primary w-0 group-hover:w-full h-0.5 transition-all duration-300"></span>
+            </motion.a>
+          ))}
         </nav>
 
         <div className="hidden md:flex items-center gap-4">
@@ -137,25 +136,23 @@ export const RootHeader = () => {
           className="md:hidden top-16 absolute inset-x-0 bg-background/95 backdrop-blur-lg border-b"
         >
           <div className="flex flex-col gap-4 mx-auto px-4 py-4 container">
-            {["Examples", "Features"].map(
-              (item, i) => (
-                <motion.a
-                  key={item}
-                  initial={{ opacity: 0, x: -10 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ duration: 0.2, delay: i * 0.05 }}
-                  href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
-                  onClick={(e) => {
-                    handleScrollToSection(e);
-                    setMobileMenuOpen(false);
-                  }}
-                  className="group relative py-2 overflow-hidden font-medium text-sm"
-                >
-                  <span className="z-10 relative">{item}</span>
-                  <span className="bottom-0 left-0 absolute bg-primary w-0 group-hover:w-full h-0.5 transition-all duration-300"></span>
-                </motion.a>
-              )
-            )}
+            {["Examples", "Features"].map((item, i) => (
+              <motion.a
+                key={item}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.2, delay: i * 0.05 }}
+                href={`#${item.toLowerCase().replace(/\s+/g, "-")}`}
+                onClick={(e) => {
+                  handleScrollToSection(e);
+                  setMobileMenuOpen(false);
+                }}
+                className="group relative py-2 overflow-hidden font-medium text-sm"
+              >
+                <span className="z-10 relative">{item}</span>
+                <span className="bottom-0 left-0 absolute bg-primary w-0 group-hover:w-full h-0.5 transition-all duration-300"></span>
+              </motion.a>
+            ))}
             <motion.div
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}

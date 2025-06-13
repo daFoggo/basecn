@@ -30,9 +30,9 @@ export const Features = () => {
             Features
           </Badge>
         </div>
-        <h2 className="bg-clip-text bg-gradient-to-r from-foreground to-foreground/80 font-bold text-transparent text-3xl md:text-4xl tracking-tight">
+        <p className="bg-clip-text bg-gradient-to-r from-foreground to-foreground/80 font-bold text-transparent text-3xl md:text-4xl tracking-tight">
           Quickly build up your application
-        </h2>
+        </p>
         <p className="max-w-[800px] text-muted-foreground md:text-lg">
           Explore a collection of ready-to-use components and layouts that suit
           most practical needs.

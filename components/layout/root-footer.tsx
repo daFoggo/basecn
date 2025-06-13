@@ -1,6 +1,7 @@
 import { PanelsTopLeft } from "lucide-react";
 import Link from "next/link";
 import { GitHubIcon } from "../common/icons";
+import { APP_CONFIG } from "@/config/app";
 export const RootFooter = () => {
   return (
     <footer className="bg-background/95 backdrop-blur-sm border-t w-full">
@@ -9,15 +10,14 @@ export const RootFooter = () => {
           <div className="space-y-4 col-span-2 max-w-md">
             <Link href="/" className="flex items-center gap-2 font-bold">
               <PanelsTopLeft className="size-4" />
-              <span>basecn</span>
+              <span>{APP_CONFIG.name}</span>
             </Link>
             <p className="text-muted-foreground text-sm">
-              A Next.js with shadcn/ui project base to build mordern web
-              applications.
+              {APP_CONFIG.description}
             </p>
             <div className="flex gap-4">
               <a
-                href="https://github.com/daFoggo/basecn"
+                href={APP_CONFIG.github}
                 className="text-muted-foreground hover:text-foreground transition-colors"
                 target="_blank"
               >
@@ -44,14 +44,6 @@ export const RootFooter = () => {
                   Examples
                 </a>
               </li>
-              <li>
-                <a
-                  href="#roadmap"
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  Roadmap
-                </a>
-              </li>
             </ul>
           </div>
           <div className="space-y-4">
@@ -59,7 +51,7 @@ export const RootFooter = () => {
             <ul className="space-y-2 text-sm">
               <li>
                 <a
-                  href="https://github.com/daFoggo/basecn"
+                  href={APP_CONFIG.github}
                   className="text-muted-foreground hover:text-foreground transition-colors"
                   target="_blank"
                 >
@@ -68,7 +60,7 @@ export const RootFooter = () => {
               </li>
               <li>
                 <a
-                  href="mailto:ntgiang141105@gmail.com"
+                  href={APP_CONFIG.contact}
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
                   Contact
@@ -80,7 +72,7 @@ export const RootFooter = () => {
 
         <div className="flex sm:flex-row flex-col justify-between items-center gap-4 pt-8 border-t border-border/40">
           <p className="text-muted-foreground text-xs">
-            &copy; {new Date().getFullYear()} basecn. All rights reserved.
+            &copy; {new Date().getFullYear()} {APP_CONFIG.name}. All rights reserved.
           </p>
           {/* <p className="text-muted-foreground text-xs">
             <Link href="/privacy-policy">Privacy Policy</Link>

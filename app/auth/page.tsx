@@ -1,5 +1,7 @@
-const Page = () => {
-  return <div>Page</div>;
+import { redirect } from "next/navigation";
+
+const AuthPage = () => {
+  redirect("/auth/login");
 };
 
-export default Page;
+export default AuthPage;
