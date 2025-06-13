@@ -9,7 +9,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useDataTable } from "@/hooks/use-data-table";
+import { useDataTable } from "@/lib/hooks/use-data-table";
 
 import { Checkbox } from "@/components/ui/checkbox";
 import { DataTableColumnHeader } from "@/components/ui/data-table-column-header";

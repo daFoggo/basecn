@@ -1,11 +1,11 @@
 import { LoaderPage } from "@/components/common/loaderPage";
-import { DiceUITable } from "@/features/dice_ui_table";
+import { Landing } from "@/features/landing";
 import { Suspense } from "react";
 
 const Page = () => {
   return (
     <Suspense fallback={<LoaderPage variant="bars" />}>
-      <DiceUITable />
+      <Landing />
     </Suspense>
   );
 };

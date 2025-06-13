@@ -82,9 +82,9 @@ export const RootFooter = () => {
           <p className="text-muted-foreground text-xs">
             &copy; {new Date().getFullYear()} basecn. All rights reserved.
           </p>
-          <p className="text-muted-foreground text-xs">
+          {/* <p className="text-muted-foreground text-xs">
             <Link href="/privacy-policy">Privacy Policy</Link>
-          </p>
+          </p> */}
         </div>
       </div>
     </footer>
