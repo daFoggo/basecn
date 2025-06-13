@@ -6,8 +6,8 @@ import { TECH_STACK } from "../utils/constants";
 
 export function Hero() {
   return (
-    <section className="isolate relative mx-auto py-20 md:py-32 lg:py-40 w-full container">
-      <div className="z-10 relative px-4 md:px-6">
+    <section className="isolate py-20 md:py-32 lg:py-40 w-full container">
+      <div className="z-10 relative">
         <div className="items-center gap-12 grid lg:grid-cols-2">
           {/* Left Column - Text Content */}
           <div className="mx-auto lg:mx-0 max-w-2xl text-left">
@@ -22,19 +22,18 @@ export function Hero() {
                 Project base
               </Badge>
             </div>
-            <h1 className="bg-clip-text bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 mb-6 font-bold text-transparent text-4xl md:text-5xl lg:text-6xl tracking-tight">
+            <p className="bg-clip-text bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 mb-6 font-bold text-transparent text-4xl md:text-5xl lg:text-6xl tracking-tight">
               Let's start cooking your mordern web application
-            </h1>
+            </p>
             <p className="mb-8 text-muted-foreground text-lg md:text-xl leading-relaxed">
-              Essential components and features builts with shadcn/ui for
-              helping kickstart your Next.js projects.
+              Essential components and features builts with shadcn/ui for kickstarting your Next.js projects.
             </p>
 
             <div className="mt-8">
               <h3 className="mb-4 font-medium text-muted-foreground text-sm">
                 Built with modern tech stack
               </h3>
-              <div className="gap-4 grid grid-cols-1 sm:grid-cols-3">
+              <div className="gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                 {TECH_STACK.map((tech, index) => (
                   <TechCard
                     key={index}
@@ -80,8 +79,8 @@ const TechCard = ({
       rel="noopener noreferrer"
       className="no-underline"
     >
-      <div className="group flex items-center gap-3 bg-background/50 hover:bg-primary/5 backdrop-blur-sm p-3 border hover:border-primary/100 border-border/70 rounded-lg h-full transition-all duration-300">
-        <div className="flex-shrink-0 bg-background shadow-sm p-2 border group-hover:border-primary/70 border-border/40 rounded-md group-hover:text-primary transition-colors">
+      <div className="group flex items-center gap-3 bg-background/50 hover:bg-primary/5 backdrop-blur-sm p-3 border hover:border-primary/100 border-border/70 h-full transition-all duration-300">
+        <div className="flex-shrink-0 bg-background shadow-sm p-2 border group-hover:border-primary/70 border-border/40 group-hover:text-primary transition-colors">
           {icon}
         </div>
         <div>

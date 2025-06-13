@@ -4,3 +4,9 @@ export interface ITechStack {
   description: string;
   link: string;
 }
+
+export interface IFeature {
+  icon: JSX.Element;
+  name: string;
+  description: string;
+}

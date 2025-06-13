@@ -89,7 +89,7 @@ export const RootHeader = () => {
           </div>
         </Link>
         <nav className="hidden md:flex items-center gap-4 lg:gap-8">
-          {["Examples", "Features", "How It Works", "Roadmap", "FAQ"].map(
+          {["Examples", "Features"].map(
             (item, i) => (
               <motion.a
                 key={item}
@@ -137,7 +137,7 @@ export const RootHeader = () => {
           className="md:hidden top-16 absolute inset-x-0 bg-background/95 backdrop-blur-lg border-b"
         >
           <div className="flex flex-col gap-4 mx-auto px-4 py-4 container">
-            {["Examples", "Features", "How It Works", "Roadmap", "FAQ"].map(
+            {["Examples", "Features"].map(
               (item, i) => (
                 <motion.a
                   key={item}

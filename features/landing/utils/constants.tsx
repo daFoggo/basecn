@@ -6,7 +6,8 @@ import {
   SWRIcon,
   TailwindIcon,
 } from "@/components/common/icons";
-import { ITechStack } from "./types";
+import { Blocks, Layers, Palette, RefreshCw, Shield, Zap } from "lucide-react";
+import { IFeature, ITechStack } from "./types";
 
 export const TECH_STACK: ITechStack[] = [
   {
@@ -42,7 +43,46 @@ export const TECH_STACK: ITechStack[] = [
   {
     icon: <DiceIcon className="size-6" />,
     name: "Dice UI",
-    description: "Advanced shadcn/ui components",
+    description: "Advanced components",
     link: "https://dice-ui.com",
-  }
+  },
+];
+
+export const FEATURES: IFeature[] = [
+  {
+    icon: <Blocks className="size-6" />,
+    name: "Component-Based Architecture",
+    description:
+      "Build your UI with reusable, modular components that are easy to maintain and scale.",
+  },
+  {
+    icon: <Zap className="size-6" />,
+    name: "Lightning Fast Performance",
+    description:
+      "Optimized rendering and data fetching strategies for exceptional user experience.",
+  },
+  {
+    icon: <Palette className="size-6" />,
+    name: "Beautiful Design System",
+    description:
+      "Consistent, accessible, and customizable design tokens powered by Shadcn and Tailwind CSS.",
+  },
+  {
+    icon: <Layers className="size-6" />,
+    name: "Advanced Animations",
+    description:
+      "Create fluid, interactive animations with Framer Motion's declarative API.",
+  },
+  {
+    icon: <RefreshCw className="size-6" />,
+    name: "Easy data fetching management and revalidation",
+    description:
+      "Leverage SWR for efficient data fetching, caching, and revalidation strategies.",
+  },
+  {
+    icon: <Shield className="size-6" />,
+    name: "Type-Safe Development",
+    description:
+      "Full TypeScript support for a robust development experience with fewer bugs.",
+  },
 ];

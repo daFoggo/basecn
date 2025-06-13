@@ -5,7 +5,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="z-10 relative flex flex-col bg-background min-h-svh">
       <RootHeader />
-      <main className="flex flex-col flex-1 mx-auto container">{children}</main>
+      <main className="flex flex-col flex-1">{children}</main>
       <RootFooter />
     </div>
   );

@@ -1,9 +1,13 @@
-import { Hero } from "./hero"
+import { Examples } from "./examples";
+import { Features } from "./features";
+import { Hero } from "./hero";
 
 export const Landing = () => {
   return (
     <div className="flex-col justify-items-center items-center">
-        <Hero />
+      <Hero />
+      <Features />
+      <Examples />
     </div>
-  )
-}
+  );
+};
