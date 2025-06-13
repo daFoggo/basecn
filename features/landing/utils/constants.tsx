@@ -44,7 +44,7 @@ export const TECH_STACK: ITechStack[] = [
     icon: <DiceIcon className="size-6" />,
     name: "Dice UI",
     description: "Advanced components",
-    link: "https://dice-ui.com",
+    link: "https://diceui.com",
   },
 ];
 
