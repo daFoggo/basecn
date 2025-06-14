@@ -3,7 +3,6 @@ import type { FilterItemSchema } from "@/lib/parsers";
 import type { ColumnSort, Row, RowData } from "@tanstack/react-table";
 
 declare module "@tanstack/react-table" {
-  //@ts-ignore
   interface ColumnMeta<TData extends RowData, TValue> {
     label?: string;
     placeholder?: string;
@@ -12,6 +11,10 @@ declare module "@tanstack/react-table" {
     range?: [number, number];
     unit?: string;
     icon?: React.FC<React.SVGProps<SVGSVGElement>>;
+
+    // dont use these properties
+    accessor?: keyof TData; 
+    formatter?: (value: TValue) => string; 
   }
 }
 
