@@ -11,26 +11,33 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { formatDate } from "@/lib/format";
 import { Clock, FileText, MoreHorizontal } from "lucide-react";
-import { useNotebookManageForm } from "../hooks/use-notebook-manage-form";
+import { useRouter } from "next/navigation";
 import { INoteBook } from "../utils/types";
 import { NoteBookMangeForm } from "./notebook-manage-form";
 
-interface NotebookCardProps {
+interface INotebookCardProps {
   notebook: INoteBook;
+  onOpenUpdateForm: (notebookId: string, e: any) => void;
+  onOpenDeleteForm: (notebookId: string, e: any) => void;
 }
 
-export function NotebookCard({ notebook }: NotebookCardProps) {
-  const { setFormType, setIsOpen } = useNotebookManageForm();
+export function NotebookCard({
+  notebook,
+  onOpenUpdateForm,
+  onOpenDeleteForm,
+}: INotebookCardProps) {
+  const router = useRouter();
   const sources = notebook?.sources || [];
-
-  const handleOpenForm = (type: "update" | "delete") => {
-    setFormType(type);
-    setIsOpen(true);
+  const handleNavigateToNotebook = () => {
+    router.push(`/notebooks/${notebook.id}`);
   };
 
   return (
     <>
-      <Card className="group flex flex-col justify-between gap-3 cursor-pointer">
+      <Card
+        className="group flex flex-col justify-between gap-3 hover:border-primary transition-all cursor-pointer"
+        onClick={handleNavigateToNotebook}
+      >
         <CardHeader>
           <div className="flex justify-between items-start">
             <div className="flex-1 min-w-0">
@@ -52,12 +59,14 @@ export function NotebookCard({ notebook }: NotebookCardProps) {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
-                <DropdownMenuItem onClick={() => handleOpenForm("update")}>
+                <DropdownMenuItem
+                  onClick={(e) => onOpenUpdateForm(notebook.id, e)}
+                >
                   Chỉnh sửa
                 </DropdownMenuItem>
                 <DropdownMenuItem
                   className="text-destructive"
-                  onClick={() => handleOpenForm("delete")}
+                  onClick={(e) => onOpenDeleteForm(notebook.id, e)}
                 >
                   Xóa
                 </DropdownMenuItem>

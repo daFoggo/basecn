@@ -21,14 +21,22 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useNotebookManageForm } from "../hooks/use-notebook-manage-form";
+import {
+  useNotebookManageForm,
+  useNotebookManageFormStore,
+} from "../hooks/use-notebook-manage-form";
 
 const formSchema = z.object({
   title: z.string().min(1, "Tiêu đề không được để trống"),
 });
 
 export const NoteBookMangeForm = () => {
-  const { formType, isOpen, setIsOpen } = useNotebookManageForm();
+  const SAMPLE_USER_ID = "1";
+  const { formType, isOpen, setIsOpen, selectedNotebookId } =
+    useNotebookManageFormStore();
+  const { onCloseForm, handleDeleteNotebook, handleUpdateNotebook } =
+    useNotebookManageForm(SAMPLE_USER_ID);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -37,18 +45,15 @@ export const NoteBookMangeForm = () => {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
-    setIsOpen(false); // Đóng form sau khi submit
+    if (!selectedNotebookId) return;
+    // Gọi function update notebook (cần implement)
+    handleUpdateNotebook?.(selectedNotebookId, { title: values.title });
   }
 
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-
   const handleDelete = () => {
-    // Xử lý logic xóa ở đây
-    console.log("Deleting notebook...");
-    setIsOpen(false);
+    if (!selectedNotebookId) return;
+    // Gọi function delete notebook (cần implement)
+    handleDeleteNotebook?.(selectedNotebookId);
   };
 
   return (
@@ -84,7 +89,7 @@ export const NoteBookMangeForm = () => {
                 )}
               />
               <DialogFooter>
-                <Button type="button" variant="outline" onClick={handleClose}>
+                <Button type="button" variant="outline" onClick={onCloseForm}>
                   Hủy
                 </Button>
                 <Button type="submit">Lưu thay đổi</Button>
@@ -93,7 +98,7 @@ export const NoteBookMangeForm = () => {
           </Form>
         ) : (
           <DialogFooter>
-            <Button variant="outline" onClick={handleClose}>
+            <Button variant="outline" onClick={onCloseForm}>
               Hủy
             </Button>
             <Button variant="destructive" onClick={handleDelete}>

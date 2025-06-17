@@ -1,5 +1,8 @@
 "use client";
 
+import { ErrorAlert } from "@/components/common/error-alert";
+import { Loader } from "@/components/common/loaders";
+import { PageLoader } from "@/components/common/page-loader";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -10,8 +13,10 @@ import {
 } from "@/components/ui/select";
 import { Toggle } from "@/components/ui/toggle";
 import { LayoutGrid, Plus, TableProperties } from "lucide-react";
-import { useMemo, useState } from "react";
-import { SAMPLE_NOTEBOOKS } from "../utils/constants";
+import { useState } from "react";
+import { toast } from "sonner";
+import { useNotebookManageForm } from "../hooks/use-notebook-manage-form";
+import { useThreadsManagement } from "../hooks/use-threads-management";
 import { NotebookCard } from "./notebook-card";
 import { NotebookTable } from "./notebook-table";
 
@@ -19,37 +24,41 @@ type ViewMode = "card" | "table";
 type SortOption = "title" | "updated";
 
 export const NoteBookList = () => {
+  const SAMPLE_USER_ID = "1";
   const [viewMode, setViewMode] = useState<ViewMode>("card");
   const [sortBy, setSortBy] = useState<SortOption>("updated");
 
-  const sortedNotebooks = useMemo(() => {
-    const notebooks = [...SAMPLE_NOTEBOOKS];
+  const { threads, isLoading, isError } = useThreadsManagement(SAMPLE_USER_ID);
+  const {
+    handleCreateNoteBook,
+    isCreating,
+    onOpenUpdateForm,
+    onOpenDeleteForm,
+  } = useNotebookManageForm(SAMPLE_USER_ID);
 
-    switch (sortBy) {
-      case "title":
-        return notebooks.sort((a, b) => {
-          const titleA = a.title || "Untitled";
-          const titleB = b.title || "Untitled";
-          return titleA.localeCompare(titleB);
-        });
-      case "updated":
-        return notebooks.sort(
-          (a, b) =>
-            new Date(b.updatedAt || 0).getTime() -
-            new Date(a.updatedAt || 0).getTime()
-        );
-      default:
-        return notebooks;
-    }
-  }, [sortBy]);
+  if (isLoading) return <PageLoader variant="bars" />;
+
+  if (isError) {
+    toast.error("Không thể tải danh sách notebook");
+    return <ErrorAlert title="Có lỗi xảy ra trong quá trình tải notebook" />;
+  }
 
   return (
     <div className="flex flex-col gap-6">
       {/* Header */}
       <div className="flex sm:flex-row flex-col justify-between items-start sm:items-center gap-4">
-        <Button>
-          <Plus className="size-4" />
-          Tạo mới
+        <Button onClick={handleCreateNoteBook} disabled={isCreating}>
+          {isCreating ? (
+            <>
+              <Loader />
+              <span>Đang tạo...</span>
+            </>
+          ) : (
+            <>
+              <Plus className="size-4" />
+              <span>Tạo notebook mới</span>
+            </>
+          )}
         </Button>
 
         <div className="flex items-center gap-6">
@@ -91,15 +100,24 @@ export const NoteBookList = () => {
       {/* List */}
       {viewMode === "card" ? (
         <div className="gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {sortedNotebooks.map((notebook) => (
-            <NotebookCard key={notebook.id} notebook={notebook} />
+          {threads?.map((notebook) => (
+            <NotebookCard
+              key={notebook.id}
+              notebook={notebook}
+              onOpenUpdateForm={onOpenUpdateForm}
+              onOpenDeleteForm={onOpenDeleteForm}
+            />
           ))}
         </div>
       ) : (
-        <NotebookTable notebooks={SAMPLE_NOTEBOOKS} />
+        <NotebookTable
+          notebooks={threads || []}
+          onOpenUpdateForm={onOpenUpdateForm}
+          onOpenDeleteForm={onOpenDeleteForm}
+        />
       )}
 
-      {sortedNotebooks.length === 0 && (
+      {threads?.length === 0 && (
         <div className="flex flex-col justify-center items-center py-12 text-center">
           <div className="bg-muted mb-4 p-4 rounded-full">
             <LayoutGrid className="w-8 h-8 text-muted-foreground" />
@@ -108,9 +126,18 @@ export const NoteBookList = () => {
           <p className="mb-4 text-muted-foreground">
             Tạo notebook đầu tiên để bắt đầu ghi chú
           </p>
-          <Button>
-            <Plus className="size-4" />
-            Tạo notebook mới
+          <Button onClick={handleCreateNoteBook} disabled={isCreating}>
+            {isCreating ? (
+              <>
+                <Loader />
+                <span>Đang tạo...</span>
+              </>
+            ) : (
+              <>
+                <Plus className="size-4" />
+                Tạo notebook mới
+              </>
+            )}
           </Button>
         </div>
       )}

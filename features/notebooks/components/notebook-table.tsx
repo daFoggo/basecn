@@ -15,22 +15,20 @@ import { useDataTable } from "@/lib/hooks/use-data-table";
 import { Column, ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 import { useMemo } from "react";
-import { useNotebookManageForm } from "../hooks/use-notebook-manage-form";
 import { INoteBook } from "../utils/types";
 import { NoteBookMangeForm } from "./notebook-manage-form";
 
 interface INotebookTableProps {
   notebooks: INoteBook[];
+  onOpenUpdateForm: (notebookId: string, e: any) => void;
+  onOpenDeleteForm: (notebookId: string, e: any) => void;
 }
 
-export const NotebookTable = ({ notebooks }: INotebookTableProps) => {
-  const { setFormType, setIsOpen } = useNotebookManageForm();
-
-  const handleOpenForm = (type: "update" | "delete") => {
-    setFormType(type);
-    setIsOpen(true);
-  };
-
+export const NotebookTable = ({
+  notebooks,
+  onOpenUpdateForm,
+  onOpenDeleteForm,
+}: INotebookTableProps) => {
   const columns = useMemo<ColumnDef<INoteBook>[]>(
     () => [
       {
@@ -110,10 +108,15 @@ export const NotebookTable = ({ notebooks }: INotebookTableProps) => {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem onClick={() => handleOpenForm("update")}> 
+                <DropdownMenuItem
+                  onClick={(e) => onOpenUpdateForm(row.original.id, e)}
+                >
                   Chỉnh sửa
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-destructive" onClick={() => handleOpenForm("delete")}>
+                <DropdownMenuItem
+                  className="text-destructive"
+                  onClick={(e) => onOpenDeleteForm(row.original.id, e)}
+                >
                   Xóa
                 </DropdownMenuItem>
               </DropdownMenuContent>
