@@ -15,13 +15,22 @@ import { useDataTable } from "@/lib/hooks/use-data-table";
 import { Column, ColumnDef } from "@tanstack/react-table";
 import { MoreHorizontal } from "lucide-react";
 import { useMemo } from "react";
+import { useNotebookManageForm } from "../hooks/use-notebook-manage-form";
 import { INoteBook } from "../utils/types";
+import { NoteBookMangeForm } from "./notebook-manage-form";
 
 interface INotebookTableProps {
   notebooks: INoteBook[];
 }
 
-export function NotebookTable({ notebooks }: INotebookTableProps) {
+export const NotebookTable = ({ notebooks }: INotebookTableProps) => {
+  const { setFormType, setIsOpen } = useNotebookManageForm();
+
+  const handleOpenForm = (type: "update" | "delete") => {
+    setFormType(type);
+    setIsOpen(true);
+  };
+
   const columns = useMemo<ColumnDef<INoteBook>[]>(
     () => [
       {
@@ -33,7 +42,7 @@ export function NotebookTable({ notebooks }: INotebookTableProps) {
         enableSorting: true,
         enableColumnFilter: true,
         header: ({ column }: { column: Column<INoteBook, unknown> }) => (
-          <DataTableColumnHeader column={column} title="Title" />
+          <DataTableColumnHeader column={column} title="Tiêu đề" />
         ),
         cell: ({ row }) => {
           const title = row.getValue("title") as string;
@@ -46,7 +55,7 @@ export function NotebookTable({ notebooks }: INotebookTableProps) {
         accessorKey: "sources",
         header: "Các nguồn",
         meta: {
-            label: "Các nguồn",
+          label: "Các nguồn",
         },
         cell: ({ row }) => {
           const sources = row.getValue("sources") as INoteBook["sources"];
@@ -101,9 +110,11 @@ export function NotebookTable({ notebooks }: INotebookTableProps) {
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent>
-                <DropdownMenuItem>Edit</DropdownMenuItem>
-                <DropdownMenuItem className="text-destructive">
-                  Delete
+                <DropdownMenuItem onClick={() => handleOpenForm("update")}> 
+                  Chỉnh sửa
+                </DropdownMenuItem>
+                <DropdownMenuItem className="text-destructive" onClick={() => handleOpenForm("delete")}>
+                  Xóa
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
@@ -132,6 +143,7 @@ export function NotebookTable({ notebooks }: INotebookTableProps) {
       <DataTable table={table}>
         <DataTableToolbar table={table} />
       </DataTable>
+      <NoteBookMangeForm />
     </div>
   );
-}
+};

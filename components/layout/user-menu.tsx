@@ -23,17 +23,17 @@ const UserMenu = () => {
         </Avatar>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="start">
-        <DropdownMenuLabel>My Account</DropdownMenuLabel>
+        <DropdownMenuLabel>daFoggo</DropdownMenuLabel>
         <DropdownMenuGroup>
           <DropdownMenuItem>
             <Contact className="size-4" />
-            Profile
+            Hồ sơ
           </DropdownMenuItem>
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
         <DropdownMenuItem>
           <LogOut className="size-4" />
-          Log out
+          Đăng xuất
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

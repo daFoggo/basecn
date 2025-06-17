@@ -17,11 +17,15 @@ export const useAuth = (): IAuthState & {
   login: (
     params: ILoginParams
   ) => Promise<{ user: IUserData; tokens: IAuthTokens }>;
+
   register: (
     params: IRegisterParams
   ) => Promise<{ user: IUserData; tokens: IAuthTokens }>;
+
   logout: () => Promise<void>;
+
   refreshToken: () => Promise<{ user: IUserData; tokens: IAuthTokens }>;
+  
   mutateUser: KeyedMutator<IUserData>;
 } => {
   const {

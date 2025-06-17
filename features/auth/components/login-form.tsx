@@ -4,14 +4,6 @@ import placeHolder from "@/assets/svgs/placeholder.svg";
 import { GoogleIcon } from "@/components/common/icons";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { APP_CONFIG } from "@/lib/config/app";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
-import Link from "next/link";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import * as z from "zod";
 import {
   Form,
   FormControl,
@@ -20,10 +12,25 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { APP_CONFIG } from "@/lib/config/app";
+import { cn } from "@/lib/utils";
+import { zodResolver } from "@hookform/resolvers/zod";
+import Image from "next/image";
+import Link from "next/link";
+import { useForm } from "react-hook-form";
+import * as z from "zod";
 
 const formSchema = z.object({
-  email: z.string().email({ message: "Please enter a valid email address" }).min(1, { message: "Email is required" }),
-  password: z.string().min(6, { message: "Password is required and must be at least 6 characters" }),
+  username: z
+    .string()
+    .min(1, { message: "Username is required" })
+    .min(3, { message: "Username must be at least 3 characters" }),
+  password: z
+    .string()
+    .min(6, {
+      message: "Password is required and must be at least 6 characters",
+    }),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -35,7 +42,7 @@ export const LoginForm = ({
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      email: "",
+      username: "",
       password: "",
     },
   });
@@ -57,19 +64,18 @@ export const LoginForm = ({
                     Login to your {APP_CONFIG.name} account
                   </p>
                 </div>
-                
+
                 <FormField
                   control={form.control}
-                  name="email"
+                  name="username"
                   render={({ field }) => (
                     <FormItem className="gap-3 grid">
-                      <FormLabel htmlFor="email">Email</FormLabel>
+                      <FormLabel htmlFor="username">Username</FormLabel>
                       <FormControl>
                         <Input
-                          id="email"
-                          type="email"
-                          placeholder="m@example.com"
-                    
+                          id="username"
+                          type="text"
+                          placeholder="Enter your username"
                           {...field}
                         />
                       </FormControl>
@@ -77,7 +83,7 @@ export const LoginForm = ({
                     </FormItem>
                   )}
                 />
-                
+
                 <FormField
                   control={form.control}
                   name="password"
@@ -99,24 +105,24 @@ export const LoginForm = ({
                     </FormItem>
                   )}
                 />
-                
+
                 <Button type="submit" className="w-full">
                   Login
                 </Button>
-                
+
                 <div className="after:top-1/2 after:z-0 after:absolute relative after:inset-0 after:flex after:items-center after:border-t after:border-border text-sm text-center">
                   <span className="z-10 relative bg-card px-2 text-muted-foreground">
                     Or continue with
                   </span>
                 </div>
-                
+
                 <div className="gap-4 grid grid-cols-1">
                   <Button variant="outline" type="button" className="w-full">
                     <GoogleIcon className="size-4" />
                     <span>Login with Google</span>
                   </Button>
                 </div>
-                
+
                 <div className="text-sm text-center">
                   Don&apos;t have an account?{" "}
                   <Link
@@ -129,7 +135,7 @@ export const LoginForm = ({
               </div>
             </form>
           </Form>
-          
+
           <div className="hidden md:block relative bg-muted">
             <Image
               src={placeHolder || "/placeholder.svg"}
@@ -139,7 +145,7 @@ export const LoginForm = ({
           </div>
         </CardContent>
       </Card>
-      
+
       <div className="text-muted-foreground *:[a]:hover:text-primary text-xs text-center *:[a]:underline *:[a]:underline-offset-4 text-balance">
         By logging in, you agree to our{" "}
         <Link href="/terms-of-service">Terms of Service</Link> and{" "}

@@ -9,7 +9,7 @@ import {
 import { IAuthTokens, IUserData } from "../utils/types";
 
 const AUTH_ENDPOINTS = {
-  LOGIN: `${BACK_END_API}/users/`,
+  LOGIN: `${BACK_END_API}/auth/login`,
   REGISTER: `${BACK_END_API}/auth/register`,
 
   REFRESH: `${BACK_END_API}/auth/refresh`,
@@ -25,7 +25,7 @@ export interface IAuthResponse {
 }
 
 export interface ILoginParams {
-  email: string;
+  username: string;
   password: string;
 }
 
