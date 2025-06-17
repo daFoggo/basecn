@@ -1,7 +1,6 @@
+import { APP_CONFIG } from "@/lib/config/app";
 import { PanelsTopLeft } from "lucide-react";
 import Link from "next/link";
-import { GitHubIcon } from "../common/icons";
-import { APP_CONFIG } from "@/lib/config/app";
 export const RootFooter = () => {
   return (
     <footer className="bg-background/95 backdrop-blur-sm border-t w-full">
@@ -15,15 +14,6 @@ export const RootFooter = () => {
             <p className="text-muted-foreground text-sm">
               {APP_CONFIG.description}
             </p>
-            <div className="flex gap-4">
-              <a
-                href={APP_CONFIG.github}
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                target="_blank"
-              >
-                <GitHubIcon className="size-5" />
-              </a>
-            </div>
           </div>
           <div className="space-y-4">
             <h4 className="font-bold text-sm">Product</h4>
@@ -51,15 +41,6 @@ export const RootFooter = () => {
             <ul className="space-y-2 text-sm">
               <li>
                 <a
-                  href={APP_CONFIG.github}
-                  className="text-muted-foreground hover:text-foreground transition-colors"
-                  target="_blank"
-                >
-                  GitHub
-                </a>
-              </li>
-              <li>
-                <a
                   href={APP_CONFIG.contact}
                   className="text-muted-foreground hover:text-foreground transition-colors"
                 >
@@ -72,7 +53,8 @@ export const RootFooter = () => {
 
         <div className="flex sm:flex-row flex-col justify-between items-center gap-4 pt-8 border-t border-border/40">
           <p className="text-muted-foreground text-xs">
-            &copy; {new Date().getFullYear()} {APP_CONFIG.name}. All rights reserved.
+            &copy; {new Date().getFullYear()} {APP_CONFIG.name}. All rights
+            reserved.
           </p>
           {/* <p className="text-muted-foreground text-xs">
             <Link href="/privacy-policy">Privacy Policy</Link>

@@ -1,5 +1,4 @@
-import { IAuthTokens } from "./types/token";
-import { IUserData } from "./types/user";
+import { IAuthTokens, IUserData } from "@/features/auth/utils/types";
 
 // Local storage keys
 const TOKEN_KEY = "auth_tokens";

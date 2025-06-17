@@ -6,12 +6,12 @@ import {
   saveTokens,
   saveUser,
 } from "@/lib/storage";
-import { IAuthTokens } from "@/lib/types/token";
-import { IUserData } from "@/lib/types/user";
+import { IAuthTokens, IUserData } from "../utils/types";
 
 const AUTH_ENDPOINTS = {
-  LOGIN: `${BACK_END_API}/auth/login`,
+  LOGIN: `${BACK_END_API}/users/`,
   REGISTER: `${BACK_END_API}/auth/register`,
+
   REFRESH: `${BACK_END_API}/auth/refresh`,
   LOGOUT: `${BACK_END_API}/auth/logout`,
   ME: `${BACK_END_API}/auth/me`,

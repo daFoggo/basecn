@@ -1,41 +1,22 @@
 "use client";
-import { APP_CONFIG } from "@/lib/config/app";
-import { formatCompactNumber } from "@/lib/format";
 import { motion } from "framer-motion";
-import { GitHubIcon } from "../common/icons";
 import { ThemeSwitcher } from "../common/theme-switcher";
-import { Button } from "../ui/button";
 import { RootHeaderNavigateButton } from "./root-header-navigate-button";
-import { useGithubStars } from "@/lib/hooks/use-github-stars";
+import UserMenu from "./user-menu";
 
 interface IHeaderActionButtonsProps {
   showNavigationButton?: boolean;
+  showUserMenu?: boolean;
 }
 
 const HeaderActionButtons = ({
   showNavigationButton = true,
+  showUserMenu = false,
 }: IHeaderActionButtonsProps) => {
-  const { stargazersCount } = useGithubStars("daFoggo", "basecn");
+  // const { isAuthenticated } = useAuthContext();
+  const isAuthenticated = true;
   return (
     <>
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.3, delay: 0.45 }}
-      >
-        <Button variant="ghost" asChild>
-          <a
-            href={APP_CONFIG.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="font-semibold"
-          >
-            <GitHubIcon className="size-4" />
-            {stargazersCount > 0 && formatCompactNumber(stargazersCount)}
-          </a>
-        </Button>
-      </motion.div>
-
       <motion.div
         initial={{ opacity: 0, scale: 0.9 }}
         animate={{ opacity: 1, scale: 1 }}
@@ -51,6 +32,15 @@ const HeaderActionButtons = ({
           transition={{ duration: 0.3, delay: 0.5 }}
         >
           <RootHeaderNavigateButton />
+        </motion.div>
+      )}
+      {showUserMenu && isAuthenticated && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.3, delay: 0.6 }}
+        >
+          <UserMenu />
         </motion.div>
       )}
     </>

@@ -9,6 +9,12 @@ type Coords = { x: number; y: number };
 
 export function ThemeSwitcher() {
   const { setTheme, resolvedTheme } = useTheme();
+  const [mounted, setMounted] = React.useState(false);
+
+  // Ensure component is mounted before rendering to avoid hydration mismatch
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleThemeToggleAnimation = (coords?: Coords) => {
     console.log("handleThemeToggleAnimation called", coords);
@@ -97,6 +103,25 @@ export function ThemeSwitcher() {
   const moonPath =
     "M70 49.5C70 60.8218 60.8218 70 49.5 70C38.1782 70 29 60.8218 29 49.5C29 38.1782 38.1782 29 49.5 29C39 45 49.5 59.5 70 49.5Z";
 
+  // Don't render until mounted to avoid hydration issues
+  if (!mounted) {
+    return (
+      <Button
+        variant="ghost"
+        size="icon"
+        className="group/toggle size-8 extend-touch-target"
+        title="Toggle theme"
+      >
+        <div className="size-4.5" />
+        <span className="sr-only">Toggle theme</span>
+      </Button>
+    );
+  }
+
+  // Determine current state - default to light if resolvedTheme is undefined
+  const isDark = resolvedTheme === "dark";
+  const currentPath = isDark ? moonPath : sunPath;
+
   return (
     <Button
       variant="ghost"
@@ -126,13 +151,13 @@ export function ThemeSwitcher() {
           d={moonPath}
           className="top-0 left-0 absolute stroke-blue-100"
           initial="hidden"
-          animate={resolvedTheme === "dark" ? "visible" : "hidden"}
+          animate={isDark ? "visible" : "hidden"}
         />
 
         <m.g
           variants={raysVariants}
           initial="hidden"
-          animate={resolvedTheme === "light" ? "visible" : "hidden"}
+          animate={!isDark ? "visible" : "hidden"}
           className="stroke-6 stroke-yellow-600"
           style={{ strokeLinecap: "round" }}
         >
@@ -151,12 +176,16 @@ export function ThemeSwitcher() {
         </m.g>
 
         <m.path
-          d={sunPath}
+          d={currentPath}
           fill="transparent"
           transition={{ duration: 1, type: "spring" }}
-          initial={{ fillOpacity: 0, strokeOpacity: 0 }}
+          initial={{
+            fillOpacity: 0,
+            strokeOpacity: 0,
+            d: currentPath, // Ensure initial d is set
+          }}
           animate={
-            resolvedTheme === "dark"
+            isDark
               ? {
                   d: moonPath,
                   rotate: -360,

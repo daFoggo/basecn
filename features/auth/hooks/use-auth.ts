@@ -1,10 +1,9 @@
 "use client";
 
-import type { IAuthTokens } from "@/lib/types/token";
-import type { IUserData } from "@/lib/types/user";
 import { useCallback } from "react";
 import useSWR, { type KeyedMutator, mutate } from "swr";
 import { ILoginParams, IRegisterParams, authService } from "../services/auth";
+import { IAuthTokens, IUserData } from "../utils/types";
 
 interface IAuthState {
   user: IUserData | null;

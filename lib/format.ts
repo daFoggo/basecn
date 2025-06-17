@@ -9,8 +9,8 @@ export function formatDate(
   if (!date) return "";
 
   try {
-    return new Intl.DateTimeFormat("en-US", {
-      month: opts.month ?? "long",
+    return new Intl.DateTimeFormat("vi-VN", {
+      month: opts.month ?? "short",
       day: opts.day ?? "numeric",
       year: opts.year ?? "numeric",
       ...opts,

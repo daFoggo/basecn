@@ -1,7 +1,4 @@
 "use client";
-
-import { IAuthTokens } from "@/lib/types/token";
-import { IUserData } from "@/lib/types/user";
 import {
   createContext,
   useContext,
@@ -11,6 +8,7 @@ import {
 } from "react";
 import { useAuth } from "../hooks/use-auth";
 import { ILoginParams, IRegisterParams } from "../services/auth";
+import { IAuthTokens, IUserData } from "../utils/types";
 
 interface IAuthContextType {
   user: IUserData | null;

@@ -25,7 +25,6 @@ import {
 } from "lucide-react";
 import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
 import * as React from "react";
-import { use } from "react";
 
 interface Project {
   id: string;
