@@ -1,4 +1,5 @@
-import HeroImg from "@/assets/imgs/hero.png";
+import HeroImgLight from "@/assets/imgs/hero-light.png";
+import HeroImgDark from "@/assets/imgs/hero-dark.png";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Component } from "lucide-react";
@@ -16,7 +17,7 @@ export function Hero() {
                 className="mb-3 px-3 py-1 rounded-full font-semibold text-sm"
                 variant="secondary"
               >
-                <Component className="mr-2 size-4 text-primary" />
+                <Component className="mr-2 size-4" />
                 Project base
               </Badge>
             </div>
@@ -51,7 +52,18 @@ export function Hero() {
 
           <div className="hidden lg:block relative">
             <Card className="relative bg-gradient-to-b from-background to-background/95 shadow-xl backdrop-blur p-0 overflow-hidden">
-              <Image src={HeroImg} alt="Hero Image" />
+              <Image
+                src={HeroImgLight}
+                alt="Hero Image Light"
+                className="dark:hidden"
+                priority
+              />
+              <Image
+                src={HeroImgDark}
+                alt="Hero Image Dark"
+                className="hidden dark:block"
+                priority
+              />
             </Card>
           </div>
         </div>

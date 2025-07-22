@@ -5,7 +5,13 @@ import { Suspense } from "react";
 
 const ExercisesLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Suspense fallback={<PageLoader variant="bars" />}>
+    <Suspense
+      fallback={
+        <div className="flex flex-col min-h-svh">
+          <PageLoader variant="dots" text="Loading exercises..." />
+        </div>
+      }
+    >
       <div className="flex flex-col min-h-svh">
         <AppHeader />
         <main className="flex flex-col flex-1">{children}</main>

@@ -18,7 +18,7 @@ export const Examples = () => {
             className="mb-3 px-3 py-1 rounded-full font-semibold text-sm transition-none"
             variant="secondary"
           >
-            <Component className="mr-2 size-4 text-primary" />
+            <Component className="mr-2 size-4" />
             Examples
           </Badge>
         </div>

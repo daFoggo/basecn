@@ -24,7 +24,7 @@ export const Features = () => {
             className="mb-3 px-3 py-1 rounded-full font-semibold text-sm transition-none"
             variant="secondary"
           >
-            <Code className="mr-2 size-4 text-primary" />
+            <Code className="mr-2 size-4" />
             Features
           </Badge>
         </div>
