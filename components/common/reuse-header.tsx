@@ -24,7 +24,8 @@ interface IReusableHeaderProps {
 	enableScrollEffect?: boolean;
 	enableMobileMenu?: boolean;
 	stickyHeader?: boolean;
-	backdropBlur?: boolean;
+	backdropBlur?: boolean
+	useContainer?: boolean;
 }
 
 // #region Main Layout
@@ -40,6 +41,7 @@ export const ReusableHeader = ({
 	enableMobileMenu = true,
 	stickyHeader = true,
 	backdropBlur = true,
+	useContainer = true,
 }: IReusableHeaderProps) => {
 	const [isScrolled, setIsScrolled] = useState(false);
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -70,7 +72,8 @@ export const ReusableHeader = ({
 	);
 
 	const containerClasses = cn(
-		"flex justify-between items-center mx-auto px-4 md:px-6 container",
+		"flex justify-between items-center mx-auto px-4 md:px-6",
+		useContainer ? "container" : "",
 		height,
 		containerClassName,
 	);

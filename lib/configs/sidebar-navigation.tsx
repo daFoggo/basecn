@@ -1,0 +1,42 @@
+import {
+	BookOpen,
+	ChartNoAxesCombined,
+	ListTodo,
+	type LucideIcon,
+	Users,
+} from "lucide-react";
+import { GitHubIcon } from "@/components/common/icons";
+import type { INavigationConfig } from "../types/navigation";
+import { APP_INFO } from "./app-info";
+
+export const SIDEBAR_NAVIGATION: INavigationConfig = {
+	navMain: [
+		{
+			title: "Tasks",
+			url: "/dashboard/tasks",
+			icon: ListTodo,
+		},
+		{
+			title: "Members",
+			url: "/dashboard/members",
+			icon: Users,
+		},
+		{
+			title: "Analytics",
+			icon: ChartNoAxesCombined,
+			url: "/dashboard/playground",
+		},
+	],
+	navSecondary: [
+		{
+			title: "Documents",
+			url: APP_INFO.githubUrl || "",
+			icon: BookOpen,
+		},
+		{
+			title: "Github",
+			url: APP_INFO.githubUrl || "",
+			icon: GitHubIcon as unknown as LucideIcon,
+		},
+	],
+};

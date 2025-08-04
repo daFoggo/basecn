@@ -14,23 +14,29 @@ export const RootFooter = () => {
 				<AnimatedContainer className="space-y-4">
 					<AppLogo />
 					<p className="mt-8 md:mt-2 text-muted-foreground text-sm">
-						© {new Date().getFullYear()} {APP_INFO.name}. Developed by {" "}
-                        <a
-                            href={APP_INFO.authorWebsite || APP_INFO.githubUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-primary hover:underline underline-offset-2 transition-all duration-300"
-                        >
-                            {APP_INFO.githubAuthor}.
-                        </a>
+						© {new Date().getFullYear()} {APP_INFO.name}. Developed by
+						<a
+							href={APP_INFO.authorWebsite || APP_INFO.githubUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+							className="text-primary hover:underline underline-offset-2 transition-all duration-300"
+						>
+							{" "}
+							{APP_INFO.githubAuthor}.
+						</a>
 					</p>
+					{APP_INFO.appVersion && (
+						<p className="text-muted-foreground/70 text-xs">
+							Version {APP_INFO.appVersion}
+						</p>
+					)}
 				</AnimatedContainer>
 			</div>
 		</footer>
 	);
 };
 
-type ViewAnimationProps = {
+type IViewAnimationProps = {
 	delay?: number;
 	className?: ComponentProps<typeof motion.div>["className"];
 	children: ReactNode;
@@ -40,7 +46,7 @@ const AnimatedContainer = ({
 	className,
 	delay = 0.1,
 	children,
-}: ViewAnimationProps) => {
+}: IViewAnimationProps) => {
 	const shouldReduceMotion = useReducedMotion();
 
 	if (shouldReduceMotion) {

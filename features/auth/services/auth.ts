@@ -1,4 +1,4 @@
-import { BACKEND_API } from "@/lib/constants/environment";
+import { BACKEND_API } from "@/lib/configs/environment";
 import { fetcher } from "@/lib/utils/fetcher";
 import { SAMPLE_USER } from "../utils/constants";
 import { generateSampleSession } from "../utils/functions";

@@ -8,6 +8,7 @@ export interface IAppInfo {
   githubRepo?: string;
   authorWebsite?: string;
   contactEmail?: string;
+  appVersion?: string;
 }
 
 export const APP_INFO: IAppInfo = {
@@ -21,4 +22,5 @@ export const APP_INFO: IAppInfo = {
   githubRepo: "basecn",
   authorWebsite: "https://github.com/daFoggo",
   contactEmail: "ntgiang141105@gmail.com",
+  appVersion: "0.1.0-alpha",
 };
