@@ -1,5 +1,6 @@
 "use client";
 
+import { redirect } from "next/navigation";
 import {
 	createContext,
 	type ReactNode,
@@ -7,6 +8,7 @@ import {
 	useEffect,
 	useState,
 } from "react";
+import { PageLoading } from "@/components/common/page-loading";
 import { getItem, removeItem, setItem } from "@/lib/utils/storage";
 import { useAuth } from "../hooks/use-auth-swr";
 import type { IPostLogin, IPostRegister } from "../services/auth";
@@ -148,7 +150,7 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
 	return (
 		<AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>
 	);
-}
+};
 
 export const useAuthContext = (): IAuthContext => {
 	const context = useContext(AuthContext);
@@ -158,7 +160,7 @@ export const useAuthContext = (): IAuthContext => {
 	}
 
 	return context;
-}
+};
 
 export const withAuth = <P extends object>(
 	Component: React.ComponentType<P>,
@@ -167,16 +169,16 @@ export const withAuth = <P extends object>(
 		const { isAuthenticated, isLoading } = useAuthContext();
 
 		if (isLoading) {
-			return <div>Loading...</div>;
+			return <PageLoading />;
 		}
 
 		if (!isAuthenticated) {
-			return <div>Unauthorized - Please login</div>;
+			return redirect("/unauthorized");
 		}
 
 		return <Component {...props} />;
 	};
-}
+};
 
 export const useRequireAuth = () => {
 	const { isAuthenticated, isLoading } = useAuthContext();
@@ -186,4 +188,4 @@ export const useRequireAuth = () => {
 		isAuthenticated,
 		shouldRedirect: !isLoading && !isAuthenticated,
 	};
-}
+};
