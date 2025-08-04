@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Source_Serif_4 } from "next/font/google";
+import { SWRProvider } from "@/components/providers/swr-provider";
+import { AuthProvider } from "@/features/auth/contexts/auth-context";
 import { ThemeProvider } from "@/lib/contexts/theme-context";
 import "./globals.css";
 
@@ -12,6 +14,26 @@ const geistMono = Geist_Mono({
 	variable: "--font-geist-mono",
 	subsets: ["latin"],
 });
+
+const sourceSerif4 = Source_Serif_4({
+	variable: "--font-source-serif-4",
+	subsets: ["latin"],
+});
+
+// const inter = Inter({
+// 	variable: "--font-inter",
+// 	subsets: ["latin"],
+// });
+
+// const lora = Lora({
+// 	variable: "--font-lora",
+// 	subsets: ["latin"],
+// });
+
+// const jetbrainsMono = JetBrains_Mono({
+// 	variable: "--font-jetbrains-mono",
+// 	subsets: ["latin"],
+// });
 
 export const metadata: Metadata = {
 	title: "Create Next App",
@@ -26,7 +48,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+				className={`${geistSans.variable} ${geistMono.variable} ${sourceSerif4.variable} antialiased`}
 			>
 				<ThemeProvider
 					attribute="class"
@@ -34,7 +56,9 @@ export default function RootLayout({
 					enableSystem
 					disableTransitionOnChange
 				>
-					{children}
+					<SWRProvider>
+						<AuthProvider>{children}</AuthProvider>
+					</SWRProvider>
 				</ThemeProvider>
 			</body>
 		</html>
