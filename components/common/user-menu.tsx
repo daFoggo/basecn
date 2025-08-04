@@ -11,7 +11,7 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { useAuth } from "@/features/auth/hooks/use-auth-swr";
+import { useAuthContext } from "@/features/auth";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Button } from "../ui/button";
 import { Skeleton } from "../ui/skeleton";
@@ -20,9 +20,9 @@ interface IUserMenu {
 	shouldShowGoToApp?: boolean;
 }
 export const UserMenu = ({ shouldShowGoToApp = false }: IUserMenu) => {
-	const { isAuthenticated, isLoadingUser, user, logout } = useAuth();
+	const { isAuthenticated, isLoading, user, logout } = useAuthContext();
 
-	if (isLoadingUser) return <Skeleton className="rounded-full size-6" />;
+	if (isLoading) return <Skeleton className="rounded-full size-6" />;
 
 	if (isAuthenticated) {
 		if (shouldShowGoToApp) {

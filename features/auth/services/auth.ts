@@ -1,5 +1,7 @@
 import { BACKEND_API } from "@/lib/constants/environment";
 import { fetcher } from "@/lib/utils/fetcher";
+import { SAMPLE_USER } from "../utils/constants";
+import { generateSampleSession } from "../utils/functions";
 import type { ISession, IUser } from "../utils/types";
 
 const AUTH_ENDPOINTS = {
@@ -30,7 +32,15 @@ export const authServices = {
       AUTH_ENDPOINTS.LOGIN,
       { method: "POST", data: params },
     ]);
-    return response;
+
+	return {
+	  session: generateSampleSession(),
+	  user: {
+		...SAMPLE_USER,
+		...response.user,
+	  },
+	};
+    // return response;
   },
 
   register: async (params: IPostRegister): Promise<IAuthResponse> => {
@@ -42,22 +52,10 @@ export const authServices = {
   },
 
   me: async (): Promise<IUser> => {
-    // const response = await fetcher<IUser>([
-    //   AUTH_ENDPOINTS.ME,
-    //   { method: "GET" },
-    // ]);
-    // return response;
-    // Mocking user data for demonstration purposes
-    const SAMPLE_USER: IUser = {
-      id: "foggo",
-      userName: "Foggo",
-      email: "foggo@gmail.com",
-      emailVerified: true,
-      image: "https://api.dicebear.com/9.x/lorelei/svg?seed=Chase",
-      createdAt: "2023-01-01T00:00:00Z",
-      updatedAt: "2023-01-01T00:00:00Z",
-    };
-
-    return SAMPLE_USER;
+    const response = await fetcher<IUser>([
+      AUTH_ENDPOINTS.ME,
+      { method: "GET" },
+    ]);
+    return response;
   },
 };

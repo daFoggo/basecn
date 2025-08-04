@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Source_Serif_4 } from "next/font/google";
 import { SWRProvider } from "@/components/providers/swr-provider";
-import { AuthProvider } from "@/features/auth/contexts/auth-context";
+import { AuthProvider } from "@/features/auth";
 import { ThemeProvider } from "@/lib/contexts/theme-context";
 import "./globals.css";
 

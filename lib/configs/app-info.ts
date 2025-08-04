@@ -6,6 +6,7 @@ export interface IAppInfo {
   githubUrl?: string;
   githubAuthor?: string;
   githubRepo?: string;
+  authorWebsite?: string;
   contactEmail?: string;
 }
 
@@ -18,5 +19,6 @@ export const APP_INFO: IAppInfo = {
   githubUrl: "https://github.com/daFoggo/basecn",
   githubAuthor: "daFoggo",
   githubRepo: "basecn",
+  authorWebsite: "https://github.com/daFoggo",
   contactEmail: "ntgiang141105@gmail.com",
 };
