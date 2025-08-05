@@ -10,10 +10,33 @@ import PageHeading from "@/components/common/page-heading";
 import { PageLoading } from "@/components/common/page-loading";
 import { StatisticBlock } from "@/components/common/statistic-block";
 import { useOverviewStatsSWR } from "../hooks/use-overview-stats-swr";
+import { MemberWorkLoadRadialChart } from "./member-work-load-radial-chart";
+import ProjectProgressLineChart from "./project-progress-line-chart";
+import TaskCompletionBarChart from "./task-completion-bar-chart";
+import TopPerformers from "./top-performers";
 
 export const Overview = () => {
-	const { overviewStats, overviewStatsError, isLoadingOverviewStats } =
-		useOverviewStatsSWR();
+	const {
+		overviewStats,
+		overviewStatsError,
+		isLoadingOverviewStats,
+
+		taskCompletionData,
+		taskCompletionError,
+		isLoadingTaskCompletion,
+
+		topPerformersData,
+		topPerformersError,
+		isLoadingTopPerformers,
+
+		memberWorkloadData,
+		memberWorkloadError,
+		isLoadingMemberWorkload,
+
+		projectProgressData,
+		projectProgressError,
+		isLoadingProjectProgress,
+	} = useOverviewStatsSWR();
 
 	if (isLoadingOverviewStats) {
 		return <PageLoading variant="dots" text="Loading overview stats..." />;
@@ -31,7 +54,7 @@ export const Overview = () => {
 	return (
 		<div className="flex flex-col gap-6">
 			<PageHeading title="Wazzup my N-word 🤟" />
-			<div className="gap-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 dark:*:data-[slot=card]:bg-card *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:from-primary/5 *:data-[slot=card]:to-card *:data-[slot=card]:shadow-xs">
+			<div className="gap-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 dark:*:data-[slot=card]:bg-card *:data-[slot=card]:bg-gradient-to-t *:data-[slot=card]:from-primary/10 *:data-[slot=card]:to-card *:data-[slot=card]:shadow-xs">
 				<StatisticBlock
 					icon={<CircleFadingArrowUp />}
 					title="Inprogress Tasks"
@@ -62,10 +85,6 @@ export const Overview = () => {
 					icon={<UsersRound />}
 					title="Active Members"
 					value={overviewStats.activeMembers}
-					trend={{
-						value: 1,
-						direction: "up",
-					}}
 					footer={{
 						primary: "Trending up this week",
 						secondary: "Current active members",
@@ -75,15 +94,41 @@ export const Overview = () => {
 					icon={<FolderKanban />}
 					title="Total Projects"
 					value={overviewStats.totalProjects}
-					trend={{
-						value: 2,
-						direction: "up",
-					}}
 					footer={{
 						primary: "Trending up this week",
 						secondary: "Current total projects",
 					}}
 				/>
+			</div>
+			<div className="gap-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-7">
+				<div className="col-span-4">
+					<TaskCompletionBarChart
+						taskCompletionData={taskCompletionData || []}
+						taskCompletionError={taskCompletionError}
+						isLoadingTaskCompletion={isLoadingTaskCompletion}
+					/>
+				</div>
+				<div className="col-span-4 md:col-span-3">
+					<TopPerformers
+						topPerformersData={topPerformersData || []}
+						topPerformersError={topPerformersError}
+						isLoadingTopPerformers={isLoadingTopPerformers}
+					/>
+				</div>
+				<div className="col-span-4">
+					<ProjectProgressLineChart
+						projectProgressData={projectProgressData || []}
+						projectProgressError={projectProgressError}
+						isLoadingProjectProgress={isLoadingProjectProgress}
+					/>
+				</div>
+				<div className="col-span-4 md:col-span-3">
+					<MemberWorkLoadRadialChart
+						memberWorkloadData={memberWorkloadData || []}
+						memberWorkloadError={memberWorkloadError}
+						isLoadingMemberWorkload={isLoadingMemberWorkload}
+					/>
+				</div>
 			</div>
 		</div>
 	);
