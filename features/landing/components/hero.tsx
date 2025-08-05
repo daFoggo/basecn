@@ -1,10 +1,10 @@
+import Image from "next/image";
+import type React from "react";
 import HeroImgDark from "@/assets/imgs/hero-dark.png";
 import HeroImgLight from "@/assets/imgs/hero-light.png";
 import { GeminiIcon } from "@/components/common/icons";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import Image from "next/image";
-import type React from "react";
 import { TECH_STACK } from "../utils/constants";
 
 export function Hero() {
@@ -24,7 +24,7 @@ export function Hero() {
 						</div>
 						<p className="bg-clip-text bg-gradient-to-r from-foreground via-foreground/90 to-foreground/70 mb-6 font-bold text-transparent text-4xl md:text-5xl lg:text-6xl tracking-tight">
 							Let's start{" "}
-							<span className="font-serif text-primary italic">
+							<span className="font-serif font-medium text-primary italic">
 								cooking
 							</span>
 							<br />

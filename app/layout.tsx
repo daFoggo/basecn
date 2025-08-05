@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Source_Serif_4 } from "next/font/google";
+import { Fraunces, Geist, Geist_Mono } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { SWRProvider } from "@/components/providers/swr-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -18,25 +18,10 @@ const geistMono = Geist_Mono({
 	subsets: ["latin"],
 });
 
-const sourceSerif4 = Source_Serif_4({
-	variable: "--font-source-serif-4",
+const fraunces = Fraunces({
+	variable: "--font-fraunces",
 	subsets: ["latin"],
 });
-
-// const inter = Inter({
-// 	variable: "--font-inter",
-// 	subsets: ["latin"],
-// });
-
-// const lora = Lora({
-// 	variable: "--font-lora",
-// 	subsets: ["latin"],
-// });
-
-// const jetbrainsMono = JetBrains_Mono({
-// 	variable: "--font-jetbrains-mono",
-// 	subsets: ["latin"],
-// });
 
 export const metadata: Metadata = {
 	title: APP_INFO.name,
@@ -51,7 +36,7 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} ${sourceSerif4.variable} antialiased`}
+				className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} antialiased`}
 			>
 				<ThemeProvider
 					attribute="class"

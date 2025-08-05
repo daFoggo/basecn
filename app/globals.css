@@ -35,7 +35,7 @@
   --sidebar-border: oklch(0.9146 0.0146 64.3315);
   --sidebar-ring: oklch(0.3084 0.1285 300.5672);
   --font-sans: Geist, ui-sans-serif, sans-serif, system-ui;
-  --font-serif: Source Serif 4, ui-serif, serif;
+  --font-serif: Fraunces, ui-serif, serif;
   --font-mono: Geist Mono, ui-monospace, monospace;
   --radius: 1.0rem;
   --shadow-2xs: 0px 2px 4px 0px hsl(0 0% 0% / 0.05);
@@ -91,7 +91,7 @@
   --sidebar-border: oklch(0.3214 0.0666 302.7743);
   --sidebar-ring: oklch(0.7073 0.1817 40.3193);
   --font-sans: Geist, ui-sans-serif, sans-serif, system-ui;
-  --font-serif: Source Serif 4, ui-serif, serif;
+  --font-serif: Fraunces, ui-serif, serif;
   --font-mono: Geist Mono, ui-monospace, monospace;
   --radius: 1.0rem;
   --shadow-2xs: 0px 2px 4px 0px hsl(0 0% 0% / 0.10);
@@ -113,10 +113,11 @@
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
   --font-sans: Geist, ui-sans-serif, sans-serif, system-ui;
   --font-mono: Geist Mono, ui-monospace, monospace;
+  --font-serif: Fraunces, ui-serif, serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -150,7 +151,6 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --font-serif: Source Serif 4, ui-serif, serif;
   --radius: 1.0rem;
   --tracking-tighter: calc(var(--tracking-normal) - 0.05em);
   --tracking-tight: calc(var(--tracking-normal) - 0.025em);
