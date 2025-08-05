@@ -24,7 +24,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
 			/>
 			<SidebarInset>
 				<DashboardHeader />
-				<main className="flex flex-col flex-1 p-2 sm:p-6 w-full">{children}</main>
+				<main className="flex-1 p-2 sm:p-6 w-full">{children}</main>
 			</SidebarInset>
 		</SidebarProvider>
 	);

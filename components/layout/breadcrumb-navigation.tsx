@@ -41,13 +41,11 @@ export const BreadcrumbNav = ({
 						<BreadcrumbItem>
 							{item.isCurrentPage || !item.url ? (
 								<BreadcrumbPage className="flex items-center gap-2 font-semibold">
-									{item.icon && index > 0 && <item.icon className="size-4" />}
 									<span>{item.title}</span>
 								</BreadcrumbPage>
 							) : (
 								<BreadcrumbLink asChild>
 									<Link href={item.url} className="flex items-center gap-2 font-semibold">
-										{item.icon && index > 0 && <item.icon className="size-4" />}
 										<span>{item.title}</span>
 									</Link>
 								</BreadcrumbLink>

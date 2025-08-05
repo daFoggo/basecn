@@ -2,107 +2,93 @@
 
 import { usePathname } from "next/navigation";
 import { useMemo } from "react";
-import type {
-  IBreadcrumbItem,
-  INavItem,
-  INavigationConfig,
-} from "../types/navigation";
-
-interface UseBreadcrumbOptions {
-  skipSegments?: string[];
-}
+import type { IBreadcrumbItem, INavigationConfig } from "../types/navigation";
 
 export const useBreadcrumb = (
-  navigationConfig: INavigationConfig,
-  options: UseBreadcrumbOptions = {}
+  navigationConfig: INavigationConfig
 ): IBreadcrumbItem[] => {
   const pathname = usePathname();
 
-  const {
-    skipSegments = ["dashboard", "admin"], // add skip segments to ignore in breadcrumb
-  } = options;
-
   return useMemo(() => {
-    return generateBreadcrumbFromNavigation(
-      pathname,
-      navigationConfig.navMain,
-      skipSegments
-    );
-  }, [pathname, navigationConfig, skipSegments]);
+    return generateBreadcrumbFromNavigation(pathname, navigationConfig);
+  }, [pathname, navigationConfig]);
 };
 
 /**
- * Generates a breadcrumb navigation array based on the current pathname and navigation items.
+ * Generates a breadcrumb navigation array based on the current pathname and navigation config.
  *
- * This function creates a breadcrumb trail, optionally starting with a "Dashboard" item,
- * then traverses the navigation items to find matching paths. It supports nested navigation
- * with sub-items and can skip specified segments.
+ * This function creates a breadcrumb trail by traversing the navigation items to find
+ * matching paths. It supports nested navigation with sub-items and can include a root
+ * breadcrumb item if configured.
  *
  * @param pathname - The current URL pathname to match against navigation items
- * @param navItems - Array of navigation items to search through for breadcrumb generation
- * @param skipSegments - Array of segment names to skip in breadcrumb
- * @param showRootDashboard - Whether to show "Dashboard" as root breadcrumb item
+ * @param navigationConfig - Navigation configuration including root and nav items
  * @returns An array of breadcrumb items representing the navigation path to the current page
  *
  * @example
  * ```typescript
- * const breadcrumbs = generateBreadcrumbFromNavigation(
- *   '/dashboard/users/profile',
- *   navItems,
- *   ['dashboard'],
- *   false
- * );
+ * const config = {
+ *   root: { title: "Admin", url: "/admin", icon: AdminIcon },
+ *   navMain: [...]
+ * };
+ * const breadcrumbs = generateBreadcrumbFromNavigation('/admin/users/profile', config);
  * // Returns: [
- * //   { title: "Users", url: "/dashboard/users", icon: userIcon },
- * //   { title: "Profile", url: "/dashboard/users/profile", icon: profileIcon, isCurrentPage: true }
+ * //   { title: "Admin", url: "/admin", icon: AdminIcon },
+ * //   { title: "Users", url: "/admin/users", icon: UserIcon },
+ * //   { title: "Profile", url: "/admin/users/profile", icon: ProfileIcon, isCurrentPage: true }
  * // ]
  * ```
  */
 const generateBreadcrumbFromNavigation = (
   pathname: string,
-  navItems: INavItem[],
-  skipSegments: string[] = []
+  navigationConfig: INavigationConfig
 ): IBreadcrumbItem[] => {
+  const { root, navMain } = navigationConfig;
   const breadcrumbs: IBreadcrumbItem[] = [];
 
-  const shouldSkipSegment = (segment: string) => skipSegments.includes(segment);
+  // Add root breadcrumb if configured and pathname matches root
+  if (root && pathname.startsWith(root.url)) {
+    breadcrumbs.push({
+      title: root.title,
+      url: root.url,
+      icon: root.icon,
+      isCurrentPage: pathname === root.url,
+    });
 
-  for (const item of navItems) {
-    // Check main item
-    if (pathname.startsWith(item.url) && item.url !== "/dashboard") {
-      const itemSegments = item.url.split("/").filter(Boolean);
-      const lastSegment = itemSegments[itemSegments.length - 1];
+    // If we're exactly on root path, return just the root breadcrumb
+    if (pathname === root.url) {
+      return breadcrumbs;
+    }
+  }
 
-      if (!shouldSkipSegment(lastSegment)) {
-        breadcrumbs.push({
-          title: item.title,
-          url: item.url,
-          icon: item.icon,
-        });
-      }
+  // Find matching navigation items (exclude root url to avoid duplication)
+  for (const item of navMain) {
+    if (pathname.startsWith(item.url) && item.url !== root?.url) {
+      breadcrumbs.push({
+        title: item.title,
+        url: item.url,
+        icon: item.icon,
+      });
 
+      // Check sub-items
       if (item.items) {
         for (const subItem of item.items) {
           if (
             pathname === subItem.url ||
             pathname.startsWith(`${subItem.url}/`)
           ) {
-            const subItemSegments = subItem.url.split("/").filter(Boolean);
-            const subLastSegment = subItemSegments[subItemSegments.length - 1];
-
-            if (!shouldSkipSegment(subLastSegment)) {
-              breadcrumbs.push({
-                title: subItem.title,
-                url: subItem.url,
-                icon: subItem.icon,
-                isCurrentPage: pathname === subItem.url,
-              });
-            }
+            breadcrumbs.push({
+              title: subItem.title,
+              url: subItem.url,
+              icon: subItem.icon,
+              isCurrentPage: pathname === subItem.url,
+            });
             break;
           }
         }
       } else if (pathname === item.url) {
-        if (breadcrumbs.length > 0 && !shouldSkipSegment(lastSegment)) {
+        // Mark current item as current page
+        if (breadcrumbs.length > 0) {
           breadcrumbs[breadcrumbs.length - 1].isCurrentPage = true;
         }
       }

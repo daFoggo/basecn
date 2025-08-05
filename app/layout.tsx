@@ -1,11 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Source_Serif_4 } from "next/font/google";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { SWRProvider } from "@/components/providers/swr-provider";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import { AuthProvider } from "@/features/auth";
+import { APP_INFO } from "@/lib/configs/app-info";
 import { ThemeProvider } from "@/lib/contexts/theme-context";
 import "./globals.css";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { APP_INFO } from "@/lib/configs/app-info";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -58,13 +59,15 @@ export default function RootLayout({
 					enableSystem
 					disableTransitionOnChange
 				>
-					<SWRProvider>
-						<AuthProvider>
-							<TooltipProvider delayDuration={0} skipDelayDuration={100}>	
-							{children}
-							</TooltipProvider>
+					<NuqsAdapter>
+						<SWRProvider>
+							<AuthProvider>
+								<TooltipProvider delayDuration={0} skipDelayDuration={100}>
+									{children}
+								</TooltipProvider>
 							</AuthProvider>
-					</SWRProvider>
+						</SWRProvider>
+					</NuqsAdapter>
 				</ThemeProvider>
 			</body>
 		</html>

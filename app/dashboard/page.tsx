@@ -1,7 +1,10 @@
+"use client";
+
+import { redirect } from "next/navigation"
 
 const DashboardPage = () => {
     return (
-        <div>DashboardPage</div>
+        redirect('/dashboard/overview')
     )
 }
 

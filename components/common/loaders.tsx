@@ -376,19 +376,20 @@ export function WaveLoader({
 		lg: "text-base",
 	};
 
-	const heights = {
-		sm: ["6px", "9px", "12px", "9px", "6px"],
-		md: ["8px", "12px", "16px", "12px", "8px"],
-		lg: ["10px", "15px", "20px", "15px", "10px"],
-	};
-
 	const waveBars = useMemo(
-		() =>
-			Array.from({ length: 5 }, (_, i) => ({
+		() => {
+			const heights = {
+				sm: ["6px", "9px", "12px", "9px", "6px"],
+				md: ["8px", "12px", "16px", "12px", "8px"],
+				lg: ["10px", "15px", "20px", "15px", "10px"],
+			};
+
+			return Array.from({ length: 5 }, (_, i) => ({
 				id: `wave-bar-${i}`,
 				delay: i * 100,
 				height: heights[size][i],
-			})),
+			}));
+		},
 		[size],
 	);
 

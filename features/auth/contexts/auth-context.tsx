@@ -10,7 +10,7 @@ import {
 } from "react";
 import { PageLoading } from "@/components/common/page-loading";
 import { getItem, removeItem, setItem } from "@/lib/utils/storage";
-import { useAuth } from "../hooks/use-auth-swr";
+import { useAuthSWR } from "../hooks/use-auth-swr";
 import type { IPostLogin, IPostRegister } from "../services/auth";
 import type { IUser } from "../utils/types";
 
@@ -65,7 +65,7 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
 		registerError,
 		resetLogin,
 		resetRegister,
-	} = useAuth();
+	} = useAuthSWR();
 
 	const clearStoredAuth = () => {
 		removeItem(STORAGE_KEYS.ACCESS_TOKEN);

@@ -16,7 +16,7 @@ export const AUTH_CACHE_KEYS = {
   REGISTER: "auth-register",
 };
 
-export function useAuth() {
+export function useAuthSWR() {
 
   const {
     data: user,
@@ -28,6 +28,7 @@ export function useAuth() {
     revalidateOnReconnect: false,
     shouldRetryOnError: false,
     onError: (error) => {
+      toast.error("Failed to get user info");
       console.error("Failed to get user info:", error);
     },
   });

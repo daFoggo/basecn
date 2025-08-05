@@ -10,7 +10,16 @@ import type { INavigationConfig } from "../types/navigation";
 import { APP_INFO } from "./app-info";
 
 export const SIDEBAR_NAVIGATION: INavigationConfig = {
+	root: {
+		title: "Dashboard",
+		url: "/dashboard",
+	},
 	navMain: [
+		{
+			title: "Overview",
+			url: "/dashboard/overview",
+			icon: ChartNoAxesCombined,
+		},
 		{
 			title: "Tasks",
 			url: "/dashboard/tasks",
@@ -20,11 +29,6 @@ export const SIDEBAR_NAVIGATION: INavigationConfig = {
 			title: "Members",
 			url: "/dashboard/members",
 			icon: Users,
-		},
-		{
-			title: "Analytics",
-			icon: ChartNoAxesCombined,
-			url: "/dashboard/playground",
 		},
 	],
 	navSecondary: [

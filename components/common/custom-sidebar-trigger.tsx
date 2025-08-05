@@ -103,7 +103,7 @@ export const CustomSidebarTrigger = forwardRef<
 						</Button>
 					</TooltipTrigger>
 					<TooltipContent  align="start">
-						{isExpanded ? "Close Sidebar (Ctrl + b)" : "Open Sidebar (Ctrl + b)"}
+						{isExpanded ? "Close Sidebar (⌘ + b)" : "Open Sidebar (⌘ + b)"}
 					</TooltipContent>
 				</Tooltip>
 			</TooltipProvider>
