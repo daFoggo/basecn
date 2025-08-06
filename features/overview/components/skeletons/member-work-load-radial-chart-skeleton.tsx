@@ -9,10 +9,13 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 
 export const MemberWorkLoadRadialChartSkeleton = () => {
-    const skeletonItems = Array.from({ length: 5 }, (_, index) => ({
-        id: `skeleton-item-${index}`,
-        barHeight: Math.floor(Math.random() * 100) + 50,
-    }));
+    const skeletonItems = [
+        { id: 'skeleton-item-0', barHeight: 136 },
+        { id: 'skeleton-item-1', barHeight: 101 },
+        { id: 'skeleton-item-2', barHeight: 72 },
+        { id: 'skeleton-item-3', barHeight: 129 },
+        { id: 'skeleton-item-4', barHeight: 87 },
+    ];
 
     return (
         <Card className="flex flex-col h-full">
@@ -27,21 +30,21 @@ export const MemberWorkLoadRadialChartSkeleton = () => {
 
             <CardContent className="flex-1 pb-0">
                 <div className="relative flex justify-center items-center mx-auto">
-                    {/* Container cho radial chart skeleton */}
+                
                     <div className="relative flex justify-center items-center w-[300px] h-[300px]">
-                        {/* Vòng tròn giữa */}
+                    
                         <div className="absolute inset-0 flex justify-center items-center">
                             <Skeleton className="rounded-full w-[120px] h-[120px]" />
                         </div>
 
-                        {/* Các thanh radial bars */}
+                 
                         <div className="absolute inset-0 flex justify-center items-center">
-                            {skeletonItems.map((item) => (
+                            {skeletonItems.map((item, index) => (
                                 <div
                                     key={item.id}
                                     className="absolute"
                                     style={{
-                                        transform: `rotate(${skeletonItems.indexOf(item) * (360 / skeletonItems.length)}deg)`,
+                                        transform: `rotate(${index * (360 / skeletonItems.length)}deg)`,
                                     }}
                                 >
                                     <Skeleton
@@ -52,7 +55,7 @@ export const MemberWorkLoadRadialChartSkeleton = () => {
                             ))}
                         </div>
 
-                        {/* Vòng tròn ngoài */}
+                  
                         <div className="absolute inset-0">
                             <Skeleton className="opacity-20 rounded-full w-full h-full" />
                         </div>

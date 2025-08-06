@@ -815,7 +815,7 @@ const KanbanColumn = React.forwardRef<HTMLDivElement, KanbanColumnProps>(
 						ref={composedRef}
 						style={composedStyle}
 						className={cn(
-							"flex flex-col gap-2 bg-zinc-100 dark:bg-zinc-900 aria-disabled:opacity-50 p-2.5 border rounded-lg size-full aria-disabled:pointer-events-none",
+							"flex flex-col gap-2 bg-muted aria-disabled:opacity-50 p-2.5 border rounded-lg size-full aria-disabled:pointer-events-none",
 							{
 								"touch-none select-none": asHandle,
 								"cursor-default": context.flatCursor,

@@ -24,19 +24,17 @@ const TopPerformersSkeleton = () => {
                                 key={skeletonId}
                                 className="flex items-center gap-3 px-3 py-2"
                             >
-                                {/* Rank Skeleton */}
+
                                 <Skeleton className="w-4 h-4" />
 
-                                {/* Avatar Skeleton */}
                                 <Skeleton className="rounded-full size-8" />
 
-                                {/* Name & Role Skeleton */}
                                 <div className="flex-1 space-y-1 min-w-0">
                                     <Skeleton className="w-24 h-4" />
                                     <Skeleton className="w-32 h-3" />
                                 </div>
 
-                                {/* Metrics Skeleton */}
+
                                 <div className="flex items-center gap-3">
                                     <Skeleton className="w-8 h-4" />
                                     <span className="text-muted-foreground">/</span>

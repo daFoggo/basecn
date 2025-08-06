@@ -5,7 +5,9 @@ import { Members } from "@/features/members";
 
 const MembersPage = () => {
 	return (
-		<Suspense fallback={<PageLoading variant="dots" text="Loading page..." />}>
+		<Suspense
+			fallback={<PageLoading variant="dots" text="Loading members page..." />}
+		>
 			<Members />
 		</Suspense>
 	);

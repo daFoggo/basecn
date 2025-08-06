@@ -40,7 +40,7 @@ const TopPerformers = ({
 	if (topPerformersError || !topPerformersData) {
 		return (
 			<ErrorAlert
-				title="Error fetching top performers"
+				title="Error loading top performers"
 				description="Please try again later."
 			/>
 		);

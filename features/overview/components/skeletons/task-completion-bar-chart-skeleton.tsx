@@ -7,6 +7,21 @@ import {
 } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
+const SKELETON_DATA = [
+	{ id: 'bar-jan', height: 134 },
+	{ id: 'bar-feb', height: 190 },
+	{ id: 'bar-mar', height: 151 },
+	{ id: 'bar-apr', height: 95 },
+	{ id: 'bar-may', height: 50 },
+	{ id: 'bar-jun', height: 189 },
+	{ id: 'bar-jul', height: 186 },
+	{ id: 'bar-aug', height: 104 },
+	{ id: 'bar-sep', height: 182 },
+	{ id: 'bar-oct', height: 62 },
+	{ id: 'bar-nov', height: 83 },
+	{ id: 'bar-dec', height: 140 }
+];
+
 const TaskCompletionBarChartSkeleton = () => {
 	return (
 		<Card className="py-0">
@@ -20,12 +35,12 @@ const TaskCompletionBarChartSkeleton = () => {
 					</CardDescription>
 				</div>
 				<div className="flex">
-					{/* Completed button skeleton */}
+		
 					<div className="z-30 relative flex flex-col flex-1 justify-center gap-1 px-6 sm:px-8 py-4 sm:py-6 border-t sm:border-t-0 sm:border-l text-left">
 						<Skeleton className="w-16 h-3" />
 						<Skeleton className="w-8 h-6 sm:h-8" />
 					</div>
-					{/* Created button skeleton */}
+			
 					<div className="z-30 relative flex flex-col flex-1 justify-center gap-1 px-6 sm:px-8 py-4 sm:py-6 border-t sm:border-t-0 sm:border-l even:border-l rounded-tr-xl text-left">
 						<Skeleton className="w-12 h-3" />
 						<Skeleton className="w-8 h-6 sm:h-8" />
@@ -34,13 +49,13 @@ const TaskCompletionBarChartSkeleton = () => {
 			</CardHeader>
 			<CardContent className="sm:p-6 px-2">
 				<div className="flex justify-between items-end gap-2 px-4 py-4 w-full h-[250px] aspect-auto">
-					{/* Skeleton bars representing chart data */}
-					{Array.from({ length: 12 }, (_, index) => `skeleton-bar-${index}`).map((key) => (
-						<div key={key} className="flex flex-col flex-1 items-center gap-2">
+				
+					{SKELETON_DATA.map((bar) => (
+						<div key={bar.id} className="flex flex-col flex-1 items-center gap-2">
 							<Skeleton
 								className="rounded-sm w-full max-w-8"
 								style={{
-									height: `${Math.random() * 150 + 50}px`
+									height: `${bar.height}px`
 								}}
 							/>
 							<Skeleton className="w-6 h-3" />

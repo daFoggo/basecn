@@ -21,27 +21,27 @@ const ProjectProgressLineChartSkeleton = () => {
             </CardHeader>
             <CardContent>
                 <div className="space-y-4">
-                    {/* Chart area skeleton */}
+            
                     <div className="relative h-[300px]">
-                        {/* X-axis labels */}
+              
                         <div className="right-0 bottom-0 left-0 absolute flex justify-between px-3">
                             {Array.from({ length: 6 }, (_, i) => `x-axis-label-${i}`).map((key) => (
                                 <Skeleton key={key} className="w-8 h-3" />
                             ))}
                         </div>
 
-                        {/* Chart lines skeleton */}
+             
                         <div className="relative h-[280px]">
-                            {/* Grid lines */}
+                    
                             <div className="absolute inset-0 space-y-8 pt-4">
                                 {Array.from({ length: 4 }, (_, i) => `grid-line-${i}`).map((key) => (
                                     <Skeleton key={key} className="w-full h-px" />
                                 ))}
                             </div>
 
-                            {/* Line chart dots */}
+                     
                             <div className="absolute inset-0">
-                                {/* Web App line dots */}
+                         
                                 <div className="top-16 left-8 absolute">
                                     <Skeleton className="rounded-full w-2 h-2" />
                                 </div>
@@ -61,7 +61,7 @@ const ProjectProgressLineChartSkeleton = () => {
                                     <Skeleton className="rounded-full w-2 h-2" />
                                 </div>
 
-                                {/* Mobile App line dots */}
+                    
                                 <div className="top-24 left-8 absolute">
                                     <Skeleton className="rounded-full w-2 h-2" />
                                 </div>
@@ -81,7 +81,6 @@ const ProjectProgressLineChartSkeleton = () => {
                                     <Skeleton className="rounded-full w-2 h-2" />
                                 </div>
 
-                                {/* Design line dots */}
                                 <div className="top-32 left-8 absolute">
                                     <Skeleton className="rounded-full w-2 h-2" />
                                 </div>
