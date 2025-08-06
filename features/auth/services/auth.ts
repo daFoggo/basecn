@@ -28,18 +28,18 @@ export interface IAuthResponse {
 
 export const authServices = {
   login: async (params: IPostLogin): Promise<IAuthResponse> => {
-    const response = await fetcher<IAuthResponse>([
-      AUTH_ENDPOINTS.LOGIN,
-      { method: "POST", data: params },
-    ]);
-
-	return {
-	  session: generateSampleSession(),
-	  user: {
-		...SAMPLE_USER,
-		...response.user,
-	  },
-	};
+    // const response = await fetcher<IAuthResponse>([
+    //   AUTH_ENDPOINTS.LOGIN,
+    //   { method: "POST", data: params },
+    // ]);
+    console.log("Login service called with params:", params);
+    return {
+      session: generateSampleSession(),
+      user: {
+        ...SAMPLE_USER,
+        // ...response.user,
+      },
+    };
     // return response;
   },
 
