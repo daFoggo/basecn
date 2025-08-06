@@ -1,8 +1,8 @@
 import {
 	BookOpen,
 	ChartNoAxesCombined,
-	ListTodo,
 	type LucideIcon,
+	SquareKanban,
 	Users,
 } from "lucide-react";
 import { GitHubIcon } from "@/components/common/icons";
@@ -23,7 +23,7 @@ export const SIDEBAR_NAVIGATION: INavigationConfig = {
 		{
 			title: "Tasks",
 			url: "/dashboard/tasks",
-			icon: ListTodo,
+			icon: SquareKanban,
 		},
 		{
 			title: "Members",

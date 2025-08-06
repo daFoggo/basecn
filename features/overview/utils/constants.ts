@@ -1,41 +1,41 @@
 import type { IMember, IProject, ITask } from "./types";
 
 export enum TASK_STATUS {
-  TODO = "todo",
-  IN_PROGRESS = "in_progress",
-  IN_REVIEW = "in_review",
-  DONE = "done",
-  CANCELLED = "cancelled",
+  TODO = "Todo",
+  IN_PROGRESS = "In Progress",
+  IN_REVIEW = "In Review",
+  DONE = "Done",
+  CANCELLED = "Cancelled",
 }
 
 export enum TASK_PRIORITY {
-  LOW = "low",
-  MEDIUM = "medium",
-  HIGH = "high",
-  URGENT = "urgent",
+  LOW = "Low",
+  MEDIUM = "Medium",
+  HIGH = "High",
+  URGENT = "Urgent",
 }
 
 export enum MEMBER_ROLE {
-  ADMIN = "admin",
-  PROJECT_MANAGER = "project_manager",
-  DEVELOPER = "developer",
-  DESIGNER = "designer",
-  TESTER = "tester",
-  MEMBER = "member",
+  ADMIN = "Admin",
+  PROJECT_MANAGER = "Project Manager",
+  DEVELOPER = "Developer",
+  DESIGNER = "Designer",
+  TESTER = "Tester",
+  MEMBER = "Member",
 }
 
 export enum MEMBER_STATUS {
-  ACTIVE = "active",
-  INACTIVE = "inactive",
-  ON_LEAVE = "on_leave",
+  ACTIVE = "Active",
+  INACTIVE = "Inactive",
+  ON_LEAVE = "On Leave",
 }
 
 export enum PROJECT_TYPE {
-  WEB_APP = "web_app",
-  MOBILE_APP = "mobile_app",
-  DESIGN = "design",
-  MARKETING = "marketing",
-  RESEARCH = "research",
+  WEB_APP = "Web App",
+  MOBILE_APP = "Mobile App",
+  DESIGN = "Design",
+  MARKETING = "Marketing",
+  RESEARCH = "Research",
 }
 
 export const SAMPLE_MEMBERS_DATA: IMember[] = [

@@ -1,7 +1,8 @@
+import { Tasks } from "@/features/tasks"
 
 const TasksPage = () => {
     return (
-        <div>TasksPage</div>
+        <Tasks />
     )
 }
 
