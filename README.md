@@ -1,4 +1,4 @@
-# READ AI-GENERATED DOCUMENT BY DEEPWIKI IN HERE: <https://deepwiki.com/daFoggo/basecn>
+# READ AI-GENERATED DOCUMENT BY DEEPWIKI IN HERE: <https://deepwiki.com/daFoggo/basecn> (UPDATE EVERY 7 DAYS)
 
 ## This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app)
 
