@@ -1,4 +1,6 @@
-# This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app)
+# READ AI-GENERATED DOCUMENT BY DEEPWIKI IN HERE: <https://deepwiki.com/daFoggo/basecn>
+
+## This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app)
 
 ## Getting Started
 

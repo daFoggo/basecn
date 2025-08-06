@@ -236,7 +236,7 @@ export const overviewStatsServices = {
     IMemberWorkloadData[]
   > => {
     return SAMPLE_MEMBERS_DATA.filter(
-      (member) => member.status === "active"
+      (member) => member.status === MEMBER_STATUS.ACTIVE
     )
       .sort((a, b) => b.workload - a.workload)
       .slice(0, 3)

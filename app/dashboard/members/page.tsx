@@ -1,9 +1,14 @@
-import { Members } from '@/features/members'
+"use client";
+import { Suspense } from "react";
+import { PageLoading } from "@/components/common/page-loading";
+import { Members } from "@/features/members";
 
 const MembersPage = () => {
-    return (
-        <Members />
-    )
-}
+	return (
+		<Suspense fallback={<PageLoading variant="dots" text="Loading page..." />}>
+			<Members />
+		</Suspense>
+	);
+};
 
-export default MembersPage
+export default MembersPage;
