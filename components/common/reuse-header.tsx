@@ -187,8 +187,8 @@ export const AnimatedNavItem = ({
 			href={href}
 			onClick={onClick}
 			className={cn(
-				"group relative font-medium text-muted-foreground hover:text-foreground text-xs lg:text-sm transition-colors",
-				isCurrentPath(href || "") && "text-foreground font-semibold",
+				"group relative font-medium text-muted-foreground hover:text-primary text-xs lg:text-sm transition-colors",
+				isCurrentPath(href || "") && "text-primary font-semibold",
 				className,
 			)}
 		>
