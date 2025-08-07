@@ -103,7 +103,7 @@ export const RegisterForm = () => {
 									control={form.control}
 									name="userName"
 									render={({ field }) => (
-										<FormItem className="gap-3 grid">
+										<FormItem className="gap-4 grid">
 											<FormLabel htmlFor="userName">Username</FormLabel>
 											<FormControl>
 												<Input
@@ -122,7 +122,7 @@ export const RegisterForm = () => {
 									control={form.control}
 									name="email"
 									render={({ field }) => (
-										<FormItem className="gap-3 grid">
+										<FormItem className="gap-4 grid">
 											<FormLabel htmlFor="email">Email</FormLabel>
 											<FormControl>
 												<Input
@@ -142,7 +142,7 @@ export const RegisterForm = () => {
 									control={form.control}
 									name="password"
 									render={({ field }) => (
-										<FormItem className="gap-3 grid">
+										<FormItem className="gap-4 grid">
 											<FormLabel htmlFor="password">Password</FormLabel>
 											<FormControl>
 												<Input
@@ -161,7 +161,7 @@ export const RegisterForm = () => {
 									control={form.control}
 									name="confirmPassword"
 									render={({ field }) => (
-										<FormItem className="gap-3 grid">
+										<FormItem className="gap-4 grid">
 											<FormLabel htmlFor="confirmPassword">
 												Confirm Password
 											</FormLabel>
@@ -193,7 +193,7 @@ export const RegisterForm = () => {
 									</span>
 								</div>
 
-								<div className="gap-3 grid grid-cols-1">
+								<div className="gap-4 grid grid-cols-1">
 									<Button
 										variant="outline"
 										type="button"

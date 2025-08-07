@@ -1,7 +1,7 @@
 "use client";
 import type { Column, ColumnDef } from "@tanstack/react-table";
 import { Ellipsis, FilePen, Trash2 } from "lucide-react";
-import type { Dispatch, SetStateAction } from "react";
+import { type Dispatch, type SetStateAction, useMemo } from "react";
 import { DataTableColumnHeader } from "@/components/data-table/data-table-column-header";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -48,6 +48,36 @@ export const getMembersColumnConfig = ({
 			size: 32,
 			enableSorting: false,
 			enableHiding: false,
+		},
+		{
+			id: "index",
+			header: ({ column }: { column: Column<IMember, unknown> }) => (
+				<DataTableColumnHeader column={column} title="Index" />
+			),
+			cell: ({ row, table }) => {
+				const sortedRows = table.getSortedRowModel().flatRows;
+				const indexMap = useMemo(() => {
+					const map = new Map();
+					sortedRows.forEach((sortedRow, index) => {
+						map.set(sortedRow.id, index + 1);
+					});
+					return map;
+				}, [sortedRows]);
+
+				const displayIndex = indexMap.get(row.id) || 1;
+
+				return (
+					<div className="font-medium text-muted-foreground text-center">
+						{displayIndex}
+					</div>
+				);
+			},
+			meta: {
+				label: "Index",
+			},
+			enableSorting: false,
+			enableColumnFilter: false,
+			size: 60,
 		},
 		{
 			id: "id",

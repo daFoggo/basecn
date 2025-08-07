@@ -21,7 +21,7 @@ const PageHeading = ({
     className
 }: IPageHeadingProps) => {
     return (
-        <div className={cn("flex justify-between items-start gap-3 w-full", className)}>
+        <div className={cn("flex justify-between items-start gap-4 w-full", className)}>
             <div className="flex flex-col items-start gap-1">
                 <p className={cn("font-bold text-2xl", titleClassName)}>
                     {title}

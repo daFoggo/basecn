@@ -87,7 +87,7 @@ export const LoginForm = () => {
 									control={form.control}
 									name="userName"
 									render={({ field }) => (
-										<FormItem className="gap-3 grid">
+										<FormItem className="gap-4 grid">
 											<FormLabel htmlFor="userName">Username</FormLabel>
 											<FormControl>
 												<Input
@@ -107,7 +107,7 @@ export const LoginForm = () => {
 									control={form.control}
 									name="password"
 									render={({ field }) => (
-										<FormItem className="gap-3 grid">
+										<FormItem className="gap-4 grid">
 											<div className="flex items-center">
 												<FormLabel htmlFor="password">Password</FormLabel>
 												<Link
@@ -145,7 +145,7 @@ export const LoginForm = () => {
 									</span>
 								</div>
 
-								<div className="gap-3 grid grid-cols-1">
+								<div className="gap-4 grid grid-cols-1">
 									<Button
 										variant="outline"
 										type="button"

@@ -250,7 +250,7 @@ export function DataTableFilterList<TData>({
 				<PopoverContent
 					aria-describedby={descriptionId}
 					aria-labelledby={labelId}
-					className="flex flex-col gap-3.5 p-4 w-full sm:min-w-[380px] max-w-[var(--radix-popover-content-available-width)] origin-[var(--radix-popover-content-transform-origin)]"
+					className="flex flex-col gap-4.5 p-4 w-full sm:min-w-[380px] max-w-[var(--radix-popover-content-available-width)] origin-[var(--radix-popover-content-transform-origin)]"
 					{...props}
 				>
 					<div className="flex flex-col gap-1">

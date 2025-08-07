@@ -49,9 +49,9 @@ export function DataTable<TData>({
                     {header.isPlaceholder
                       ? null
                       : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
                   </TableHead>
                 ))}
               </TableRow>
@@ -86,7 +86,7 @@ export function DataTable<TData>({
                         className={cn(
                           // Apply background cho cell thay vì dùng inline style
                           pinningStyles.background &&
-                            "[--cell-bg:var(--background)]",
+                          "[--cell-bg:var(--background)]",
                           "relative",
                           // Background layers
                           "before:absolute before:inset-0 before:bg-[var(--cell-bg,transparent)] before:z-[-1]",

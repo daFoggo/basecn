@@ -22,7 +22,7 @@ const TopPerformersSkeleton = () => {
                         {Array.from({ length: 8 }, (_, index) => `skeleton-${index}`).map((skeletonId) => (
                             <div
                                 key={skeletonId}
-                                className="flex items-center gap-3 px-3 py-2"
+                                className="flex items-center gap-4 px-3 py-2"
                             >
 
                                 <Skeleton className="w-4 h-4" />
@@ -35,7 +35,7 @@ const TopPerformersSkeleton = () => {
                                 </div>
 
 
-                                <div className="flex items-center gap-3">
+                                <div className="flex items-center gap-4">
                                     <Skeleton className="w-8 h-4" />
                                     <span className="text-muted-foreground">/</span>
                                     <Skeleton className="rounded-full w-12 h-5" />

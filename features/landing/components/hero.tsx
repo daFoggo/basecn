@@ -39,7 +39,7 @@ export function Hero() {
 							<p className="mb-3 font-semibold text-muted-foreground text-sm">
 								Built with modern tech stack
 							</p>
-							<div className="gap-3 grid grid-cols-2 lg:grid-cols-3">
+							<div className="gap-4 grid grid-cols-2 lg:grid-cols-3">
 								{TECH_STACK.map((tech) => (
 									<TechCard
 										key={tech.id}
@@ -96,7 +96,7 @@ const TechCard = ({
 			className="no-underline"
 		>
 			<Card className="group hover:bg-primary/5 p-0 hover:border-primary/100 h-full transition-all duration-300">
-				<CardContent className="flex items-center gap-3 p-3">
+				<CardContent className="flex items-center gap-4 p-3">
 					<div className="flex-shrink-0 p-2 border group-hover:border-primary/70 rounded-md group-hover:text-primary transition-all">
 						{icon}
 					</div>

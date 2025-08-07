@@ -258,7 +258,7 @@ export function DotsLoader({
 	);
 
 	return (
-		<div className={cn("flex items-center gap-3", className)}>
+		<div className={cn("flex items-center gap-4", className)}>
 			<div className={cn("flex items-center space-x-1", containerSizes[size])}>
 				{dots.map((dot) => (
 					<div
@@ -322,7 +322,7 @@ export function TypingLoader({
 	);
 
 	return (
-		<div className={cn("flex items-center gap-3", className)}>
+		<div className={cn("flex items-center gap-4", className)}>
 			{text && (
 				<span
 					className={cn("font-medium text-muted-foreground", textSizes[size])}
@@ -394,7 +394,7 @@ export function WaveLoader({
 	);
 
 	return (
-		<div className={cn("flex items-center gap-3", className)}>
+		<div className={cn("flex items-center gap-4", className)}>
 			<div className={cn("flex items-center gap-0.5", containerSizes[size])}>
 				{waveBars.map((bar) => (
 					<div
@@ -459,7 +459,7 @@ export function BarsLoader({
 	);
 
 	return (
-		<div className={cn("flex items-center gap-3", className)}>
+		<div className={cn("flex items-center gap-4", className)}>
 			<div className={cn("flex", containerSizes[size])}>
 				{bars.map((bar) => (
 					<div

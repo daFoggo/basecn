@@ -119,7 +119,7 @@ export const MemberWorkLoadRadialChart = ({
 									const data = payload[0].payload;
 									const color = payload[0].fill || data.fill;
 									return (
-										<div className="flex justify-between items-center gap-3 bg-background shadow-lg p-2 border border-border rounded-lg">
+										<div className="flex justify-between items-center gap-4 bg-background shadow-lg p-2 border border-border rounded-lg">
 											<div className="flex items-center gap-2">
 												<div
 													className="rounded-[2px] w-2.5 h-2.5 shrink-0"

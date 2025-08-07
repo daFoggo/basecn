@@ -12,7 +12,7 @@ const EmptyData = ({
 	messageClassName,
 }: IEmptyDataProps) => {
 	return (
-		<div className="flex flex-col justify-center items-center gap-3 w-full h-full text-muted-foreground">
+		<div className="flex flex-col justify-center items-center gap-4 w-full h-full text-muted-foreground">
 			<FolderSearch className={cn("size-12", iconClassName)} />
 			<p className={cn("", messageClassName)}>{message}</p>
 		</div>

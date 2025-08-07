@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { type MouseEvent, type ReactNode, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils/tailwind";
@@ -24,7 +25,7 @@ interface IReusableHeaderProps {
 	enableScrollEffect?: boolean;
 	enableMobileMenu?: boolean;
 	stickyHeader?: boolean;
-	backdropBlur?: boolean
+	backdropBlur?: boolean;
 	useContainer?: boolean;
 }
 
@@ -72,7 +73,7 @@ export const ReusableHeader = ({
 	);
 
 	const containerClasses = cn(
-		"flex justify-between items-center mx-auto px-4 md:px-6",
+		"flex justify-between items-center mx-auto px-3 md:px-6",
 		useContainer ? "container" : "",
 		height,
 		containerClassName,
@@ -135,7 +136,7 @@ export const ReusableHeader = ({
 					className="md:hidden absolute inset-x-0 bg-background/95 backdrop-blur-lg border-b"
 					style={{ top: height === "h-16" ? "4rem" : "auto" }}
 				>
-					<div className="mx-auto px-4 py-4 container">{mobileMenuContent}</div>
+					<div className="mx-auto px-3 py-3 container">{mobileMenuContent}</div>
 				</motion.div>
 			)}
 		</header>
@@ -172,6 +173,12 @@ export const AnimatedNavItem = ({
 	className,
 	delay = 0,
 }: INavItemProps) => {
+	const pathName = usePathname();
+
+	const isCurrentPath = (url: string) => {
+		return pathName.startsWith(url) || pathName === url;
+	};
+
 	return (
 		<motion.a
 			initial={{ opacity: 0, y: -10 }}
@@ -181,6 +188,7 @@ export const AnimatedNavItem = ({
 			onClick={onClick}
 			className={cn(
 				"group relative font-medium text-muted-foreground hover:text-foreground text-xs lg:text-sm transition-colors",
+				isCurrentPath(href || "") && "text-foreground font-semibold",
 				className,
 			)}
 		>

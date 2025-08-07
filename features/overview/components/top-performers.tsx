@@ -70,7 +70,7 @@ const TopPerformers = ({
 								{topPerformersData.map((performer, index) => (
 									<div
 										key={performer.id}
-										className="flex items-center gap-3 hover:bg-muted/50 px-3 py-2 rounded-md transition-colors cursor-pointer"
+										className="flex items-center gap-4 hover:bg-muted/50 px-3 py-2 rounded-md transition-colors cursor-pointer"
 									>
 										{/* Rank */}
 										<span className="w-4 font-medium text-muted-foreground text-xs">
@@ -97,7 +97,7 @@ const TopPerformers = ({
 										</div>
 
 										{/* Metrics */}
-										<div className="flex items-center gap-3 text-sm">
+										<div className="flex items-center gap-4 text-sm">
 											<Tooltip>
 												<TooltipTrigger asChild>
 													<span className="font-semibold">

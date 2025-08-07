@@ -32,7 +32,7 @@ const HeaderCenterSection = () => {
 	};
 
 	return (
-		<nav className="flex items-center gap-4 lg:gap-8">
+		<nav className="flex items-center gap-4 lg:gap-6">
 			{navbarItems.map((item, i) => (
 				<AnimatedNavItem
 					key={item.label}

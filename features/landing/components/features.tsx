@@ -20,7 +20,7 @@ export const Features = () => {
 				transition={{ duration: 0.5 }}
 				className="flex flex-col justify-center items-center space-y-3 mb-12 text-center"
 			>
-				<div className="flex justify-center items-center gap-3 mb-3">
+				<div className="flex justify-center items-center gap-4 mb-3">
 					<Badge
 						className="mb-3 px-3 py-1 rounded-full font-semibold text-sm transition-none"
 						variant="secondary"

@@ -139,7 +139,7 @@ export const ForgotPasswordForm = ({
 										control={emailForm.control}
 										name="email"
 										render={({ field }) => (
-											<FormItem className="gap-3 grid">
+											<FormItem className="gap-4 grid">
 												<FormLabel htmlFor="email">Email</FormLabel>
 												<FormControl>
 													<Input
@@ -188,7 +188,7 @@ export const ForgotPasswordForm = ({
 										control={otpForm.control}
 										name="otp"
 										render={({ field }) => (
-											<FormItem className="gap-3 grid">
+											<FormItem className="gap-4 grid">
 												<FormLabel htmlFor="otp">Verification Code</FormLabel>
 												<FormControl>
 													<div className="flex justify-center">
@@ -240,7 +240,7 @@ export const ForgotPasswordForm = ({
 										control={passwordForm.control}
 										name="password"
 										render={({ field }) => (
-											<FormItem className="gap-3 grid">
+											<FormItem className="gap-4 grid">
 												<FormLabel htmlFor="password">New Password</FormLabel>
 												<FormControl>
 													<Input id="password" type="password" {...field} />
@@ -254,7 +254,7 @@ export const ForgotPasswordForm = ({
 										control={passwordForm.control}
 										name="confirmPassword"
 										render={({ field }) => (
-											<FormItem className="gap-3 grid">
+											<FormItem className="gap-4 grid">
 												<FormLabel htmlFor="confirmPassword">
 													Confirm New Password
 												</FormLabel>

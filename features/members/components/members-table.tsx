@@ -59,7 +59,6 @@ const MembersTable = ({
 		data: membersData,
 		columns: memoizedColumns,
 		pageCount: 1,
-		enableAdvancedFilter: true,
 		initialState: {
 			columnPinning: { right: ["actions"] },
 		},
@@ -67,27 +66,25 @@ const MembersTable = ({
 	});
 
 	if (isLoadingMembers) {
-		if (isLoadingMembers) {
-			return (
-				<DataTableSkeleton
-					columnCount={10}
-					filterCount={4}
-					cellWidths={[
-						"2rem",
-						"4rem",
-						"3rem",
-						"12rem",
-						"16rem",
-						"6rem",
-						"6rem",
-						"8rem",
-						"7rem",
-						"3rem",
-					]}
-					shrinkZero
-				/>
-			);
-		}
+		return (
+			<DataTableSkeleton
+				columnCount={10}
+				filterCount={4}
+				cellWidths={[
+					"2rem",
+					"4rem",
+					"3rem",
+					"12rem",
+					"16rem",
+					"6rem",
+					"6rem",
+					"8rem",
+					"7rem",
+					"3rem",
+				]}
+				shrinkZero
+			/>
+		);
 	}
 
 	if (membersError || !membersData) {

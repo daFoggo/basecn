@@ -16,7 +16,7 @@ const HeaderLeftSection = () => {
     const breadcrumbItems = useBreadcrumb(SIDEBAR_NAVIGATION);
 
     return (
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-4">
             <CustomSidebarTrigger />
             <Separator className="min-h-6" orientation="vertical" />
             <BreadcrumbNav
