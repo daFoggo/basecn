@@ -68,9 +68,10 @@ const MembersTable = ({
 	if (isLoadingMembers) {
 		return (
 			<DataTableSkeleton
-				columnCount={10}
+				columnCount={11}
 				filterCount={4}
 				cellWidths={[
+					"2rem",
 					"2rem",
 					"4rem",
 					"3rem",
