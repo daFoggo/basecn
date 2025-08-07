@@ -1,4 +1,8 @@
-# READ AI-GENERATED DOCUMENT BY DEEPWIKI IN HERE: <https://deepwiki.com/daFoggo/basecn>
+**basecn** is a modern Next.js dashboard application designed as a comprehensive project foundation for web applications. It implements a full-featured dashboard with user authentication, task management, team member management, and analytics visualization. The application serves as both a functional dashboard and a reference implementation demonstrating best practices for Next.js application architecture, component design, and state management. The codebase emphasizes modularity, type safety, and developer experience through feature-based organization and modern tooling integration.
+
+<img width="2048" height="1151" alt="basecn" src="https://github.com/user-attachments/assets/d292b4c5-8ffe-40c8-840f-270986cc1740" />
+
+## READ AI-GENERATED DOCUMENT BY DEEPWIKI IN HERE: <https://deepwiki.com/daFoggo/basecn> (UPDATE EVERY 7 DAYS)
 
 ## This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app)
 
