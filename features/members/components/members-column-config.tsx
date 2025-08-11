@@ -52,7 +52,7 @@ export const getMembersColumnConfig = ({
 		{
 			id: "index",
 			header: ({ column }: { column: Column<IMember, unknown> }) => (
-				<DataTableColumnHeader column={column} title="Index" />
+				<DataTableColumnHeader column={column} title="Index" className="flex justify-center items-center w-full text-center" />
 			),
 			cell: ({ row, table }) => {
 				const sortedRows = table.getSortedRowModel().flatRows;
