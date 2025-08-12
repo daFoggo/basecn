@@ -52,10 +52,13 @@ export const authServices = {
   },
 
   me: async (): Promise<IUser> => {
-    const response = await fetcher<IUser>([
-      AUTH_ENDPOINTS.ME,
-      { method: "GET" },
-    ]);
-    return response;
+    // const response = await fetcher<IUser>([
+    //   AUTH_ENDPOINTS.ME,
+    //   { method: "GET" },
+    // ]);
+    console.log("Me service called");
+    return {
+      ...SAMPLE_USER,
+    };
   },
 };
