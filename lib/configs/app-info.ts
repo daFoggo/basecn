@@ -22,5 +22,5 @@ export const APP_INFO: IAppInfo = {
   githubRepo: "basecn",
   authorWebsite: "https://github.com/daFoggo",
   contactEmail: "basecn@gmail.com",
-  appVersion: "0.1.0-alpha",
+  appVersion: "0.1.1-alpha",
 };
