@@ -1,11 +1,14 @@
 "use client";
 
 import { redirect } from "next/navigation";
+import type React from "react";
 import {
 	createContext,
 	type ReactNode,
+	useCallback,
 	useContext,
 	useEffect,
+	useMemo,
 	useState,
 } from "react";
 import { PageLoading } from "@/components/common/page-loading";
@@ -67,11 +70,50 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
 		resetRegister,
 	} = useAuthSWR();
 
-	const clearStoredAuth = () => {
+	const clearStoredAuth = useCallback(() => {
 		removeItem(STORAGE_KEYS.ACCESS_TOKEN);
 		removeItem(STORAGE_KEYS.REFRESH_TOKEN);
 		removeItem(STORAGE_KEYS.USER);
-	};
+	}, []);
+
+	const storeAuthData = useCallback((token: string, userData?: IUser) => {
+		setItem(STORAGE_KEYS.ACCESS_TOKEN, token);
+		if (userData) {
+			setItem(STORAGE_KEYS.USER, JSON.stringify(userData));
+		}
+	}, []);
+
+	const login = useCallback(
+		async (credentials: IPostLogin) => {
+			const response = await authLogin(credentials);
+			if (response?.session.token) {
+				storeAuthData(response.session.token, response.user);
+			}
+		},
+		[authLogin, storeAuthData],
+	);
+
+	const register = useCallback(
+		async (userData: IPostRegister) => {
+			const response = await authRegister(userData);
+			if (response?.session.token) {
+				storeAuthData(response.session.token, response.user);
+			}
+		},
+		[authRegister, storeAuthData],
+	);
+
+	const logout = useCallback(() => {
+		clearStoredAuth();
+		authLogout();
+	}, [clearStoredAuth, authLogout]);
+
+	const refreshUser = useCallback(async () => {
+		await authRefreshUser();
+		if (user) {
+			setItem(STORAGE_KEYS.USER, JSON.stringify(user));
+		}
+	}, [authRefreshUser, user]);
 
 	useEffect(() => {
 		const initializeAuth = async () => {
@@ -92,60 +134,45 @@ export const AuthProvider = ({ children }: IAuthProviderProps) => {
 		initializeAuth();
 	}, [authRefreshUser]);
 
-	const storeAuthData = (token: string, userData?: IUser) => {
-		setItem(STORAGE_KEYS.ACCESS_TOKEN, token);
-		if (userData) {
-			setItem(STORAGE_KEYS.USER, JSON.stringify(userData));
-		}
-	};
+	const contextValue: IAuthContext = useMemo(
+		() => ({
+			user,
+			isAuthenticated,
+			isLoading: isInitializing || isLoadingUser,
 
-	const login = async (credentials: IPostLogin) => {
-		const response = await authLogin(credentials);
-		if (response?.session.token) {
-			storeAuthData(response.session.token, response.user);
-		}
-	};
+			login,
+			register,
+			logout,
+			refreshUser,
 
-	const register = async (userData: IPostRegister) => {
-		const response = await authRegister(userData);
-		if (response?.session.token) {
-			storeAuthData(response.session.token, response.user);
-		}
-	};
+			isLoggingIn,
+			isRegistering,
 
-	const logout = () => {
-		clearStoredAuth();
-		authLogout();
-	};
+			loginError,
+			registerError,
+			userError,
 
-	const refreshUser = async () => {
-		await authRefreshUser();
-
-		if (user) {
-			setItem(STORAGE_KEYS.USER, JSON.stringify(user));
-		}
-	};
-
-	const contextValue: IAuthContext = {
-		user,
-		isAuthenticated,
-		isLoading: isInitializing || isLoadingUser,
-
-		login,
-		register,
-		logout,
-		refreshUser,
-
-		isLoggingIn,
-		isRegistering,
-
-		loginError,
-		registerError,
-		userError,
-
-		resetLogin,
-		resetRegister,
-	};
+			resetLogin,
+			resetRegister,
+		}),
+		[
+			user,
+			isAuthenticated,
+			isInitializing,
+			isLoadingUser,
+			login,
+			register,
+			logout,
+			refreshUser,
+			isLoggingIn,
+			isRegistering,
+			loginError,
+			registerError,
+			userError,
+			resetLogin,
+			resetRegister,
+		],
+	);
 
 	return (
 		<AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>

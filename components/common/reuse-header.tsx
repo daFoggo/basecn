@@ -5,6 +5,7 @@ import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
 import {
 	type MouseEvent,
+	memo,
 	type ReactNode,
 	useEffect,
 	useRef,
@@ -28,6 +29,95 @@ interface IReusableHeaderProps {
 	useContainer?: boolean;
 	centerVisibleOnMobile?: boolean;
 }
+
+const LeftSection = memo(({ children }: { children: ReactNode }) => (
+	<div className="flex justify-start items-center min-w-0">{children}</div>
+));
+LeftSection.displayName = "LeftSection";
+
+const CenterSection = memo(
+	({
+		children,
+		centerVisibleOnMobile,
+	}: {
+		children: ReactNode;
+		centerVisibleOnMobile: boolean;
+	}) =>
+		!centerVisibleOnMobile ? (
+			<div className={cn("flex justify-center items-center min-w-0")}>
+				{children}
+			</div>
+		) : (
+			<div></div>
+		),
+);
+CenterSection.displayName = "CenterSection";
+
+const RightSection = memo(
+	({
+		children,
+		enableMobileMenu,
+		mobileMenuOpen,
+		onToggleMobileMenu,
+	}: {
+		children: ReactNode;
+		enableMobileMenu: boolean;
+		mobileMenuOpen: boolean;
+		onToggleMobileMenu: () => void;
+	}) => (
+		<div className="flex justify-end items-center gap-2 md:gap-4 min-w-0">
+			<div
+				className={`${enableMobileMenu ? "hidden md:flex" : "flex"} items-center gap-2 md:gap-4`}
+			>
+				{children}
+			</div>
+			{enableMobileMenu && (
+				<Button
+					variant="ghost"
+					size="icon"
+					className="md:hidden"
+					onClick={onToggleMobileMenu}
+					aria-expanded={mobileMenuOpen}
+					aria-controls="mobile-menu"
+				>
+					{mobileMenuOpen ? (
+						<X className="size-5" />
+					) : (
+						<Menu className="size-5" />
+					)}
+					<span className="sr-only">Toggle menu</span>
+				</Button>
+			)}
+		</div>
+	),
+);
+RightSection.displayName = "RightSection";
+
+const MobileMenu = memo(
+	({
+		isOpen,
+		content,
+		barHeight,
+	}: {
+		isOpen: boolean;
+		content: ReactNode;
+		barHeight: number;
+	}) =>
+		isOpen &&
+		content && (
+			<motion.div
+				id="mobile-menu"
+				initial={{ opacity: 0, y: -10 }}
+				animate={{ opacity: 1, y: 0 }}
+				exit={{ opacity: 0, y: -10 }}
+				className="md:hidden z-40 fixed inset-x-0 bg-background/95 backdrop-blur-lg border-t"
+				style={{ top: barHeight }}
+			>
+				<div className="mx-auto px-3 py-3 container">{content}</div>
+			</motion.div>
+		),
+);
+MobileMenu.displayName = "MobileMenu";
 
 export const ReusableHeader = ({
 	leftSection,
@@ -66,6 +156,8 @@ export const ReusableHeader = ({
 		};
 	}, []);
 
+	const toggleMobileMenu = () => setMobileMenuOpen((v) => !v);
+
 	const headerClasses = cn(
 		"z-50 w-full",
 		stickyHeader && "sticky top-0",
@@ -92,61 +184,32 @@ export const ReusableHeader = ({
 					"grid grid-cols-[minmax(0,1fr)_auto_minmax(0,1fr)] items-center gap-2 md:gap-4",
 				)}
 			>
-				<div className="flex justify-start items-center min-w-0">
-					{leftSection}
-				</div>
+				<LeftSection>{leftSection}</LeftSection>
 
-				{!centerVisibleOnMobile ? (
-					<div className={cn("flex justify-center items-center min-w-0")}>
-						{centerSection}
-					</div>
-				) : (
-					<div></div>
-				)}
+				<CenterSection centerVisibleOnMobile={centerVisibleOnMobile}>
+					{centerSection}
+				</CenterSection>
 
-				<div className="flex justify-end items-center gap-2 md:gap-4 min-w-0">
-					<div
-						className={`${enableMobileMenu ? "hidden md:flex" : "flex"} items-center gap-2 md:gap-4`}
-					>
-						{rightSection}
-					</div>
-					{enableMobileMenu && (
-						<Button
-							variant="ghost"
-							size="icon"
-							className="md:hidden"
-							onClick={() => setMobileMenuOpen((v) => !v)}
-							aria-expanded={mobileMenuOpen}
-							aria-controls="mobile-menu"
-						>
-							{mobileMenuOpen ? (
-								<X className="size-5" />
-							) : (
-								<Menu className="size-5" />
-							)}
-							<span className="sr-only">Toggle menu</span>
-						</Button>
-					)}
-				</div>
+				<RightSection
+					enableMobileMenu={enableMobileMenu}
+					mobileMenuOpen={mobileMenuOpen}
+					onToggleMobileMenu={toggleMobileMenu}
+				>
+					{rightSection}
+				</RightSection>
 			</div>
 
-			{enableMobileMenu && mobileMenuOpen && mobileMenuContent && (
-				<motion.div
-					id="mobile-menu"
-					initial={{ opacity: 0, y: -10 }}
-					animate={{ opacity: 1, y: 0 }}
-					exit={{ opacity: 0, y: -10 }}
-					className="md:hidden z-40 fixed inset-x-0 bg-background/95 backdrop-blur-lg border-t"
-					style={{ top: barHeight }}
-				>
-					<div className="mx-auto px-3 py-3 container">{mobileMenuContent}</div>
-				</motion.div>
+			{enableMobileMenu && (
+				<MobileMenu
+					isOpen={mobileMenuOpen}
+					content={mobileMenuContent}
+					barHeight={barHeight}
+				/>
 			)}
 		</header>
 	);
 };
 
-// Mobile Menu Hook
 export const useMobileMenu = () => {
 	const [isOpen, setIsOpen] = useState(false);
 	const toggle = () => setIsOpen((prev) => !prev);
@@ -155,7 +218,6 @@ export const useMobileMenu = () => {
 	return { isOpen, toggle, close, open };
 };
 
-// Animated Navigation Item
 interface INavItemProps {
 	children: ReactNode;
 	href?: string;
@@ -164,43 +226,39 @@ interface INavItemProps {
 	delay?: number;
 }
 
-export const AnimatedNavItem = ({
-	children,
-	href,
-	onClick,
-	className,
-	delay = 0,
-}: INavItemProps) => {
-	const pathName = usePathname();
-	const isCurrentPath = (url: string) => {
-		if (!url) return false;
-		try {
-			return pathName === url || pathName.startsWith(url);
-		} catch {
-			return false;
-		}
-	};
+export const AnimatedNavItem = memo(
+	({ children, href, onClick, className, delay = 0 }: INavItemProps) => {
+		const pathName = usePathname();
+		const isCurrentPath = (url: string) => {
+			if (!url) return false;
+			try {
+				return pathName === url || pathName.startsWith(url);
+			} catch {
+				return false;
+			}
+		};
 
-	return (
-		<motion.a
-			initial={{ opacity: 0, y: -10 }}
-			animate={{ opacity: 1, y: 0 }}
-			transition={{ duration: 0.3, delay }}
-			href={href}
-			onClick={onClick}
-			className={cn(
-				"group relative font-medium text-muted-foreground hover:text-primary text-xs lg:text-sm transition-colors",
-				isCurrentPath(href || "") && "text-primary font-semibold",
-				className,
-			)}
-		>
-			{children}
-			<span className="-bottom-1 left-0 absolute bg-primary w-0 group-hover:w-full h-0.5 transition-all duration-300"></span>
-		</motion.a>
-	);
-};
+		return (
+			<motion.a
+				initial={{ opacity: 0, y: -10 }}
+				animate={{ opacity: 1, y: 0 }}
+				transition={{ duration: 0.3, delay }}
+				href={href}
+				onClick={onClick}
+				className={cn(
+					"group relative font-medium text-muted-foreground hover:text-primary text-xs lg:text-sm transition-colors",
+					isCurrentPath(href || "") && "text-primary font-semibold",
+					className,
+				)}
+			>
+				{children}
+				<span className="-bottom-1 left-0 absolute bg-primary w-0 group-hover:w-full h-0.5 transition-all duration-300"></span>
+			</motion.a>
+		);
+	},
+);
+AnimatedNavItem.displayName = "AnimatedNavItem";
 
-// Animated Button
 interface IAnimatedButtonProps {
 	children: ReactNode;
 	className?: string;
@@ -210,28 +268,31 @@ interface IAnimatedButtonProps {
 	asChild?: boolean;
 }
 
-export const AnimatedButton = ({
-	children,
-	className,
-	delay = 0,
-	onClick,
-	variant = "default",
-	asChild = false,
-}: IAnimatedButtonProps) => {
-	return (
-		<motion.div
-			initial={{ opacity: 0, scale: 0.98 }}
-			animate={{ opacity: 1, scale: 1 }}
-			transition={{ duration: 0.25, delay }}
-		>
-			<Button
-				variant={variant}
-				className={className}
-				onClick={onClick}
-				asChild={asChild}
+export const AnimatedButton = memo(
+	({
+		children,
+		className,
+		delay = 0,
+		onClick,
+		variant = "default",
+		asChild = false,
+	}: IAnimatedButtonProps) => {
+		return (
+			<motion.div
+				initial={{ opacity: 0, scale: 0.98 }}
+				animate={{ opacity: 1, scale: 1 }}
+				transition={{ duration: 0.25, delay }}
 			>
-				{children}
-			</Button>
-		</motion.div>
-	);
-};
+				<Button
+					variant={variant}
+					className={className}
+					onClick={onClick}
+					asChild={asChild}
+				>
+					{children}
+				</Button>
+			</motion.div>
+		);
+	},
+);
+AnimatedButton.displayName = "AnimatedButton";

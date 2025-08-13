@@ -7,6 +7,8 @@ import { AuthProvider } from "@/features/auth";
 import { APP_INFO } from "@/lib/configs/app-info";
 import { ThemeProvider } from "@/lib/contexts/theme-context";
 import "./globals.css";
+import { ClerkProvider } from "@clerk/nextjs";
+import { ClerkThemeProvider } from "@/components/providers/clerk-theme-provider";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -46,11 +48,15 @@ export default function RootLayout({
 				>
 					<NuqsAdapter>
 						<SWRProvider>
-							<AuthProvider>
-								<TooltipProvider delayDuration={0} skipDelayDuration={100}>
-									{children}
-								</TooltipProvider>
-							</AuthProvider>
+							<ClerkThemeProvider>
+								<ClerkProvider>
+									<AuthProvider>
+										<TooltipProvider delayDuration={0} skipDelayDuration={100}>
+											{children}
+										</TooltipProvider>
+									</AuthProvider>
+								</ClerkProvider>
+							</ClerkThemeProvider>
 						</SWRProvider>
 					</NuqsAdapter>
 				</ThemeProvider>

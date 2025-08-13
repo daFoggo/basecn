@@ -118,9 +118,9 @@ export const NavMain = ({ items }: { items: INavItem[] }) => {
 											{item.items.map((subItem) => (
 												<SidebarMenuSubItem key={subItem.title}>
 													<SidebarMenuSubButton asChild>
-														<a href={subItem.url}>
+														<Link href={subItem.url}>
 															<span>{subItem.title}</span>
-														</a>
+														</Link>
 													</SidebarMenuSubButton>
 												</SidebarMenuSubItem>
 											))}
@@ -134,10 +134,10 @@ export const NavMain = ({ items }: { items: INavItem[] }) => {
 					return (
 						<SidebarMenuItem key={item.title}>
 							<SidebarMenuButton asChild tooltip={item.title}>
-								<a href={item.url}>
+								<Link href={item.url}>
 									{item.icon && <item.icon />}
 									<span>{item.title}</span>
-								</a>
+								</Link>
 							</SidebarMenuButton>
 						</SidebarMenuItem>
 					);
@@ -155,10 +155,10 @@ export const NavSecondary = ({ items }: { items: INavItem[] }) => {
 				{items.map((item) => (
 					<SidebarMenuItem key={item.title}>
 						<SidebarMenuButton asChild tooltip={item.title}>
-							<a href={item.url}>
+							<Link href={item.url} target="_blank" rel="noopener noreferrer">
 								{item.icon && <item.icon />}
 								<span>{item.title}</span>
-							</a>
+							</Link>
 						</SidebarMenuButton>
 					</SidebarMenuItem>
 				))}
@@ -211,9 +211,9 @@ export const SidebarLogo = ({
 					className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
 				>
 					{url ? (
-						<a href={url} className="flex items-center gap-2">
+						<Link href={url} className="flex items-center gap-2">
 							{logoContent}
-						</a>
+						</Link>
 					) : (
 						<div className="flex items-center gap-2">{logoContent}</div>
 					)}

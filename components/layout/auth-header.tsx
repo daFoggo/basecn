@@ -1,12 +1,12 @@
 "use client";
 
+import { SignInButton } from "@clerk/nextjs";
 import AppLogo from "../common/app-logo";
 import {
 	AnimatedButton,
 	ReusableHeader
 } from "../common/reuse-header";
 import { ThemeSwitcher } from "../common/theme-switcher";
-import { UserMenu } from "../common/user-menu";
 
 const HeaderLeftSection = () => {
 	return <AppLogo />;
@@ -25,7 +25,7 @@ const HeaderMobileMenuContent = () => {
 	return (
 		<div className="flex flex-col gap-4">
 			<div className="mt-2 pt-2 border-t border-border/30">
-				<UserMenu shouldShowGoToApp />
+				<SignInButton />
 			</div>
 		</div>
 	);

@@ -17,7 +17,6 @@ export const AUTH_CACHE_KEYS = {
 };
 
 export function useAuthSWR() {
-
   const {
     data: user,
     error: userError,

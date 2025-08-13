@@ -1,5 +1,8 @@
 "use client";
 
+import { SignInButton, useAuth } from "@clerk/nextjs";
+import { ChevronRight } from "lucide-react";
+import Link from "next/dist/client/link";
 import AppLogo from "../common/app-logo";
 import GithubStat from "../common/github-stat";
 import {
@@ -8,7 +11,6 @@ import {
 	ReusableHeader,
 } from "../common/reuse-header";
 import { ThemeSwitcher } from "../common/theme-switcher";
-import { UserMenu } from "../common/user-menu";
 
 const navbarItems = [
 	{ label: "Features", href: "#features" },
@@ -50,7 +52,15 @@ const HeaderCenterSection = () => {
 };
 
 // Component cho Right Section
-const HeaderRightSection = () => {
+const HeaderRightSection = ({
+	isSignedIn,
+	userId,
+	sessionId,
+}: {
+	isSignedIn: boolean | undefined;
+	userId: string | null | undefined;
+	sessionId: string | null | undefined;
+}) => {
 	return (
 		<>
 			<AnimatedButton variant="ghost" delay={0.45} asChild>
@@ -66,13 +76,27 @@ const HeaderRightSection = () => {
 				className="rounded-full font-medium hover:scale-105 transition-transform cursor-pointer"
 				asChild
 			>
-				<UserMenu shouldShowGoToApp />
+				{!isSignedIn ? <SignInButton /> :
+					(userId && sessionId ? (
+						<Link href="/dashboard">
+							Go to App
+							<ChevronRight className="ml-2 size-4" />
+						</Link>
+					) : null)}
 			</AnimatedButton>
 		</>
 	);
 };
 
-const HeaderMobileMenuContent = () => {
+const HeaderMobileMenuContent = ({
+	isSignedIn,
+	userId,
+	sessionId,
+}: {
+	isSignedIn: boolean | undefined;
+	userId: string | null | undefined;
+	sessionId: string | null | undefined;
+}) => {
 	const handleScrollToSection = (e: React.MouseEvent<HTMLAnchorElement>) => {
 		e.preventDefault();
 		const targetId = e.currentTarget.getAttribute("href")?.slice(1);
@@ -99,19 +123,38 @@ const HeaderMobileMenuContent = () => {
 			))}
 
 			<div className="mt-2 pt-2 border-t border-border/30">
-				<UserMenu shouldShowGoToApp />
+				{!isSignedIn ? <SignInButton /> :
+					(userId && sessionId ? (
+						<Link href="/dashboard">
+							Go to App
+							<ChevronRight className="ml-2 size-4" />
+						</Link>
+					) : null)}
 			</div>
 		</div>
 	);
 };
 
 export const RootHeader = () => {
+	const { isSignedIn, userId, sessionId } = useAuth();
 	return (
 		<ReusableHeader
 			leftSection={<HeaderLeftSection />}
 			centerSection={<HeaderCenterSection />}
-			rightSection={<HeaderRightSection />}
-			mobileMenuContent={<HeaderMobileMenuContent />}
+			rightSection={
+				<HeaderRightSection
+					isSignedIn={isSignedIn}
+					userId={userId}
+					sessionId={sessionId}
+				/>
+			}
+			mobileMenuContent={
+				<HeaderMobileMenuContent
+					isSignedIn={isSignedIn}
+					userId={userId}
+					sessionId={sessionId}
+				/>
+			}
 			enableScrollEffect={true}
 			enableMobileMenu={true}
 			stickyHeader={true}
