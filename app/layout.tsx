@@ -1,4 +1,5 @@
 import { ClerkProvider } from "@clerk/nextjs";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Fraunces, Geist, Geist_Mono } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
@@ -57,6 +58,7 @@ export default function RootLayout({
 						</SWRProvider>
 					</NuqsAdapter>
 				</ThemeProvider>
+				<SpeedInsights />
 			</body>
 		</html>
 	);
