@@ -1,14 +1,13 @@
+import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
 import { Fraunces, Geist, Geist_Mono } from "next/font/google";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
+import { ClerkThemeProvider } from "@/components/providers/clerk-theme-provider";
 import { SWRProvider } from "@/components/providers/swr-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { AuthProvider } from "@/features/auth";
 import { APP_INFO } from "@/lib/configs/app-info";
 import { ThemeProvider } from "@/lib/contexts/theme-context";
 import "./globals.css";
-import { ClerkProvider } from "@clerk/nextjs";
-import { ClerkThemeProvider } from "@/components/providers/clerk-theme-provider";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -50,11 +49,9 @@ export default function RootLayout({
 						<SWRProvider>
 							<ClerkThemeProvider>
 								<ClerkProvider>
-									<AuthProvider>
-										<TooltipProvider delayDuration={0} skipDelayDuration={100}>
-											{children}
-										</TooltipProvider>
-									</AuthProvider>
+									<TooltipProvider delayDuration={0} skipDelayDuration={100}>
+										{children}
+									</TooltipProvider>
 								</ClerkProvider>
 							</ClerkThemeProvider>
 						</SWRProvider>
