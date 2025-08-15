@@ -46,19 +46,13 @@ const HeaderRightSection = memo(
 					<ThemeSwitcher />
 				</AnimatedButton>
 
-				<AnimatedButton
-					delay={0.5}
-					className="rounded-full font-medium hover:scale-105 transition-transform cursor-pointer"
-					asChild
-				>
-					{!isLoaded ? null : !isSignedIn ? (
-						<SignInButton />
-					) : userId && sessionId ? (
-						<UserButton />
-					) : (
-						<Skeleton className="rounded-full size-12" />
-					)}
-				</AnimatedButton>
+				{!isLoaded ? null : !isSignedIn ? (
+					<SignInButton />
+				) : userId && sessionId ? (
+					<UserButton />
+				) : (
+					<Skeleton className="rounded-full size-12" />
+				)}
 			</div>
 		);
 	},
