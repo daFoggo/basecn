@@ -5,7 +5,7 @@ import { memo } from "react";
 import { SIDEBAR_NAVIGATION } from "@/lib/configs/sidebar-navigation";
 import { useBreadcrumb } from "@/lib/hooks/use-breadcrumb";
 import { CustomSidebarTrigger } from "../common/custom-sidebar-trigger";
-import { ReusableHeader } from "../common/reuse-header";
+import { AnimatedButton, ReusableHeader } from "../common/reuse-header";
 import { ThemeSwitcher } from "../common/theme-switcher";
 import { Separator } from "../ui/separator";
 import { Skeleton } from "../ui/skeleton";
@@ -42,15 +42,23 @@ const HeaderRightSection = memo(
 	}) => {
 		return (
 			<div className="flex items-center gap-2 md:gap-4">
-				<ThemeSwitcher />
+				<AnimatedButton variant="ghost" delay={0.4} asChild>
+					<ThemeSwitcher />
+				</AnimatedButton>
 
-				{!isLoaded ? null : !isSignedIn ? (
-					<SignInButton />
-				) : userId && sessionId ? (
-					<UserButton />
-				) : (
-					<Skeleton className="rounded-full size-12" />
-				)}
+				<AnimatedButton
+					delay={0.5}
+					className="rounded-full font-medium hover:scale-105 transition-transform cursor-pointer"
+					asChild
+				>
+					{!isLoaded ? null : !isSignedIn ? (
+						<SignInButton />
+					) : userId && sessionId ? (
+						<UserButton />
+					) : (
+						<Skeleton className="rounded-full size-12" />
+					)}
+				</AnimatedButton>
 			</div>
 		);
 	},
