@@ -2,8 +2,9 @@ import type { ReactNode } from "react";
 import { cn } from "@/lib/utils/tailwind";
 
 interface IPageHeadingProps {
-    title: string;
+    title?: string;
     subtitle?: string;
+    customTitleComponent?: ReactNode;
     rightSections?: ReactNode;
     titleClassName?: string;
     subtitleClassName?: string;
@@ -11,21 +12,24 @@ interface IPageHeadingProps {
     className?: string;
 }
 
-const PageHeading = ({ 
-    title, 
-    subtitle, 
+const PageHeading = ({
+    title,
+    subtitle,
+    customTitleComponent,
     rightSections,
     titleClassName,
     subtitleClassName,
     rightSectionsClassName,
-    className
+    className,
 }: IPageHeadingProps) => {
     return (
-        <div className={cn("flex justify-between items-start gap-4 w-full", className)}>
+        <div
+            className={cn("flex justify-between items-start gap-4 w-full", className)}
+        >
             <div className="flex flex-col items-start gap-1">
-                <p className={cn("font-bold text-2xl", titleClassName)}>
-                    {title}
-                </p>
+                {customTitleComponent || (
+                    <p className={cn("font-bold text-2xl", titleClassName)}>{title}</p>
+                )}
                 {subtitle && (
                     <p className={cn("text-muted-foreground text-sm", subtitleClassName)}>
                         {subtitle}
@@ -33,9 +37,7 @@ const PageHeading = ({
                 )}
             </div>
             {rightSections && (
-                <div className={cn("", rightSectionsClassName)}>
-                    {rightSections}
-                </div>
+                <div className={cn("", rightSectionsClassName)}>{rightSections}</div>
             )}
         </div>
     );
