@@ -1,9 +1,13 @@
 "use client";
 
-import type { LucideIcon } from "lucide-react";
 import { ChevronRight, ChevronsUpDown, Plus } from "lucide-react";
 import Link from "next/link";
-import { type ComponentProps, type ElementType, useState } from "react";
+import {
+	type ComponentProps,
+	type ElementType,
+	type ReactNode,
+	useState,
+} from "react";
 import {
 	Collapsible,
 	CollapsibleContent,
@@ -43,7 +47,7 @@ interface ITeam {
 }
 
 interface ISidebarLogoProps {
-	icon: LucideIcon;
+	icon: ReactNode;
 	title: string;
 	url?: string;
 	variant?: "default" | "compact";
@@ -168,7 +172,7 @@ export const NavSecondary = ({ items }: { items: INavItem[] }) => {
 };
 
 export const SidebarLogo = ({
-	icon: LogoIcon,
+	icon,
 	title,
 	url,
 	variant = "default",
@@ -187,7 +191,7 @@ export const SidebarLogo = ({
 						: "",
 				)}
 			>
-				<LogoIcon className={cn("", useIconBackground ? "size-4" : "size-5")} />
+				{icon}
 			</div>
 			{isExpanded && (
 				<div className="flex flex-col gap-0.5 leading-none">

@@ -1,7 +1,7 @@
 "use client";
 
-import { LayoutPanelLeft } from "lucide-react";
 import type { ReactNode } from "react";
+import { PureAppLogo } from "@/components/common/app-logo";
 import { DashboardHeader } from "@/components/layout/dashboard-header";
 import { DashboardSidebar } from "@/components/layout/dashboard-sidebar";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
@@ -15,7 +15,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
 				navMain={SIDEBAR_NAVIGATION.navMain}
 				navSecondary={SIDEBAR_NAVIGATION.navSecondary}
 				sidebarLogo={{
-					icon: LayoutPanelLeft,
+					icon: <PureAppLogo showText={false} />,
 					title: APP_INFO.name || "Dashboard",
 					url: "/dashboard",
 					variant: "default",
