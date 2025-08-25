@@ -1,8 +1,6 @@
-"use client";
-
-import { ChevronRight } from "lucide-react";
-import Link from "next/link";
-import { Fragment } from "react";
+import { ChevronRight } from "lucide-react"
+import Link from "next/link"
+import { Fragment } from "react"
 
 import {
 	Breadcrumb,
@@ -11,27 +9,46 @@ import {
 	BreadcrumbList,
 	BreadcrumbPage,
 	BreadcrumbSeparator,
-} from "@/components/ui/breadcrumb";
-import type { IBreadcrumbItem } from "@/lib/types/navigation";
+} from "@/components/ui/breadcrumb"
+import { Skeleton } from "@/components/ui/skeleton"
+import type { IBreadcrumbItem } from "@/lib/types/navigation"
 
 interface IBreadcrumbNavProps {
-	items: IBreadcrumbItem[];
-	className?: string;
-	maxItems?: number;
+	items: IBreadcrumbItem[]
+	className?: string
+	maxItems?: number
+	isLoading?: boolean
 }
 
-export const BreadcrumbNav = ({
-	items,
-	className,
-	maxItems = 5,
-}: IBreadcrumbNavProps) => {
-	if (!items.length) return null;
+export const BreadcrumbNav = ({ items, className, maxItems = 5, isLoading }: IBreadcrumbNavProps) => {
+	if (isLoading) {
+		const skeletonCount = items.length || 2
+
+		return (
+			<Breadcrumb className={className}>
+				<BreadcrumbList>
+					{Array.from({ length: skeletonCount }, (_, index) => index).map((skeletonId) => (
+						<Fragment key={`skeleton-item-${skeletonId}`}>
+							<BreadcrumbItem>
+								<Skeleton className="w-16 md:w-20 h-4" />
+							</BreadcrumbItem>
+							{skeletonId < skeletonCount - 1 && (
+								<BreadcrumbSeparator>
+									<ChevronRight className="size-4 text-muted-foreground/50" />
+								</BreadcrumbSeparator>
+							)}
+						</Fragment>
+					))}
+				</BreadcrumbList>
+			</Breadcrumb>
+		)
+	}
+
+	if (!items.length) return null
 
 	// Truncate items if too many
 	const displayItems =
-		items.length > maxItems
-			? [items[0], { title: "...", url: undefined }, ...items.slice(-2)]
-			: items;
+		items.length > maxItems ? [items[0], { title: "...", url: undefined }, ...items.slice(-2)] : items
 
 	return (
 		<Breadcrumb className={className}>
@@ -60,5 +77,5 @@ export const BreadcrumbNav = ({
 				))}
 			</BreadcrumbList>
 		</Breadcrumb>
-	);
-};
+	)
+}

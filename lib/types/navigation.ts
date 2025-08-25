@@ -8,6 +8,7 @@ export interface IBreadcrumbItem {
 }
 
 export interface INavigationConfig {
+    parent?: INavigationConfig;
   root: INavItem;
   navMain: INavItem[];
   navSecondary?: INavItem[];
