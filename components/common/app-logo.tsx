@@ -1,4 +1,4 @@
-import { Orbit } from "lucide-react";
+import { LayoutPanelLeft } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils/tailwind";
 
@@ -47,7 +47,7 @@ export const PureAppLogo = ({
 		<div
 			className={cn("flex items-center gap-2 font-bold", containerClassName)}
 		>
-			{showIcon && <Orbit className={cn("size-6", iconClassName)} />}
+			{showIcon && <LayoutPanelLeft className={cn("size-6", iconClassName)} />}
 			{showText && (
 				<span className={cn("hidden lg:block", textClassName)}>
 					{APP_INFO.name}
