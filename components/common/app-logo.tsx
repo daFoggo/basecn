@@ -1,10 +1,7 @@
 import { LayoutPanelLeft } from "lucide-react";
 import Link from "next/link";
+import { APP_INFO } from "@/lib/configs/app-info";
 import { cn } from "@/lib/utils/tailwind";
-
-const APP_INFO = {
-	name: "Dashboard App",
-};
 
 interface IAppLogoProps {
 	showText?: boolean;
