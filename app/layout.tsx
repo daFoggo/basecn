@@ -2,13 +2,13 @@ import { ClerkProvider } from "@clerk/nextjs";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Fraunces, Geist, Geist_Mono } from "next/font/google";
+import NextTopLoader from "nextjs-toploader";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { ClerkThemeProvider } from "@/components/providers/clerk-theme-provider";
 import { SWRProvider } from "@/components/providers/swr-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { APP_INFO } from "@/lib/configs/app-info";
 import { ThemeProvider } from "@/lib/contexts/theme-context";
-import "./globals.css";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -40,6 +40,7 @@ export default function RootLayout({
 			<body
 				className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} antialiased`}
 			>
+				<NextTopLoader />
 				<ThemeProvider
 					attribute="class"
 					defaultTheme="system"
