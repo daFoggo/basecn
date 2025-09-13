@@ -9,6 +9,8 @@ import { SWRProvider } from "@/components/providers/swr-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { APP_INFO } from "@/lib/configs/app-info";
 import { ThemeProvider } from "@/lib/contexts/theme-context";
+import { ppEditorial } from "@/lib/utils/fonts";
+import "./globals.css";
 
 const geistSans = Geist({
 	variable: "--font-geist-sans",
@@ -38,9 +40,9 @@ export default function RootLayout({
 	return (
 		<html lang="en" suppressHydrationWarning>
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} antialiased`}
+				className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} ${ppEditorial.variable} antialiased`}
 			>
-				<NextTopLoader />
+				<NextTopLoader showSpinner={false} />
 				<ThemeProvider
 					attribute="class"
 					defaultTheme="system"
