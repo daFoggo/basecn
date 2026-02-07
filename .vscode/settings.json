@@ -1,0 +1,11 @@
+{
+	// allow biome js to sort on save
+	"editor.codeActionsOnSave": {
+		"source.organizeImports.biome": "explicit",
+		"source.fixAll.biome": "explicit"
+	},
+	// allow vscode to treat tailwindcss files as css
+	"files.associations": {
+		"*.css": "tailwindcss"
+	}
+}
