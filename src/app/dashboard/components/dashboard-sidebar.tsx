@@ -34,7 +34,7 @@ import {
 } from "@/components/ui/sidebar";
 import { SITE_CONFIG } from "@/configs/site";
 import type { INavItem } from "@/types/navigation";
-import { navData } from "./nav-data";
+import { DASHBOARD_NAV_DATA } from "./nav-data";
 
 export const DashboardSidebar = () => {
   const { setOpen } = useCommandMenu();
@@ -137,7 +137,7 @@ export const DashboardSidebar = () => {
                 align="inline-end"
                 className="group-data-[collapsible=icon]:hidden"
               >
-                <Kbd>⌘K</Kbd>
+                <Kbd>Ctrl+K</Kbd>
               </InputGroupAddon>
             </InputGroup>
           </SidebarMenuButton>
@@ -215,7 +215,7 @@ export const DashboardSidebar = () => {
               exit="exit"
               className="h-full w-full"
             >
-              {navData.map((group, index) => (
+              {DASHBOARD_NAV_DATA.map((group, index) => (
                 <div key={group.title || index}>
                   <SidebarGroup>
                     {group.title && (
@@ -248,7 +248,9 @@ export const DashboardSidebar = () => {
                       </SidebarMenu>
                     </SidebarGroupContent>
                   </SidebarGroup>
-                  {index < navData.length - 1 && <SidebarSeparator />}
+                  {index < DASHBOARD_NAV_DATA.length - 1 && (
+                    <SidebarSeparator />
+                  )}
                 </div>
               ))}
             </motion.div>

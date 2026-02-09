@@ -1,28 +1,10 @@
 "use client";
 
-import { Monitor, Moon, Sun } from "lucide-react";
 import { motion } from "motion/react";
 import { useTheme } from "next-themes";
 import { useEffect, useState } from "react";
+import { THEME_OPTIONS } from "@/constants/theme";
 import { cn } from "@/lib/utils";
-
-const themes = [
-  {
-    key: "system",
-    icon: Monitor,
-    label: "System theme",
-  },
-  {
-    key: "light",
-    icon: Sun,
-    label: "Light theme",
-  },
-  {
-    key: "dark",
-    icon: Moon,
-    label: "Dark theme",
-  },
-] as const;
 
 export type ThemeSwitcherProps = {
   className?: string;
@@ -56,8 +38,8 @@ export const ThemeSwitcher = ({ className }: ThemeSwitcherProps) => {
         className,
       )}
     >
-      {themes.map(({ key, icon: Icon, label }) => {
-        const isActive = theme === key;
+      {THEME_OPTIONS.map(({ value, icon: Icon, label }) => {
+        const isActive = theme === value;
 
         return (
           <button
@@ -66,8 +48,8 @@ export const ThemeSwitcher = ({ className }: ThemeSwitcherProps) => {
               "group relative size-6 rounded-full transition-colors",
               !isActive && "hover:bg-muted/50",
             )}
-            key={key}
-            onClick={() => setTheme(key)}
+            key={value}
+            onClick={() => setTheme(value)}
             type="button"
           >
             {isActive && (

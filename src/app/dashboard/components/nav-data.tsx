@@ -30,7 +30,7 @@ import {
 } from "lucide-react";
 import type { INavGroup } from "@/types/navigation";
 
-export const navData: INavGroup[] = [
+export const DASHBOARD_NAV_DATA: INavGroup[] = [
   {
     title: "",
     items: [

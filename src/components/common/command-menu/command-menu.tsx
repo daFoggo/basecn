@@ -11,7 +11,7 @@ import {
   useState,
 } from "react";
 
-import { navData } from "@/app/dashboard/components/nav-data";
+import { DASHBOARD_NAV_DATA } from "@/app/dashboard/components/nav-data";
 import {
   Command,
   CommandDialog,
@@ -67,7 +67,7 @@ export const CommandMenu = () => {
   const [selectedType, setSelectedType] = useState<TSelectedType>(null);
 
   // Group nav data for search - memoized to avoid recalculation
-  const navGroups = useMemo(() => flattenNavData(navData), []);
+  const navGroups = useMemo(() => flattenNavData(DASHBOARD_NAV_DATA), []);
 
   // Reset selected type when menu closes
   useEffect(() => {
@@ -116,17 +116,20 @@ export const CommandMenu = () => {
 
           {/* Theme Options */}
           <CommandGroup heading="Theme">
-            {THEME_OPTIONS.map((theme) => (
-              <CommandMenuItem
-                key={theme.value}
-                value={`${theme.label} theme`}
-                onHighlight={() => setSelectedType("theme")}
-                onSelect={() => runCommand(() => setTheme(theme.value))}
-              >
-                {theme.icon}
-                <span className="ml-2">{theme.label}</span>
-              </CommandMenuItem>
-            ))}
+            {THEME_OPTIONS.map((theme) => {
+              const Icon = theme.icon;
+              return (
+                <CommandMenuItem
+                  key={theme.value}
+                  value={`${theme.label} theme`}
+                  onHighlight={() => setSelectedType("theme")}
+                  onSelect={() => runCommand(() => setTheme(theme.value))}
+                >
+                  <Icon className="size-4" />
+                  <span className="ml-2">{theme.label}</span>
+                </CommandMenuItem>
+              );
+            })}
           </CommandGroup>
         </CommandList>
 
