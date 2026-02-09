@@ -13,6 +13,19 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+  {
+    rules: {
+      // "max-params": ["error", 2],
+      // "func-style": ["error", "expression"],
+      // "react/function-component-definition": [
+      //   "error",
+      //   {
+      //     namedComponents: "arrow-function",
+      //     unnamedComponents: "arrow-function",
+      //   },
+      // ],
+    },
+  },
 ]);
 
 export default eslintConfig;

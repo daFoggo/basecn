@@ -34,6 +34,7 @@ export const ThemeSwitcher = ({ className }: ThemeSwitcherProps) => {
 
   // Prevent hydration mismatch
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 
