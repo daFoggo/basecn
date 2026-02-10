@@ -6,6 +6,8 @@ import {
   Bot,
   Box,
   BoxSelect,
+  Cloud,
+  Cpu,
   Database,
   Eye,
   GitBranch,
@@ -37,116 +39,116 @@ export const DASHBOARD_NAV_DATA: INavGroup[] = [
       {
         title: "Projects",
         href: "/dashboard/projects",
-        icon: <LayoutGrid className="size-4" />,
+        icon: LayoutGrid,
       },
       {
         title: "Deployments",
         href: "/dashboard/deployments",
-        icon: <Box className="size-4" />,
+        icon: Box,
       },
       {
         title: "Logs",
         href: "/dashboard/logs",
-        icon: <List className="size-4" />,
+        icon: List,
       },
       {
         title: "Analytics",
         href: "/dashboard/analytics",
-        icon: <LineChart className="size-4" />,
+        icon: LineChart,
       },
       {
         title: "Speed Insights",
         href: "/dashboard/speed-insights",
-        icon: <Timer className="size-4" />,
+        icon: Timer,
       },
       {
         title: "Observability",
         href: "#",
-        icon: <Eye className="size-4" />,
+        icon: Eye,
         items: [
           {
             title: "Overview",
             href: "/dashboard/observability/overview",
-            icon: <LayoutDashboard className="size-4" />,
+            icon: LayoutDashboard,
           },
           {
             title: "Query",
             href: "/dashboard/observability/query",
-            icon: <Activity className="size-4" />,
+            icon: Activity,
           },
           {
             title: "Notebooks",
             href: "/dashboard/observability/notebooks",
-            icon: <Book className="size-4" />,
+            icon: Book,
           },
           {
             title: "Alerts",
             href: "/dashboard/observability/alerts",
-            icon: <AlertTriangle className="size-4" />,
+            icon: AlertTriangle,
           },
           {
             title: "COMPUTE",
             href: "#",
-            icon: <div />, // Placeholder
+            icon: Cpu, // Replaced <div /> with Cpu icon
             variant: "group",
             items: [
               {
                 title: "Functions",
                 href: "/dashboard/observability/functions",
-                icon: <SquareFunction className="size-4" />,
+                icon: SquareFunction,
               },
               {
                 title: "External APIs",
                 href: "/dashboard/observability/external-apis",
-                icon: <Globe className="size-4" />,
+                icon: Globe,
               },
               {
                 title: "Middleware",
                 href: "/dashboard/observability/middleware",
-                icon: <Layers className="size-4" />,
+                icon: Layers,
               },
               {
                 title: "Workflows",
                 href: "/dashboard/observability/workflows",
-                icon: <GitBranch className="size-4" />,
+                icon: GitBranch,
               },
             ],
           },
           {
             title: "CDN",
             href: "#",
-            icon: <div />, // Placeholder
+            icon: Cloud, // Replaced <div /> with Cloud icon
             variant: "group",
             items: [
               {
                 title: "Edge Requests",
                 href: "/dashboard/observability/edge-requests",
-                icon: <Globe className="size-4" />,
+                icon: Globe,
               },
               {
                 title: "Fast Data Transfer",
                 href: "/dashboard/observability/fast-data-transfer",
-                icon: <ArrowRightLeft className="size-4" />,
+                icon: ArrowRightLeft,
               },
               {
                 title: "Image Optimization",
                 href: "/dashboard/observability/image-optimization",
-                icon: <Image className="size-4" />,
+                icon: Image,
               },
               {
                 title: "ISR",
                 href: "/dashboard/observability/isr",
-                icon: <RefreshCw className="size-4" />,
+                icon: RefreshCw,
               },
               {
                 title: "External Rewrites",
                 href: "/dashboard/observability/external-rewrites",
-                icon: <Shuffle className="size-4" />,
+                icon: Shuffle,
               },
               {
                 title: "Microfrontends",
                 href: "/dashboard/observability/microfrontends",
-                icon: <Package2 className="size-4" />,
+                icon: Package2,
               },
             ],
           },
@@ -155,7 +157,7 @@ export const DASHBOARD_NAV_DATA: INavGroup[] = [
       {
         title: "Firewall",
         href: "/dashboard/firewall",
-        icon: <ShieldAlert className="size-4" />,
+        icon: ShieldAlert,
       },
     ],
   },
@@ -165,51 +167,51 @@ export const DASHBOARD_NAV_DATA: INavGroup[] = [
       {
         title: "Domains",
         href: "/dashboard/domains",
-        icon: <Globe className="size-4" />,
+        icon: Globe,
       },
       {
         title: "Integrations",
         href: "/dashboard/integrations",
-        icon: <List className="size-4" />,
+        icon: List,
       },
       {
         title: "Storage",
         href: "/dashboard/storage",
-        icon: <Database className="size-4" />,
+        icon: Database,
       },
       {
         title: "Flags",
         href: "/dashboard/flags",
-        icon: <ToggleLeft className="size-4" />,
+        icon: ToggleLeft,
       },
       {
         title: "Agent",
         href: "#",
-        icon: <Bot className="size-4" />,
+        icon: Bot,
         items: [
           {
             title: "Agent Settings",
             href: "/dashboard/agent/settings",
-            icon: <Settings2 className="size-4" />,
+            icon: Settings2,
           },
         ],
       },
       {
         title: "AI Gateway",
         href: "#",
-        icon: <Share2 className="size-4" />,
+        icon: Share2,
         items: [
           {
             title: "Gateway Settings",
             href: "/dashboard/ai-gateway/settings",
-            icon: <Settings2 className="size-4" />,
+            icon: Settings2,
           },
         ],
       },
       {
         title: "Sandboxes",
         href: "/dashboard/sandboxes",
-        icon: <BoxSelect className="size-4" />,
+        icon: BoxSelect,
       },
     ],
   },
@@ -219,27 +221,27 @@ export const DASHBOARD_NAV_DATA: INavGroup[] = [
       {
         title: "Usage",
         href: "/dashboard/usage",
-        icon: <PieChart className="size-4" />,
+        icon: PieChart,
       },
       {
         title: "Support",
         href: "/dashboard/support",
-        icon: <LifeBuoy className="size-4" />,
+        icon: LifeBuoy,
       },
       {
         title: "Settings",
         href: "#",
-        icon: <Settings2 className="size-4" />,
+        icon: Settings2,
         items: [
           {
             title: "General",
             href: "/dashboard/settings/general",
-            icon: <Settings2 className="size-4" />,
+            icon: Settings2,
           },
           {
             title: "Team",
             href: "/dashboard/settings/team",
-            icon: <PieChart className="size-4" />,
+            icon: PieChart,
           },
         ],
       },

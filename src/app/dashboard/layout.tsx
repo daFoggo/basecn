@@ -8,7 +8,7 @@ const DashboardLayout = ({ children }: { children: ReactNode }) => {
   return (
     <CommandMenuProvider>
       <SidebarProvider>
-        <DashboardSidebar />
+        <DashboardSidebar enableTeamSwitcher />
         <SidebarInset>
           <DashboardHeader />
           <div className="flex-1 p-4">{children}</div>

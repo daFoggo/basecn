@@ -10,8 +10,6 @@ import {
   useRef,
   useState,
 } from "react";
-
-import { DASHBOARD_NAV_DATA } from "@/app/dashboard/components/nav-data";
 import {
   Command,
   CommandDialog,
@@ -23,6 +21,7 @@ import {
   CommandSeparator,
 } from "@/components/ui/command";
 import { Kbd } from "@/components/ui/kbd";
+import { DASHBOARD_NAV_DATA } from "@/constants/dashboard-nav";
 import { THEME_OPTIONS } from "@/constants/theme";
 import { useMutationObserver } from "@/hooks/use-mutation-observer";
 import { flattenNavData } from "@/lib/nav-utils";
@@ -98,17 +97,20 @@ export const CommandMenu = () => {
           {/* Navigation Items - Grouped */}
           {navGroups.map((group: TFlatNavGroup) => (
             <CommandGroup key={group.title} heading={group.title}>
-              {group.items.map((item: TFlatNavItem) => (
-                <CommandMenuItem
-                  key={item.href}
-                  value={`${item.title} ${item.group} ${item.keywords?.join(" ") || ""}`}
-                  onHighlight={() => setSelectedType("page")}
-                  onSelect={() => runCommand(() => router.push(item.href))}
-                >
-                  {item.icon}
-                  <span className="ml-2">{item.title}</span>
-                </CommandMenuItem>
-              ))}
+              {group.items.map((item: TFlatNavItem) => {
+                const Icon = item.icon;
+                return (
+                  <CommandMenuItem
+                    key={item.href}
+                    value={`${item.title} ${item.group} ${item.keywords?.join(" ") || ""}`}
+                    onHighlight={() => setSelectedType("page")}
+                    onSelect={() => runCommand(() => router.push(item.href))}
+                  >
+                    {Icon && <Icon className="size-4" />}
+                    <span className="ml-2">{item.title}</span>
+                  </CommandMenuItem>
+                );
+              })}
             </CommandGroup>
           ))}
 

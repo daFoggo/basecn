@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  ChevronLeft,
-  ChevronRight,
-  Inbox,
-  Search,
-  SquareArrowUpRight,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, Inbox, Search } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { useState } from "react";
@@ -32,14 +26,20 @@ import {
   SidebarMenuItem,
   SidebarSeparator,
 } from "@/components/ui/sidebar";
-import { SITE_CONFIG } from "@/configs/site";
+import { DASHBOARD_NAV_DATA } from "@/constants/dashboard-nav";
 import type { INavItem } from "@/types/navigation";
-import { DASHBOARD_NAV_DATA } from "./nav-data";
+import { LogoHeader } from "./logo-header";
+import { OrganizationSwitcherHeader } from "./organization-switcher-header";
 
-export const DashboardSidebar = () => {
+interface IDashboardSidebarProps {
+  enableTeamSwitcher?: boolean;
+}
+export const DashboardSidebar = ({
+  enableTeamSwitcher = false,
+}: IDashboardSidebarProps) => {
   const { setOpen } = useCommandMenu();
   const [activeItem, setActiveItem] = useState<INavItem | null>(null);
-  const [direction, setDirection] = useState(1); // 1 = forward, -1 = backward
+  const [direction, setDirection] = useState(1);
 
   const handleSubItemClick = (item: INavItem) => {
     setDirection(1);
@@ -104,20 +104,7 @@ export const DashboardSidebar = () => {
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton size="lg" asChild>
-              <Link href="/dashboard">
-                <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                  <SquareArrowUpRight className="size-4" />
-                </div>
-                <span className="font-medium text-lg">
-                  {SITE_CONFIG.metadata.title}
-                </span>
-              </Link>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
+        {enableTeamSwitcher ? <OrganizationSwitcherHeader /> : <LogoHeader />}
         <SidebarMenuItem>
           <SidebarMenuButton
             asChild
@@ -190,16 +177,19 @@ export const DashboardSidebar = () => {
                   )}
                   <SidebarGroupContent>
                     <SidebarMenu>
-                      {group.items.map((subItem) => (
-                        <SidebarMenuItem key={subItem.title}>
-                          <SidebarMenuButton asChild tooltip={subItem.title}>
-                            <Link href={subItem.href}>
-                              {subItem.icon}
-                              <span>{subItem.title}</span>
-                            </Link>
-                          </SidebarMenuButton>
-                        </SidebarMenuItem>
-                      ))}
+                      {group.items.map((subItem) => {
+                        const Icon = subItem.icon;
+                        return (
+                          <SidebarMenuItem key={subItem.title}>
+                            <SidebarMenuButton asChild tooltip={subItem.title}>
+                              <Link href={subItem.href}>
+                                {Icon && <Icon className="size-4" />}
+                                <span>{subItem.title}</span>
+                              </Link>
+                            </SidebarMenuButton>
+                          </SidebarMenuItem>
+                        );
+                      })}
                     </SidebarMenu>
                   </SidebarGroupContent>
                 </SidebarGroup>
@@ -223,28 +213,31 @@ export const DashboardSidebar = () => {
                     )}
                     <SidebarGroupContent>
                       <SidebarMenu>
-                        {group.items.map((item) => (
-                          <SidebarMenuItem key={item.title}>
-                            {item.items && item.items.length > 0 ? (
-                              <SidebarMenuButton
-                                tooltip={item.title}
-                                onClick={() => handleSubItemClick(item)}
-                                isActive={item.isActive}
-                              >
-                                {item.icon}
-                                <span>{item.title}</span>
-                                <ChevronRight className="ml-auto size-4 group-data-[collapsible=icon]:hidden" />
-                              </SidebarMenuButton>
-                            ) : (
-                              <SidebarMenuButton asChild tooltip={item.title}>
-                                <Link href={item.href}>
-                                  {item.icon}
+                        {group.items.map((item) => {
+                          const Icon = item.icon;
+                          return (
+                            <SidebarMenuItem key={item.title}>
+                              {item.items && item.items.length > 0 ? (
+                                <SidebarMenuButton
+                                  tooltip={item.title}
+                                  onClick={() => handleSubItemClick(item)}
+                                  isActive={item.isActive}
+                                >
+                                  {Icon && <Icon className="size-4" />}
                                   <span>{item.title}</span>
-                                </Link>
-                              </SidebarMenuButton>
-                            )}
-                          </SidebarMenuItem>
-                        ))}
+                                  <ChevronRight className="ml-auto size-4 group-data-[collapsible=icon]:hidden" />
+                                </SidebarMenuButton>
+                              ) : (
+                                <SidebarMenuButton asChild tooltip={item.title}>
+                                  <Link href={item.href}>
+                                    {Icon && <Icon className="size-4" />}
+                                    <span>{item.title}</span>
+                                  </Link>
+                                </SidebarMenuButton>
+                              )}
+                            </SidebarMenuItem>
+                          );
+                        })}
                       </SidebarMenu>
                     </SidebarGroupContent>
                   </SidebarGroup>

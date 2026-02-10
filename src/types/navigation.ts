@@ -1,9 +1,10 @@
+import type { LucideIcon } from "lucide-react";
 import type { ReactNode } from "react";
 
 export interface INavItem {
   title: string;
   href: string;
-  icon?: ReactNode;
+  icon?: LucideIcon;
   isActive?: boolean;
   items?: INavItem[];
   variant?: "item" | "group";
