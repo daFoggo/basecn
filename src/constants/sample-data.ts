@@ -1,4 +1,5 @@
 import type { IOrganization } from "@/types/organization";
+import type { IProject } from "@/types/project";
 
 export const SAMPLE_ORGANIZATIONS: IOrganization[] = [
   {
@@ -63,5 +64,56 @@ export const SAMPLE_ORGANIZATIONS: IOrganization[] = [
     slug: "wayne-enterprises",
     logo: "https://api.dicebear.com/9.x/shapes/svg?seed=Wayne",
     members: ["user-6"],
+  },
+];
+
+export const SAMPLE_PROJECTS: IProject[] = [
+  {
+    id: "proj-1",
+    name: "Marketing Campaign",
+    slug: "MKT",
+    logo: "https://api.dicebear.com/9.x/icons/svg?seed=Marketing",
+    status: "active",
+    members: ["user-1", "user-2", "user-3", "user-4"],
+  },
+  {
+    id: "proj-2",
+    name: "Mobile App",
+    slug: "MOB",
+    logo: "https://api.dicebear.com/9.x/icons/svg?seed=Mobile",
+    status: "active",
+    members: ["user-2", "user-5", "user-6"],
+  },
+  {
+    id: "proj-3",
+    name: "Website Redesign",
+    slug: "WEB",
+    logo: "https://api.dicebear.com/9.x/icons/svg?seed=Website",
+    status: "active",
+    members: ["user-1", "user-3"],
+  },
+  {
+    id: "proj-4",
+    name: "Customer Support",
+    slug: "SUP",
+    logo: "https://api.dicebear.com/9.x/icons/svg?seed=Support",
+    status: "inactive",
+    members: ["user-4", "user-6", "user-7", "user-8", "user-9"],
+  },
+  {
+    id: "proj-5",
+    name: "Data Migration",
+    slug: "DAT",
+    logo: "https://api.dicebear.com/9.x/icons/svg?seed=Data",
+    status: "archived",
+    members: ["user-2", "user-5"],
+  },
+  {
+    id: "proj-6",
+    name: "Brand Identity",
+    slug: "BRD",
+    logo: "https://api.dicebear.com/9.x/icons/svg?seed=Brand",
+    status: "active",
+    members: ["user-1", "user-3", "user-7"],
   },
 ];

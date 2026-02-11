@@ -1,11 +1,11 @@
 "use client";
 
-import { ChevronLeft, ChevronRight, Inbox, Search } from "lucide-react";
+import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import { useState } from "react";
 import { useCommandMenu } from "@/components/common/command-menu";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
   InputGroup,
@@ -26,20 +26,48 @@ import {
   SidebarMenuItem,
   SidebarSeparator,
 } from "@/components/ui/sidebar";
-import { DASHBOARD_NAV_DATA } from "@/constants/dashboard-nav";
+import { getDashboardNav } from "@/constants/dashboard-nav";
 import type { INavItem } from "@/types/navigation";
-import { LogoHeader } from "./logo-header";
-import { OrganizationSwitcherHeader } from "./organization-switcher-header";
+import { SidebarLogo } from "./sidebar-logo";
+import { SidebarOrganizationSwitcher } from "./sidebar-organization-switcher";
+import { SidebarUser } from "./sidebar-user";
 
 interface IDashboardSidebarProps {
   enableTeamSwitcher?: boolean;
 }
+
+// Helper to group items for the drill-down view
+const getGroupedItems = (items: INavItem[]) => {
+  const groups: { title?: string; items: INavItem[] }[] = [];
+  let currentGroup: { title?: string; items: INavItem[] } = { items: [] };
+
+  for (const item of items) {
+    if (item.variant === "group") {
+      if (currentGroup.items.length > 0) {
+        groups.push(currentGroup);
+      }
+      groups.push({ title: item.title, items: item.items || [] });
+      currentGroup = { items: [] };
+    } else {
+      currentGroup.items.push(item);
+    }
+  }
+  if (currentGroup.items.length > 0) {
+    groups.push(currentGroup);
+  }
+  return groups;
+};
 export const DashboardSidebar = ({
   enableTeamSwitcher = false,
 }: IDashboardSidebarProps) => {
   const { setOpen } = useCommandMenu();
+  const params = useParams();
+  const organizationSlug = params.organizationSlug as string;
+  const projectSlug = params.projectSlug as string;
   const [activeItem, setActiveItem] = useState<INavItem | null>(null);
   const [direction, setDirection] = useState(1);
+
+  const navData = getDashboardNav(organizationSlug, projectSlug);
 
   const handleSubItemClick = (item: INavItem) => {
     setDirection(1);
@@ -79,32 +107,10 @@ export const DashboardSidebar = ({
     }),
   };
 
-  // Helper to group items for the drill-down view
-  const getGroupedItems = (items: INavItem[]) => {
-    const groups: { title?: string; items: INavItem[] }[] = [];
-    let currentGroup: { title?: string; items: INavItem[] } = { items: [] };
-
-    for (const item of items) {
-      if (item.variant === "group") {
-        if (currentGroup.items.length > 0) {
-          groups.push(currentGroup);
-        }
-        groups.push({ title: item.title, items: item.items || [] });
-        currentGroup = { items: [] };
-      } else {
-        currentGroup.items.push(item);
-      }
-    }
-    if (currentGroup.items.length > 0) {
-      groups.push(currentGroup);
-    }
-    return groups;
-  };
-
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
-        {enableTeamSwitcher ? <OrganizationSwitcherHeader /> : <LogoHeader />}
+        {enableTeamSwitcher ? <SidebarOrganizationSwitcher /> : <SidebarLogo />}
         <SidebarMenuItem>
           <SidebarMenuButton
             asChild
@@ -205,7 +211,7 @@ export const DashboardSidebar = ({
               exit="exit"
               className="h-full w-full"
             >
-              {DASHBOARD_NAV_DATA.map((group, index) => (
+              {navData.map((group, index) => (
                 <div key={group.title || index}>
                   <SidebarGroup>
                     {group.title && (
@@ -241,9 +247,7 @@ export const DashboardSidebar = ({
                       </SidebarMenu>
                     </SidebarGroupContent>
                   </SidebarGroup>
-                  {index < DASHBOARD_NAV_DATA.length - 1 && (
-                    <SidebarSeparator />
-                  )}
+                  {index < navData.length - 1 && <SidebarSeparator />}
                 </div>
               ))}
             </motion.div>
@@ -252,35 +256,7 @@ export const DashboardSidebar = ({
       </SidebarContent>
 
       <SidebarFooter>
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground group-data-[collapsible=icon]:p-0!"
-              asChild
-            >
-              <div className="group-data-[collapsible=icon]:justify-center">
-                <Avatar className="size-6 rounded-lg">
-                  <AvatarImage
-                    src="https://api.dicebear.com/9.x/thumbs/svg?seed=Felix"
-                    alt="Felix"
-                  />
-                  <AvatarFallback className="rounded-lg">F</AvatarFallback>
-                </Avatar>
-                <span className="truncate font-medium text-sm leading-tight group-data-[collapsible=icon]:hidden">
-                  Felix
-                </span>
-                <Button
-                  size="icon-xs"
-                  variant="ghost"
-                  className="ml-auto group-data-[collapsible=icon]:hidden"
-                >
-                  <Inbox className="size-4" />
-                </Button>
-              </div>
-            </SidebarMenuButton>
-          </SidebarMenuItem>
-        </SidebarMenu>
+        <SidebarUser />
       </SidebarFooter>
     </Sidebar>
   );

@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import {
   type ComponentProps,
@@ -21,7 +21,7 @@ import {
   CommandSeparator,
 } from "@/components/ui/command";
 import { Kbd } from "@/components/ui/kbd";
-import { DASHBOARD_NAV_DATA } from "@/constants/dashboard-nav";
+import { getDashboardNav } from "@/constants/dashboard-nav";
 import { THEME_OPTIONS } from "@/constants/theme";
 import { useMutationObserver } from "@/hooks/use-mutation-observer";
 import { flattenNavData } from "@/lib/nav-utils";
@@ -61,12 +61,19 @@ const CommandMenuItem = ({ onHighlight, ...props }: ICommandMenuItemProps) => {
 
 export const CommandMenu = () => {
   const router = useRouter();
+  const params = useParams();
   const { open, setOpen } = useCommandMenu();
   const { setTheme } = useTheme();
   const [selectedType, setSelectedType] = useState<TSelectedType>(null);
 
+  const organizationSlug = (params.organizationSlug as string) || "";
+  const projectSlug = (params.projectSlug as string) || "";
+
   // Group nav data for search - memoized to avoid recalculation
-  const navGroups = useMemo(() => flattenNavData(DASHBOARD_NAV_DATA), []);
+  const navGroups = useMemo(
+    () => flattenNavData(getDashboardNav(organizationSlug, projectSlug)),
+    [organizationSlug, projectSlug],
+  );
 
   // Reset selected type when menu closes
   useEffect(() => {
@@ -102,7 +109,9 @@ export const CommandMenu = () => {
                 return (
                   <CommandMenuItem
                     key={item.href}
-                    value={`${item.title} ${item.group} ${item.keywords?.join(" ") || ""}`}
+                    value={`${item.title} ${item.group} ${
+                      item.keywords?.join(" ") || ""
+                    }`}
                     onHighlight={() => setSelectedType("page")}
                     onSelect={() => runCommand(() => router.push(item.href))}
                   >

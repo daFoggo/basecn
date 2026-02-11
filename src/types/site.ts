@@ -2,6 +2,7 @@ export interface ISiteConfig {
   metadata: {
     title: string;
     subTitle?: string;
+    logo?: string;
     description?: string;
     keywords?: string[];
     author?: string;

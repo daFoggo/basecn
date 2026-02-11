@@ -12,6 +12,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { SITE_CONFIG } from "@/configs/site";
+import { SAMPLE_ORGANIZATIONS } from "@/constants/sample-data";
 
 const RootPage = () => {
   const metadata = SITE_CONFIG.metadata;
@@ -45,7 +46,7 @@ const RootPage = () => {
           <p>{metadata.description}</p>
         </CardContent>
         <CardFooter>
-          <Link href="/dashboard">
+          <Link href={`/${SAMPLE_ORGANIZATIONS[0].slug}`}>
             <Button>Go to dashboard</Button>
           </Link>
         </CardFooter>

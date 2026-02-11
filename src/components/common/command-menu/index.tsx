@@ -12,6 +12,11 @@ import { CommandMenuContext } from "./command-menu-context";
 
 export const CommandMenuProvider = ({ children }: { children: ReactNode }) => {
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -50,7 +55,7 @@ export const CommandMenuProvider = ({ children }: { children: ReactNode }) => {
   return (
     <CommandMenuContext.Provider value={value}>
       {children}
-      <CommandMenu />
+      {mounted && <CommandMenu />}
     </CommandMenuContext.Provider>
   );
 };
