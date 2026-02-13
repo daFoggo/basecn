@@ -1,5 +1,5 @@
-import type { IOrganization } from "@/types/organization";
-import type { IProject } from "@/types/project";
+import type { IOrganization } from "@/types/organization.types";
+import type { IProject } from "@/types/project.types";
 
 export const SAMPLE_ORGANIZATIONS: IOrganization[] = [
   {
@@ -117,3 +117,9 @@ export const SAMPLE_PROJECTS: IProject[] = [
     members: ["user-1", "user-3", "user-7"],
   },
 ];
+
+export const SAMPLE_USER = {
+  name: "Felix",
+  email: "felix@example.com",
+  avatar: "https://api.dicebear.com/9.x/thumbs/svg?seed=Felix",
+};

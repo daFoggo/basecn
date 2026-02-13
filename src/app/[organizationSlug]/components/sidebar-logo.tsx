@@ -8,6 +8,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SITE_CONFIG } from "@/configs/site";
@@ -28,10 +29,11 @@ const SidebarLogoSkeleton = () => {
 
 const SidebarLogoContent = () => {
   use(logoLoader);
+  const { isMobile, setOpenMobile } = useSidebar();
 
   return (
     <SidebarMenuButton size="lg" asChild>
-      <Link href="/dashboard">
+      <Link href="/dashboard" onClick={() => isMobile && setOpenMobile(false)}>
         <Avatar className="size-8 rounded-lg overflow-hidden shrink-0">
           <AvatarImage
             src={SITE_CONFIG.metadata.logo}

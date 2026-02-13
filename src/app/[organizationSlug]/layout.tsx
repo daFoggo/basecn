@@ -4,13 +4,19 @@ import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { DashboardHeader } from "./components/dashboard-header";
 import { DashboardSidebar } from "./components/dashboard-sidebar";
 
-const DashboardLayout = ({ children }: { children: ReactNode }) => {
+const DashboardLayout = ({
+  children,
+  breadcrumb,
+}: {
+  children: ReactNode;
+  breadcrumb: ReactNode;
+}) => {
   return (
     <CommandMenuProvider>
       <SidebarProvider>
         <DashboardSidebar enableTeamSwitcher />
         <SidebarInset>
-          <DashboardHeader />
+          <DashboardHeader breadcrumb={breadcrumb} />
           <div className="flex-1 p-4">{children}</div>
         </SidebarInset>
       </SidebarProvider>

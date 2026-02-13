@@ -1,6 +1,6 @@
 import { Monitor, Moon, Sun } from "lucide-react";
 
-import type { IThemeOption } from "@/types/theme";
+import type { IThemeOption } from "@/types/theme.types";
 
 export const THEME_OPTIONS: IThemeOption[] = [
   { value: "system", label: "System", icon: Monitor },

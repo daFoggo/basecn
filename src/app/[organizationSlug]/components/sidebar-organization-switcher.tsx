@@ -29,7 +29,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 import { SAMPLE_ORGANIZATIONS } from "@/constants/sample-data";
 
 const orgsLoader = new Promise<typeof SAMPLE_ORGANIZATIONS>((resolve) =>
-  setTimeout(() => resolve(SAMPLE_ORGANIZATIONS), 2000),
+  setTimeout(() => resolve(SAMPLE_ORGANIZATIONS), 1000),
 );
 
 const OrganizationSwitcherSkeleton = () => {
@@ -52,7 +52,7 @@ const OrganizationSwitcherSkeleton = () => {
 };
 
 const OrganizationSwitcherContent = () => {
-  const { isMobile } = useSidebar();
+  const { isMobile, setOpenMobile } = useSidebar();
   const params = useParams();
   const router = useRouter();
   const organizationSlug = params.organizationSlug as string;
@@ -70,6 +70,9 @@ const OrganizationSwitcherContent = () => {
 
   const handleOrgSelect = (org: (typeof SAMPLE_ORGANIZATIONS)[0]) => {
     router.push(`/${org.slug}/projects`);
+    if (isMobile) {
+      setOpenMobile(false);
+    }
   };
 
   return (

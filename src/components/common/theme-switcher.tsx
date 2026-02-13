@@ -1,43 +1,75 @@
 "use client";
 
+import { cva, type VariantProps } from "class-variance-authority";
 import { motion } from "motion/react";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
+import { type HTMLAttributes, useEffect, useState } from "react";
 import { THEME_OPTIONS } from "@/constants/theme";
 import { cn } from "@/lib/utils";
 
-export type ThemeSwitcherProps = {
-  className?: string;
-};
+const themeSwitcherVariants = cva(
+  "relative isolate flex rounded-full bg-background p-1 ring-1 ring-border",
+  {
+    variants: {
+      size: {
+        default: "h-8",
+        sm: "h-7",
+      },
+    },
+    defaultVariants: {
+      size: "default",
+    },
+  },
+);
 
-export const ThemeSwitcher = ({ className }: ThemeSwitcherProps) => {
+export interface IThemeSwitcherProps
+  extends
+    HTMLAttributes<HTMLDivElement>,
+    VariantProps<typeof themeSwitcherVariants> {}
+
+export const ThemeSwitcher = ({
+  className,
+  size = "default",
+  ...props
+}: IThemeSwitcherProps) => {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
 
   // Prevent hydration mismatch
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
+
+  const sizeConfig = {
+    default: {
+      button: "size-6",
+      icon: "size-4",
+      skeleton: "h-8 w-20",
+    },
+    sm: {
+      button: "size-5",
+      icon: "size-3.5",
+      skeleton: "h-7 w-[4.25rem]",
+    },
+  };
+
+  const config = sizeConfig[size || "default"];
 
   if (!mounted) {
     return (
       <div
         className={cn(
-          "h-8 w-20 rounded-full bg-background ring-1 ring-border animate-pulse",
+          "rounded-full bg-background ring-1 ring-border animate-pulse",
+          config.skeleton,
           className,
         )}
+        {...props}
       />
     );
   }
 
   return (
-    <div
-      className={cn(
-        "relative isolate flex h-8 rounded-full bg-background p-1 ring-1 ring-border",
-        className,
-      )}
-    >
+    <div className={cn(themeSwitcherVariants({ size, className }))} {...props}>
       {THEME_OPTIONS.map(({ value, icon: Icon, label }) => {
         const isActive = theme === value;
 
@@ -45,7 +77,8 @@ export const ThemeSwitcher = ({ className }: ThemeSwitcherProps) => {
           <button
             aria-label={label}
             className={cn(
-              "group relative size-6 rounded-full transition-colors",
+              "group relative rounded-full transition-colors",
+              config.button,
               !isActive && "hover:bg-muted/50",
             )}
             key={value}
@@ -61,7 +94,8 @@ export const ThemeSwitcher = ({ className }: ThemeSwitcherProps) => {
             )}
             <Icon
               className={cn(
-                "relative z-10 m-auto size-4 transition-colors",
+                "relative z-10 m-auto transition-colors",
+                config.icon,
                 isActive
                   ? "text-foreground"
                   : "text-muted-foreground group-hover:text-foreground",

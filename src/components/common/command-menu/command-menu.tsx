@@ -21,11 +21,11 @@ import {
   CommandSeparator,
 } from "@/components/ui/command";
 import { Kbd } from "@/components/ui/kbd";
-import { getDashboardNav } from "@/constants/dashboard-nav";
+import { getDashboardNav } from "@/constants/dashboard-navigation";
 import { THEME_OPTIONS } from "@/constants/theme";
 import { useMutationObserver } from "@/hooks/use-mutation-observer";
-import { flattenNavData } from "@/lib/nav-utils";
-import type { TFlatNavGroup, TFlatNavItem } from "@/types/navigation";
+import type { TFlatNavGroup, TFlatNavItem } from "@/types/navigation.types";
+import { flattenNavData } from "@/utils/navigation";
 import { useCommandMenu } from "./command-menu-context";
 
 interface ICommandMenuItemProps extends ComponentProps<typeof CommandItem> {
@@ -113,7 +113,9 @@ export const CommandMenu = () => {
                       item.keywords?.join(" ") || ""
                     }`}
                     onHighlight={() => setSelectedType("page")}
-                    onSelect={() => runCommand(() => router.push(item.href))}
+                    onSelect={() =>
+                      runCommand(() => router.push(item.href || ""))
+                    }
                   >
                     {Icon && <Icon className="size-4" />}
                     <span className="ml-2">{item.title}</span>
