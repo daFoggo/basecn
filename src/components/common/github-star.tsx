@@ -38,10 +38,10 @@ const StarCount = ({ promise }: { promise: Promise<number> }) => {
   return <span className="font-mono">{formattedStars}</span>;
 };
 
+const starsPromise = getStarsCount();
+
 export const GitHubStar = () => {
   if (!githubConfig) return null;
-
-  const starsPromise = getStarsCount();
 
   return (
     <Button variant="ghost" asChild>

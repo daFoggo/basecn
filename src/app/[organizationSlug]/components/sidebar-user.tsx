@@ -5,6 +5,7 @@ import {
   LogOut,
   MessageCircleQuestionMark,
 } from "lucide-react";
+import Link from "next/link";
 import { Suspense, use } from "react";
 import { ThemeSwitcher } from "@/components/common/theme-switcher";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -109,10 +110,12 @@ const SidebarUserContent = () => {
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
               <DropdownMenuLabel>Navigations</DropdownMenuLabel>
-              <DropdownMenuItem className="justify-between">
-                <p>Home page</p>
-                <Home className="text-muted-foreground" />
-              </DropdownMenuItem>
+              <Link href={"/"}>
+                <DropdownMenuItem className="justify-between">
+                  <p>Home page</p>
+                  <Home className="text-muted-foreground" />
+                </DropdownMenuItem>
+              </Link>
               <DropdownMenuItem className="justify-between">
                 <p>Documents</p>
                 <Book className="text-muted-foreground" />
