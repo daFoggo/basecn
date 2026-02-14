@@ -1,4 +1,10 @@
-import { Book, Home, Inbox, MessageCircleQuestionMark } from "lucide-react";
+import {
+  Book,
+  Home,
+  Inbox,
+  LogOut,
+  MessageCircleQuestionMark,
+} from "lucide-react";
 import { Suspense, use } from "react";
 import { ThemeSwitcher } from "@/components/common/theme-switcher";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -16,6 +22,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { Skeleton } from "@/components/ui/skeleton";
 import { SAMPLE_USER } from "@/constants/sample-data";
@@ -43,6 +50,7 @@ const SidebarUserSkeleton = () => {
 };
 
 const SidebarUserContent = () => {
+  const { isMobile, state } = useSidebar();
   const user = use(userLoader);
 
   return (
@@ -75,7 +83,14 @@ const SidebarUserContent = () => {
               </div>
             </SidebarMenuButton>
           </DropdownMenuTrigger>
-          <DropdownMenuContent>
+          <DropdownMenuContent
+            className=" min-w-56 rounded-lg"
+            side={
+              isMobile ? "bottom" : state === "collapsed" ? "right" : "bottom"
+            }
+            align="end"
+            sideOffset={4}
+          >
             <DropdownMenuGroup>
               <DropdownMenuItem>
                 <div className="flex justify-between items-center">
@@ -105,6 +120,10 @@ const SidebarUserContent = () => {
               <DropdownMenuItem className="justify-between">
                 <p>Help</p>
                 <MessageCircleQuestionMark className="text-muted-foreground" />
+              </DropdownMenuItem>
+              <DropdownMenuItem className="justify-between">
+                <p>Logout</p>
+                <LogOut className="text-muted-foreground" />
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
