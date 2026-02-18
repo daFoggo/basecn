@@ -27,7 +27,7 @@ import {
 import { Skeleton } from "@/components/ui/skeleton";
 import { SAMPLE_USER } from "@/constants/sample-data";
 
-const userLoader = new Promise<typeof SAMPLE_USER>((resolve) =>
+export const userLoader = new Promise<typeof SAMPLE_USER>((resolve) =>
   setTimeout(() => resolve(SAMPLE_USER), 1000),
 );
 

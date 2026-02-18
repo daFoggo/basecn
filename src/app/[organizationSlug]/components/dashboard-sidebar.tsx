@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
 import { useParams, usePathname } from "next/navigation";
-import { Fragment, useEffect, useMemo, useState } from "react";
+import { Fragment, useMemo, useRef, useState } from "react";
 import { useCommandMenu } from "@/components/common/command-menu";
 import { Button } from "@/components/ui/button";
 import {
@@ -25,14 +25,15 @@ import { getDashboardNav } from "@/constants/dashboard-navigation";
 import type { INavItem } from "@/types/navigation.types";
 import { SidebarLogo } from "./sidebar-logo";
 import { SidebarOrganizationSwitcher } from "./sidebar-organization-switcher";
+import { SidebarTimezoneTooltip } from "./sidebar-timezone-tooltip";
 import { SidebarUser } from "./sidebar-user";
 
 interface IDashboardSidebarProps {
-  enableTeamSwitcher?: boolean;
+  enableOrganizationSwitcher?: boolean;
 }
 
 export const DashboardSidebar = ({
-  enableTeamSwitcher = false,
+  enableOrganizationSwitcher = false,
 }: IDashboardSidebarProps) => {
   const { setOpen } = useCommandMenu();
   const { isMobile, setOpenMobile } = useSidebar();
@@ -45,6 +46,14 @@ export const DashboardSidebar = ({
   const [manualNav, setManualNav] = useState<string | null>(null);
   // Dismiss state (when user clicks "Back" to override auto-detection)
   const [isDismissed, setIsDismissed] = useState(false);
+  // Track previous pathname to reset states on navigation
+  const prevPathnameRef = useRef(pathname);
+
+  if (prevPathnameRef.current !== pathname) {
+    prevPathnameRef.current = pathname;
+    setManualNav(null);
+    setIsDismissed(false);
+  }
 
   const navData = getDashboardNav(organizationSlug, projectSlug);
 
@@ -81,12 +90,6 @@ export const DashboardSidebar = ({
   // Priority: manual selection > pathname detection (unless dismissed)
   const activeItem = manualActiveItem ?? (isDismissed ? null : pathActiveItem);
 
-  // Reset states when pathname changes (user navigated)
-  useEffect(() => {
-    setManualNav(null);
-    setIsDismissed(false);
-  }, []);
-
   const handleSubItemClick = (item: INavItem) => {
     setManualNav(item.title);
     setIsDismissed(false);
@@ -107,7 +110,12 @@ export const DashboardSidebar = ({
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
-        {enableTeamSwitcher ? <SidebarOrganizationSwitcher /> : <SidebarLogo />}
+        {enableOrganizationSwitcher ? (
+          <SidebarOrganizationSwitcher />
+        ) : (
+          <SidebarLogo />
+        )}
+        {enableOrganizationSwitcher && <SidebarTimezoneTooltip />}
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton
@@ -152,21 +160,29 @@ export const DashboardSidebar = ({
 
               <SidebarGroup>
                 <SidebarGroupContent>
-                  <SidebarMenu>
+                  <SidebarMenu className="gap-0.5">
                     {activeItem.items?.map((subItem) => {
+                      const isSubActive = pathname === subItem.href;
                       const Icon = subItem.icon;
                       return (
                         <SidebarMenuItem key={subItem.title}>
                           <SidebarMenuButton
                             asChild
                             tooltip={subItem.title}
-                            isActive={pathname === subItem.href}
+                            isActive={isSubActive}
+                            className={
+                              isSubActive ? "" : "text-sidebar-foreground/70"
+                            }
                           >
                             <Link
                               href={subItem.href || "#"}
                               onClick={() => isMobile && setOpenMobile(false)}
                             >
-                              {Icon && <Icon className="size-4" />}
+                              {Icon && (
+                                <Icon
+                                  className={`size-4 ${isSubActive ? "text-sidebar-foreground" : ""}`}
+                                />
+                              )}
                               <span>{subItem.title}</span>
                             </Link>
                           </SidebarMenuButton>
@@ -194,11 +210,19 @@ export const DashboardSidebar = ({
                       <SidebarGroupLabel>{group.title}</SidebarGroupLabel>
                     )}
                     <SidebarGroupContent>
-                      <SidebarMenu>
+                      <SidebarMenu className="gap-0.5">
                         {group.items.map((item) => {
                           const Icon = item.icon;
                           const hasSubmenu =
                             item.items && item.items.length > 0;
+                          const isItemActive = hasSubmenu
+                            ? item.items?.some(
+                                (child) =>
+                                  child.href &&
+                                  child.href !== "#" &&
+                                  pathname === child.href,
+                              )
+                            : pathname === item.href;
 
                           return (
                             <SidebarMenuItem key={item.title}>
@@ -206,24 +230,41 @@ export const DashboardSidebar = ({
                                 <SidebarMenuButton
                                   tooltip={item.title}
                                   onClick={() => handleSubItemClick(item)}
-                                  isActive={item.isActive}
-                                  className="justify-between"
+                                  isActive={isItemActive}
+                                  className={`justify-between ${isItemActive ? "" : "text-sidebar-foreground/70"}`}
                                 >
                                   <div className="flex items-center gap-2">
-                                    {Icon && <Icon className="size-4" />}
+                                    {Icon && (
+                                      <Icon
+                                        className={`size-4 ${isItemActive ? "text-sidebar-foreground" : ""}`}
+                                      />
+                                    )}
                                     <span>{item.title}</span>
                                   </div>
                                   <ChevronRight className="size-4 ml-auto text-muted-foreground/50" />
                                 </SidebarMenuButton>
                               ) : (
-                                <SidebarMenuButton asChild tooltip={item.title}>
+                                <SidebarMenuButton
+                                  asChild
+                                  tooltip={item.title}
+                                  isActive={isItemActive}
+                                  className={
+                                    isItemActive
+                                      ? ""
+                                      : "text-sidebar-foreground/70"
+                                  }
+                                >
                                   <Link
                                     href={item.href || "#"}
                                     onClick={() =>
                                       isMobile && setOpenMobile(false)
                                     }
                                   >
-                                    {Icon && <Icon className="size-4" />}
+                                    {Icon && (
+                                      <Icon
+                                        className={`size-4 ${isItemActive ? "text-sidebar-foreground" : ""}`}
+                                      />
+                                    )}
                                     <span>{item.title}</span>
                                   </Link>
                                 </SidebarMenuButton>

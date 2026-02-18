@@ -14,7 +14,7 @@ const DashboardLayout = ({
   return (
     <CommandMenuProvider>
       <SidebarProvider>
-        <DashboardSidebar enableTeamSwitcher />
+        <DashboardSidebar enableOrganizationSwitcher />
         <SidebarInset>
           <DashboardHeader breadcrumb={breadcrumb} />
           <div className="flex-1 p-4">{children}</div>

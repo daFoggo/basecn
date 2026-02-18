@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import Script from "next/script";
+import NextTopLoader from "nextjs-toploader";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 import type { ReactNode } from "react";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { SITE_CONFIG } from "@/configs/site";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { ToasterProvider } from "@/providers/toaster-provider";
 import "./globals.css";
-import NextTopLoader from "nextjs-toploader";
-import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,6 +44,11 @@ const RootLayout = ({
       suppressHydrationWarning
       className={`${geistSans.variable} ${geistMono.variable} antialiased`}
     >
+      <Script
+        src="https://cdn.seline.com/seline.js"
+        data-token="PROJECT_TOKEN" // can be found at General settings
+        strategy="afterInteractive"
+      />
       <body>
         <ThemeProvider
           attribute="class"

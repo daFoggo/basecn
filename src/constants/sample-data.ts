@@ -1,5 +1,6 @@
 import type { IOrganization } from "@/types/organization.types";
 import type { IProject } from "@/types/project.types";
+import type { IUser } from "@/types/user.types";
 
 export const SAMPLE_ORGANIZATIONS: IOrganization[] = [
   {
@@ -75,6 +76,7 @@ export const SAMPLE_PROJECTS: IProject[] = [
     logo: "https://api.dicebear.com/9.x/icons/svg?seed=Marketing",
     status: "active",
     members: ["user-1", "user-2", "user-3", "user-4"],
+    timezone: "Asia/Ho_Chi_Minh",
   },
   {
     id: "proj-2",
@@ -83,6 +85,7 @@ export const SAMPLE_PROJECTS: IProject[] = [
     logo: "https://api.dicebear.com/9.x/icons/svg?seed=Mobile",
     status: "active",
     members: ["user-2", "user-5", "user-6"],
+    timezone: "Asia/Ho_Chi_Minh",
   },
   {
     id: "proj-3",
@@ -91,6 +94,7 @@ export const SAMPLE_PROJECTS: IProject[] = [
     logo: "https://api.dicebear.com/9.x/icons/svg?seed=Website",
     status: "active",
     members: ["user-1", "user-3"],
+    timezone: "Asia/Ho_Chi_Minh",
   },
   {
     id: "proj-4",
@@ -99,6 +103,7 @@ export const SAMPLE_PROJECTS: IProject[] = [
     logo: "https://api.dicebear.com/9.x/icons/svg?seed=Support",
     status: "inactive",
     members: ["user-4", "user-6", "user-7", "user-8", "user-9"],
+    timezone: "Asia/Ho_Chi_Minh",
   },
   {
     id: "proj-5",
@@ -107,6 +112,7 @@ export const SAMPLE_PROJECTS: IProject[] = [
     logo: "https://api.dicebear.com/9.x/icons/svg?seed=Data",
     status: "archived",
     members: ["user-2", "user-5"],
+    timezone: "Asia/Ho_Chi_Minh",
   },
   {
     id: "proj-6",
@@ -115,11 +121,13 @@ export const SAMPLE_PROJECTS: IProject[] = [
     logo: "https://api.dicebear.com/9.x/icons/svg?seed=Brand",
     status: "active",
     members: ["user-1", "user-3", "user-7"],
+    timezone: "Asia/Ho_Chi_Minh",
   },
 ];
 
-export const SAMPLE_USER = {
+export const SAMPLE_USER: IUser = {
   name: "Felix",
   email: "felix@example.com",
   avatar: "https://api.dicebear.com/9.x/thumbs/svg?seed=Felix",
+  timezone: "Asia/Ho_Chi_Minh",
 };

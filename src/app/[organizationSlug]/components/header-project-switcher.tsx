@@ -49,7 +49,7 @@ const PROJECT_STATUS_CONFIG = createLevelConfig({
   archived: { level: "gray", label: "Archived" },
 });
 
-const projectsLoader = new Promise<typeof SAMPLE_PROJECTS>((resolve) =>
+export const projectsLoader = new Promise<typeof SAMPLE_PROJECTS>((resolve) =>
   setTimeout(() => resolve(SAMPLE_PROJECTS), 1000),
 );
 
