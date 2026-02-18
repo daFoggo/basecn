@@ -54,7 +54,12 @@ const SidebarTimezoneTooltipContent = () => {
   }, []);
 
   const activeProject = projects.find((p) => p.slug === projectSlug);
-  const projectTimezone = activeProject?.timezone || "UTC";
+
+  if (!activeProject || !activeProject.timezone) {
+    return null;
+  }
+
+  const projectTimezone = activeProject.timezone;
   const userTimezone = user?.timezone || "UTC";
 
   const projectTimeStr = formatInTimeZone(now, projectTimezone, "hh:mm aa");
@@ -93,8 +98,8 @@ const SidebarTimezoneTooltipContent = () => {
             </SidebarMenuButton>
           </HoverCardTrigger>
           <HoverCardContent
-            side={state === "collapsed" ? "right" : "bottom"}
-            align={state === "collapsed" ? "start" : "start"}
+            side="right"
+            align="start"
             className="w-72"
             sideOffset={state === "collapsed" ? 16 : 4}
           >
