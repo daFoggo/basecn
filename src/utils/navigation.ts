@@ -143,3 +143,17 @@ export const getDashboardBreadcrumb = (
 
   return [];
 };
+
+// ============================================================================
+// 3. SLUG UTILITIES
+// Purpose: Convert URL slugs to human-readable titles.
+// ============================================================================
+
+/**
+ * Converts a URL slug (e.g. "speed-insights") to a title-cased string ("Speed Insights").
+ */
+export const formatSlugToTitle = (slug: string): string =>
+  slug
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ");

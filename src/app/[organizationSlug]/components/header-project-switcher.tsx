@@ -205,7 +205,7 @@ const ProjectSwitcherContent = () => {
               <DropdownMenuSeparator />
               <div className="p-2">
                 <Button className="w-full justify-start" variant="ghost">
-                  <PlusCircle className="size-4 mr-2" />
+                  <PlusCircle className="size-4" />
                   <span>New project</span>
                 </Button>
               </div>
@@ -352,8 +352,11 @@ const ProjectSwitcherContent = () => {
 
             <DropdownMenuSeparator />
             <div className="p-2">
-              <Button className="w-full justify-start" variant="ghost">
-                <PlusCircle className="size-4 mr-2" />
+              <Button
+                className="w-full justify-center flex items-center"
+                variant="ghost"
+              >
+                <PlusCircle className="size-4" />
                 <span>New project</span>
               </Button>
             </div>

@@ -6,6 +6,8 @@ import { SITE_CONFIG } from "@/configs/site";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { ToasterProvider } from "@/providers/toaster-provider";
 import "./globals.css";
+import NextTopLoader from "nextjs-toploader";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -49,7 +51,10 @@ const RootLayout = ({
           disableTransitionOnChange
         >
           <main>
-            <TooltipProvider>{children}</TooltipProvider>
+            <NuqsAdapter>
+              <NextTopLoader />
+              <TooltipProvider>{children}</TooltipProvider>
+            </NuqsAdapter>
           </main>
           <ToasterProvider />
         </ThemeProvider>

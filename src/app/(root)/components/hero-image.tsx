@@ -1,5 +1,3 @@
-"use client";
-
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 
@@ -39,7 +37,7 @@ export const HeroImage = () => {
         )}
       >
         <div className="relative mx-auto max-w-5xl">
-          {/* Main (Center) Image */}
+          {/* Center Image */}
           <div className="relative z-20">
             <HeroImageCard className="shadow-xl ring-1 ring-foreground/5" />
           </div>
@@ -61,8 +59,6 @@ export const HeroImage = () => {
           >
             <HeroImageCard />
           </div>
-
-          {/* <div className="absolute -bottom-4 left-0 z-20 h-40 w-full bg-linear-to-t from-background via-background/40 to-transparent" /> */}
         </div>
       </div>
     </div>

@@ -83,22 +83,22 @@ export const getDashboardNav = (
         items: [
           {
             title: "Overview",
-            href: `${baseUrl}/observability/overview`,
+            href: `${baseUrl}/monitoring/overview`,
             icon: LayoutDashboard,
           },
           {
             title: "Query",
-            href: `${baseUrl}/observability/query`,
+            href: `${baseUrl}/monitoring/query`,
             icon: Activity,
           },
           {
             title: "Notebooks",
-            href: `${baseUrl}/observability/notebooks`,
+            href: `${baseUrl}/monitoring/notebooks`,
             icon: Book,
           },
           {
             title: "Alerts",
-            href: `${baseUrl}/observability/alerts`,
+            href: `${baseUrl}/monitoring/alerts`,
             icon: AlertTriangle,
           },
         ],
@@ -110,22 +110,22 @@ export const getDashboardNav = (
         items: [
           {
             title: "Functions",
-            href: `${baseUrl}/observability/functions`,
+            href: `${baseUrl}/compute/functions`,
             icon: SquareFunction,
           },
           {
             title: "External APIs",
-            href: `${baseUrl}/observability/external-apis`,
+            href: `${baseUrl}/compute/external-apis`,
             icon: Globe,
           },
           {
             title: "Middleware",
-            href: `${baseUrl}/observability/middleware`,
+            href: `${baseUrl}/compute/middleware`,
             icon: Layers,
           },
           {
             title: "Workflows",
-            href: `${baseUrl}/observability/workflows`,
+            href: `${baseUrl}/compute/workflows`,
             icon: GitBranch,
           },
         ],
@@ -137,32 +137,32 @@ export const getDashboardNav = (
         items: [
           {
             title: "Edge Requests",
-            href: `${baseUrl}/observability/edge-requests`,
+            href: `${baseUrl}/edge-network/edge-requests`,
             icon: Globe,
           },
           {
             title: "Fast Data Transfer",
-            href: `${baseUrl}/observability/fast-data-transfer`,
+            href: `${baseUrl}/edge-network/fast-data-transfer`,
             icon: ArrowRightLeft,
           },
           {
             title: "Image Optimization",
-            href: `${baseUrl}/observability/image-optimization`,
+            href: `${baseUrl}/edge-network/image-optimization`,
             icon: Image,
           },
           {
             title: "ISR",
-            href: `${baseUrl}/observability/isr`,
+            href: `${baseUrl}/edge-network/isr`,
             icon: RefreshCw,
           },
           {
             title: "External Rewrites",
-            href: `${baseUrl}/observability/external-rewrites`,
+            href: `${baseUrl}/edge-network/external-rewrites`,
             icon: Shuffle,
           },
           {
             title: "Microfrontends",
-            href: `${baseUrl}/observability/microfrontends`,
+            href: `${baseUrl}/edge-network/microfrontends`,
             icon: Package2,
           },
         ],

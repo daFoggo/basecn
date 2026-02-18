@@ -3,8 +3,8 @@
 import { ChevronLeft, ChevronRight, Search } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import Link from "next/link";
-import { useParams } from "next/navigation";
-import { Fragment, useState } from "react";
+import { useParams, usePathname } from "next/navigation";
+import { Fragment, useEffect, useMemo, useState } from "react";
 import { useCommandMenu } from "@/components/common/command-menu";
 import { Button } from "@/components/ui/button";
 import {
@@ -37,18 +37,64 @@ export const DashboardSidebar = ({
   const { setOpen } = useCommandMenu();
   const { isMobile, setOpenMobile } = useSidebar();
   const params = useParams();
+  const pathname = usePathname();
   const organizationSlug = params.organizationSlug as string;
   const projectSlug = params.projectSlug as string;
-  const [activeItem, setActiveItem] = useState<INavItem | null>(null);
+
+  // Manual expansion state (when user clicks a parent item to browse)
+  const [manualNav, setManualNav] = useState<string | null>(null);
+  // Dismiss state (when user clicks "Back" to override auto-detection)
+  const [isDismissed, setIsDismissed] = useState(false);
 
   const navData = getDashboardNav(organizationSlug, projectSlug);
 
+  // Auto-detect which parent nav item the current pathname belongs to
+  const pathActiveItem = useMemo<INavItem | null>(() => {
+    for (const group of navData) {
+      for (const item of group.items) {
+        if (
+          item.items?.some(
+            (child) =>
+              child.href && child.href !== "#" && pathname === child.href,
+          )
+        ) {
+          return item;
+        }
+      }
+    }
+    return null;
+  }, [pathname, navData]);
+
+  // Lookup manually selected item
+  const manualActiveItem = useMemo<INavItem | null>(() => {
+    if (!manualNav) return null;
+    for (const group of navData) {
+      const found = group.items.find(
+        (item) =>
+          item.title === manualNav && item.items && item.items.length > 0,
+      );
+      if (found) return found;
+    }
+    return null;
+  }, [manualNav, navData]);
+
+  // Priority: manual selection > pathname detection (unless dismissed)
+  const activeItem = manualActiveItem ?? (isDismissed ? null : pathActiveItem);
+
+  // Reset states when pathname changes (user navigated)
+  useEffect(() => {
+    setManualNav(null);
+    setIsDismissed(false);
+  }, []);
+
   const handleSubItemClick = (item: INavItem) => {
-    setActiveItem(item);
+    setManualNav(item.title);
+    setIsDismissed(false);
   };
 
   const handleBack = () => {
-    setActiveItem(null);
+    setManualNav(null);
+    setIsDismissed(true);
   };
 
   // Simplified animation variants
@@ -111,7 +157,11 @@ export const DashboardSidebar = ({
                       const Icon = subItem.icon;
                       return (
                         <SidebarMenuItem key={subItem.title}>
-                          <SidebarMenuButton asChild tooltip={subItem.title}>
+                          <SidebarMenuButton
+                            asChild
+                            tooltip={subItem.title}
+                            isActive={pathname === subItem.href}
+                          >
                             <Link
                               href={subItem.href || "#"}
                               onClick={() => isMobile && setOpenMobile(false)}
@@ -131,7 +181,7 @@ export const DashboardSidebar = ({
             <motion.div
               key="main-menu"
               variants={slideVariants}
-              initial="exit" // Animate from left when returning? Or just static. Kept simple for now.
+              initial="exit"
               animate="center"
               exit="exit"
               transition={{ type: "spring", stiffness: 300, damping: 30 }}

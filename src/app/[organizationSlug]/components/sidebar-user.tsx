@@ -6,7 +6,7 @@ import {
   MessageCircleQuestionMark,
 } from "lucide-react";
 import Link from "next/link";
-import { Suspense, use } from "react";
+import { type ReactNode, Suspense, use } from "react";
 import { ThemeSwitcher } from "@/components/common/theme-switcher";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -15,7 +15,6 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -52,7 +51,31 @@ const SidebarUserSkeleton = () => {
 
 const SidebarUserContent = () => {
   const { isMobile, state } = useSidebar();
+
   const user = use(userLoader);
+  const MENU_ITEMS: { label: string; href?: string; icon?: ReactNode }[] = [
+    {
+      label: "Theme",
+      icon: <ThemeSwitcher size="sm" />,
+    },
+    {
+      label: "Home page",
+      href: "/",
+      icon: <Home className="text-muted-foreground" />,
+    },
+    {
+      label: "Documents",
+      icon: <Book className="text-muted-foreground" />,
+    },
+    {
+      label: "Help",
+      icon: <MessageCircleQuestionMark className="text-muted-foreground" />,
+    },
+    {
+      label: "Logout",
+      icon: <LogOut className="text-muted-foreground" />,
+    },
+  ];
 
   return (
     <SidebarMenu>
@@ -94,7 +117,7 @@ const SidebarUserContent = () => {
           >
             <DropdownMenuGroup>
               <DropdownMenuItem>
-                <div className="flex justify-between items-center">
+                <div className="flex justify-between items-center w-full cursor-pointer">
                   <div className="flex flex-col gap-0.5">
                     <p className="text-md font-medium">{user?.name}</p>
                     {user?.email && (
@@ -103,39 +126,32 @@ const SidebarUserContent = () => {
                       </p>
                     )}
                   </div>
-                  <div></div>
                 </div>
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuGroup>
-              <DropdownMenuLabel>Navigations</DropdownMenuLabel>
-              <Link href={"/"}>
-                <DropdownMenuItem className="justify-between">
-                  <p>Home page</p>
-                  <Home className="text-muted-foreground" />
-                </DropdownMenuItem>
-              </Link>
-              <DropdownMenuItem className="justify-between">
-                <p>Documents</p>
-                <Book className="text-muted-foreground" />
-              </DropdownMenuItem>
-              <DropdownMenuItem className="justify-between">
-                <p>Help</p>
-                <MessageCircleQuestionMark className="text-muted-foreground" />
-              </DropdownMenuItem>
-              <DropdownMenuItem className="justify-between">
-                <p>Logout</p>
-                <LogOut className="text-muted-foreground" />
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuLabel>Settings</DropdownMenuLabel>
-              <DropdownMenuItem className="justify-between">
-                <p>Theme</p>
-                <ThemeSwitcher size="sm" />
-              </DropdownMenuItem>
+              {MENU_ITEMS.map((item) => {
+                const ItemContent = (
+                  <DropdownMenuItem
+                    key={item.label}
+                    className="justify-between cursor-pointer"
+                  >
+                    <p>{item.label}</p>
+                    {item.icon}
+                  </DropdownMenuItem>
+                );
+
+                if (item.href) {
+                  return (
+                    <Link key={item.label} href={item.href}>
+                      {ItemContent}
+                    </Link>
+                  );
+                }
+
+                return ItemContent;
+              })}
             </DropdownMenuGroup>
           </DropdownMenuContent>
         </DropdownMenu>

@@ -1,7 +1,6 @@
 import { ArrowRight, MenuIcon, XIcon } from "lucide-react";
 import Link from "next/link";
 import React from "react";
-import { GitHubStar } from "@/components/common/github-star";
 import { Button } from "@/components/ui/button";
 import { Portal, PortalBackdrop } from "@/components/ui/portal";
 import { cn } from "@/lib/utils";
@@ -49,7 +48,6 @@ export const RootMobileNav = () => {
               ))} */}
             </div>
             <div className=" flex flex-col gap-2 items-start md:items-center">
-              <GitHubStar />
               <Link href="/acme-inc" className="w-full">
                 <Button className="w-full" size="sm">
                   Go to dashboard

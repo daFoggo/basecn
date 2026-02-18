@@ -3,6 +3,7 @@
 import { ArrowRight, SquareArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { GitHubStar } from "@/components/common/github-star";
+import { ThemeSwitcher } from "@/components/common/theme-switcher";
 import { Button } from "@/components/ui/button";
 import { SITE_CONFIG } from "@/configs/site";
 import { useScroll } from "@/hooks/use-scroll";
@@ -40,23 +41,19 @@ export const RootHeader = () => {
             </span>
           </Button>
         </Link>
-        <div className="hidden items-center gap-2 md:flex">
-          {/* <div>
-            {navLinks.map((link) => (
-              <Button asChild key={link.label} size="sm" variant="ghost">
-                <a href={link.href}>{link.label}</a>
-              </Button>
-            ))}
-          </div> */}
+        <div className="flex items-center gap-2">
           <GitHubStar />
-          <Link href="/acme-inc">
-            <Button size="sm">
-              Go to dashboard
-              <ArrowRight className="size-4" />
-            </Button>
-          </Link>
+          <ThemeSwitcher size="sm" />
+          <div className="hidden items-center gap-2 md:flex">
+            <Link href="/acme-inc">
+              <Button size="sm">
+                Go to dashboard
+                <ArrowRight className="size-4" />
+              </Button>
+            </Link>
+          </div>
+          <RootMobileNav />
         </div>
-        <RootMobileNav />
       </nav>
     </header>
   );

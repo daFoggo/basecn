@@ -23,7 +23,6 @@ const RootPage = () => {
       <RootHeader />
       <main className="flex-1 relative z-10">
         <Hero />
-        {/* <Integrations /> */}
       </main>
     </div>
   );
