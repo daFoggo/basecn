@@ -99,7 +99,7 @@ const OrganizationSwitcherContent = () => {
                   {activeOrg.name}
                 </span>
               </div>
-              <ChevronsUpDown className="ml-auto group-data-[collapsible=icon]:hidden text-sidebar-primary-foreground" />
+              <ChevronsUpDown className="ml-auto group-data-[collapsible=icon]:hidden text-sidebar-foreground" />
             </SidebarMenuButton>
           </DropdownMenuTrigger>
           <DropdownMenuContent

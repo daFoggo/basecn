@@ -1,6 +1,6 @@
-import type { IOrganization } from "@/types/organization.types";
-import type { IProject } from "@/types/project.types";
-import type { IUser } from "@/types/user.types";
+import type { IOrganization } from "@/types/organization";
+import type { IProject } from "@/types/project";
+import type { IUser } from "@/types/user";
 
 export const SAMPLE_ORGANIZATIONS: IOrganization[] = [
   {

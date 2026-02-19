@@ -22,7 +22,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import { getDashboardNav } from "@/constants/dashboard-navigation";
-import type { INavItem } from "@/types/navigation.types";
+import type { INavItem } from "@/types/navigation";
 import { SidebarLogo } from "./sidebar-logo";
 import { SidebarOrganizationSwitcher } from "./sidebar-organization-switcher";
 import { SidebarTimezoneTooltip } from "./sidebar-timezone-tooltip";

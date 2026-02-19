@@ -1,5 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
+import AnimatedContent from "@/components/decoration/animated-content";
 import SplitText from "@/components/decoration/split-text";
 import { Button } from "@/components/ui/button";
 import { SITE_CONFIG } from "@/configs/site";
@@ -23,18 +24,21 @@ export const Hero = () => {
               threshold={0.1}
               textAlign="center"
             />
-            <SplitText
-              text="is already here."
-              className="text-4xl font-medium tracking-tight sm:text-6xl "
-              delay={150}
+            <AnimatedContent
+              distance={40}
+              direction="vertical"
+              delay={0.3}
               duration={1.25}
               ease="power3.out"
-              splitType="chars"
-              from={{ opacity: 0, y: 40 }}
-              to={{ opacity: 1, y: 0 }}
               threshold={0.1}
-              textAlign="center"
-            />
+              className="text-4xl font-medium tracking-tight sm:text-6xl text-center"
+            >
+              is already{" "}
+              <span className="relative inline-flex items-center px-2 rounded-sm bg-primary/10 text-primary">
+                here
+              </span>
+              .
+            </AnimatedContent>
           </div>
 
           <p className="max-w-2xl text-md text-muted-foreground sm:text-lg">

@@ -8,7 +8,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import type { INavItem } from "@/types/navigation.types";
+import type { INavItem } from "@/types/navigation";
 
 interface HeaderBreadcrumbProps {
   items: INavItem[];

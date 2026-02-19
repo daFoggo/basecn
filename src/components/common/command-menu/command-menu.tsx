@@ -24,7 +24,7 @@ import { Kbd } from "@/components/ui/kbd";
 import { getDashboardNav } from "@/constants/dashboard-navigation";
 import { THEME_OPTIONS } from "@/constants/theme";
 import { useMutationObserver } from "@/hooks/use-mutation-observer";
-import type { TFlatNavGroup, TFlatNavItem } from "@/types/navigation.types";
+import type { TFlatNavGroup, TFlatNavItem } from "@/types/navigation";
 import { flattenNavData } from "@/utils/navigation";
 import { useCommandMenu } from "./command-menu-context";
 

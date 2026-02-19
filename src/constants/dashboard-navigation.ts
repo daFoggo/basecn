@@ -22,10 +22,11 @@ import {
   ShieldAlert,
   Shuffle,
   SquareFunction,
+  Table,
   Timer,
   ToggleLeft,
 } from "lucide-react";
-import type { INavGroup } from "@/types/navigation.types";
+import type { INavGroup } from "@/types/navigation";
 
 export const getDashboardNav = (
   orgSlug: string,
@@ -69,6 +70,11 @@ export const getDashboardNav = (
         title: "Speed Insights",
         href: `${baseUrl}/speed-insights`,
         icon: Timer,
+      },
+      {
+        title: "Data Table",
+        href: `${baseUrl}/data-table`,
+        icon: Table,
       },
     ],
   };

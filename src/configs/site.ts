@@ -1,7 +1,7 @@
 /**
  * @description Site configuration
  */
-import type { ISiteConfig } from "@/types/site.types";
+import type { ISiteConfig } from "@/types/site";
 export const SITE_CONFIG: ISiteConfig = {
   metadata: {
     title: "basecn",

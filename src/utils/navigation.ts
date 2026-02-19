@@ -4,7 +4,7 @@ import type {
   INavItem,
   TFlatNavGroup,
   TFlatNavItem,
-} from "@/types/navigation.types";
+} from "@/types/navigation";
 
 // ============================================================================
 // 1. FLATTEN NAVIGATION (For Command Menu / Search)

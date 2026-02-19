@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { EB_Garamond, Geist, Geist_Mono, Merriweather } from "next/font/google";
 import Script from "next/script";
 import NextTopLoader from "nextjs-toploader";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
@@ -9,6 +9,7 @@ import { SITE_CONFIG } from "@/configs/site";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { ToasterProvider } from "@/providers/toaster-provider";
 import "./globals.css";
+import { env } from "@/configs/env";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,6 +18,16 @@ const geistSans = Geist({
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
+const ebGaramond = EB_Garamond({
+  variable: "--font-eb-garamond",
+  subsets: ["latin"],
+});
+
+const merriweather = Merriweather({
+  variable: "--font-merriweather",
   subsets: ["latin"],
 });
 
@@ -42,11 +53,11 @@ const RootLayout = ({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${ebGaramond.variable} ${merriweather.variable} antialiased`}
     >
       <Script
         src="https://cdn.seline.com/seline.js"
-        data-token="PROJECT_TOKEN" // can be found at General settings
+        data-token={env.SELINE_TOKEN}
         strategy="afterInteractive"
       />
       <body>
