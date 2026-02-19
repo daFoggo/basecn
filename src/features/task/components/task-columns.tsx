@@ -11,77 +11,69 @@ import {
   Tag,
   Text,
   Users,
+  X,
   XCircle,
   Zap,
 } from "lucide-react";
 import { useMemo } from "react";
 import { DataTableColumnHeader } from "@/components/common/data-table/data-table-column-header";
+import {
+  Avatar,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarGroupCount,
+} from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
-import { createLevelConfig } from "@/constants/color-levels";
-import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
+import {
+  Item,
+  ItemActions,
+  ItemContent,
+  ItemGroup,
+  ItemMedia,
+  ItemTitle,
+} from "@/components/ui/item";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import {
   CATEGORY_OPTIONS,
-  type ITask,
+  PRIORITY_COLOR_CONFIG,
   PRIORITY_OPTIONS,
+  STATUS_COLOR_CONFIG,
   STATUS_OPTIONS,
-  type TTaskPriority,
-  type TTaskStatus,
-} from "../_data/tasks";
+} from "@/features/task/constants";
+import type { ITask, TTaskPriority, TTaskStatus } from "@/features/task/types";
+import { cn } from "@/lib/utils";
 
-// ─── Color Config ─────────────────────────────────────────────────────────────
-
-const STATUS_CONFIG = createLevelConfig<TTaskStatus>({
-  todo: { level: "neutral", label: "Todo" },
-  in_progress: { level: "blue", label: "In Progress" },
-  done: { level: "success", label: "Done" },
-  cancelled: { level: "gray", label: "Cancelled" },
-});
-
-const PRIORITY_CONFIG = createLevelConfig<TTaskPriority>({
-  low: { level: "neutral", label: "Low" },
-  medium: { level: "blue", label: "Medium" },
-  high: { level: "warning", label: "High" },
-  urgent: { level: "danger", label: "Urgent" },
-});
-
-// ─── Cell Renderers ───────────────────────────────────────────────────────────
-
-const getStatusBadge = (status: TTaskStatus) => {
-  const config = STATUS_CONFIG[status] || STATUS_CONFIG.todo;
+const renderStatusBadge = (status: TTaskStatus) => {
+  const config = STATUS_COLOR_CONFIG[status] || STATUS_COLOR_CONFIG.todo;
   return (
     <Badge
       variant="outline"
-      className={cn(
-        "border-transparent font-medium",
-        config.bgSubtle,
-        config.text,
-      )}
+      className={cn("font-normal", config.bgSubtle, config.text)}
     >
       {config.label}
     </Badge>
   );
 };
 
-const getPriorityBadge = (priority: TTaskPriority) => {
-  const config = PRIORITY_CONFIG[priority] || PRIORITY_CONFIG.low;
+const renderPriorityBadge = (priority: TTaskPriority) => {
+  const config = PRIORITY_COLOR_CONFIG[priority] || PRIORITY_COLOR_CONFIG.low;
   return (
-    <div className="flex items-center gap-2">
-      <span
-        className={cn(
-          "flex items-center rounded-full px-2 py-0.5 text-xs font-medium capitalize",
-          config.bgSubtle,
-          config.text,
-        )}
-      >
-        {config.label}
-      </span>
-    </div>
+    <Badge
+      variant="outline"
+      className={cn("capitalize font-normal", config.bgSubtle, config.text)}
+    >
+      {config.label}
+    </Badge>
   );
 };
 
-// ─── Hook ─────────────────────────────────────────────────────────────────────
-
-export const useTaskColumns = (): ColumnDef<ITask>[] => {
+export const useTaskColumns = () => {
   return useMemo<ColumnDef<ITask>[]>(
     () => [
       {
@@ -122,7 +114,7 @@ export const useTaskColumns = (): ColumnDef<ITask>[] => {
         id: "status",
         accessorKey: "status",
         header: ({ column }) => <DataTableColumnHeader column={column} />,
-        cell: ({ row }) => getStatusBadge(row.getValue("status")),
+        cell: ({ row }) => renderStatusBadge(row.getValue("status")),
         meta: {
           label: "Status",
           variant: "multiSelect",
@@ -136,7 +128,7 @@ export const useTaskColumns = (): ColumnDef<ITask>[] => {
         id: "priority",
         accessorKey: "priority",
         header: ({ column }) => <DataTableColumnHeader column={column} />,
-        cell: ({ row }) => getPriorityBadge(row.getValue("priority")),
+        cell: ({ row }) => renderPriorityBadge(row.getValue("priority")),
         meta: {
           label: "Priority",
           variant: "select",
@@ -163,19 +155,88 @@ export const useTaskColumns = (): ColumnDef<ITask>[] => {
         enableSorting: true,
       },
       {
-        id: "assignee",
-        accessorKey: "assignee",
+        id: "assignees",
+        accessorKey: "assignees",
         header: ({ column }) => <DataTableColumnHeader column={column} />,
-        cell: ({ row }) => (
-          <div className="flex items-center gap-2">
-            <div className="flex size-6 shrink-0 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">
-              {(row.getValue("assignee") as string).charAt(0)}
-            </div>
-            <span className="truncate text-sm">{row.getValue("assignee")}</span>
-          </div>
-        ),
+        cell: ({ row }) => {
+          const assignees = row.getValue("assignees") as string[];
+          const minimalCount = 3;
+          const showAssignees = assignees.slice(0, minimalCount);
+          const remaining = assignees.length - minimalCount;
+
+          return (
+            <HoverCard openDelay={300} closeDelay={300}>
+              <HoverCardTrigger asChild>
+                <div className="flex items-center gap-2 cursor-pointer">
+                  <AvatarGroup data-size="sm">
+                    {showAssignees.map((assignee) => (
+                      <Avatar key={assignee} size="sm">
+                        <AvatarFallback>
+                          {assignee
+                            .split(" ")
+                            .map((n) => n[0])
+                            .join("")
+                            .slice(0, 2)
+                            .toUpperCase()}
+                        </AvatarFallback>
+                      </Avatar>
+                    ))}
+                    {remaining > 0 && (
+                      <AvatarGroupCount>+{remaining}</AvatarGroupCount>
+                    )}
+                  </AvatarGroup>
+                  <span className="truncate text-sm">
+                    {assignees.length === 1
+                      ? assignees[0]
+                      : `${assignees.length} Assignees`}
+                  </span>
+                </div>
+              </HoverCardTrigger>
+              <HoverCardContent className="flex flex-col items-start gap-4">
+                <p className="text-sm font-semibold">Assignees</p>
+                <ScrollArea className="h-52 w-full">
+                  <div>
+                    <ItemGroup className=" gap-2">
+                      {assignees.map((assignee) => (
+                        <Item
+                          key={assignee}
+                          size="sm"
+                          className="p-1"
+                          variant="muted"
+                        >
+                          <ItemMedia>
+                            <Avatar size="sm">
+                              <AvatarFallback>
+                                {assignee
+                                  .split(" ")
+                                  .map((n) => n[0])
+                                  .join("")
+                                  .slice(0, 2)
+                                  .toUpperCase()}
+                              </AvatarFallback>
+                            </Avatar>
+                          </ItemMedia>
+                          <ItemContent>
+                            <ItemTitle className="font-normal">
+                              {assignee}
+                            </ItemTitle>
+                          </ItemContent>
+                          <ItemActions>
+                            <Button variant="secondary" size="icon-xs">
+                              <X />
+                            </Button>
+                          </ItemActions>
+                        </Item>
+                      ))}
+                    </ItemGroup>
+                  </div>
+                </ScrollArea>
+              </HoverCardContent>
+            </HoverCard>
+          );
+        },
         meta: {
-          label: "Assignee",
+          label: "Assignees",
           placeholder: "Search assignees...",
           variant: "text",
           icon: Users,

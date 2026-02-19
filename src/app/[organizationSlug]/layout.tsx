@@ -13,11 +13,11 @@ const DashboardLayout = ({
 }) => {
   return (
     <CommandMenuProvider>
-      <SidebarProvider>
+      <SidebarProvider className="h-svh overflow-hidden">
         <DashboardSidebar enableOrganizationSwitcher />
-        <SidebarInset>
+        <SidebarInset className="overflow-hidden">
           <DashboardHeader breadcrumb={breadcrumb} />
-          <div className="flex-1 p-4">{children}</div>
+          <div className="flex-1 overflow-auto p-4">{children}</div>
         </SidebarInset>
       </SidebarProvider>
     </CommandMenuProvider>

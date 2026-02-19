@@ -5,11 +5,11 @@ import NextTopLoader from "nextjs-toploader";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import type { ReactNode } from "react";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { envConfig } from "@/configs/env";
 import { SITE_CONFIG } from "@/configs/site";
 import { ThemeProvider } from "@/providers/theme-provider";
 import { ToasterProvider } from "@/providers/toaster-provider";
 import "./globals.css";
-import { env } from "@/configs/env";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -57,7 +57,7 @@ const RootLayout = ({
     >
       <Script
         src="https://cdn.seline.com/seline.js"
-        data-token={env.SELINE_TOKEN}
+        data-token={envConfig.SELINE_TOKEN}
         strategy="afterInteractive"
       />
       <body>
@@ -69,7 +69,7 @@ const RootLayout = ({
         >
           <main>
             <NuqsAdapter>
-              <NextTopLoader />
+              <NextTopLoader showSpinner={false} />
               <TooltipProvider>{children}</TooltipProvider>
             </NuqsAdapter>
           </main>

@@ -1,0 +1,239 @@
+[
+  {
+    "id": "TASK-001",
+    "title": "Implement user authentication flow",
+    "status": "done",
+    "priority": "high",
+    "category": "feature",
+    "assignees": [
+      "Alice Johnson",
+      "Bob Smith"
+    ],
+    "estimatedHours": 16,
+    "budget": 3200,
+    "dueDate": 1736899200000,
+    "isBlocked": false,
+    "completionRate": 100
+  },
+  {
+    "id": "TASK-002",
+    "title": "Fix payment gateway timeout issue",
+    "status": "in_progress",
+    "priority": "urgent",
+    "category": "bug",
+    "assignees": [
+      "Bob Smith"
+    ],
+    "estimatedHours": 8,
+    "budget": 1600,
+    "dueDate": 1737331200000,
+    "isBlocked": true,
+    "completionRate": 45
+  },
+  {
+    "id": "TASK-003",
+    "title": "Update API documentation",
+    "status": "todo",
+    "priority": "low",
+    "category": "docs",
+    "assignees": [
+      "Carol White",
+      "David Lee"
+    ],
+    "estimatedHours": 4,
+    "budget": 800,
+    "dueDate": 1738368000000,
+    "isBlocked": false,
+    "completionRate": 0
+  },
+  {
+    "id": "TASK-004",
+    "title": "Refactor database connection pooling",
+    "status": "in_progress",
+    "priority": "medium",
+    "category": "chore",
+    "assignees": [
+      "David Lee",
+      "Frank Miller",
+      "Grace Kim"
+    ],
+    "estimatedHours": 12,
+    "budget": 2400,
+    "dueDate": 1738022400000,
+    "isBlocked": false,
+    "completionRate": 60
+  },
+  {
+    "id": "TASK-005",
+    "title": "Design new onboarding screens",
+    "status": "todo",
+    "priority": "high",
+    "category": "feature",
+    "assignees": [
+      "Emma Davis"
+    ],
+    "estimatedHours": 20,
+    "budget": 4000,
+    "dueDate": 1739145600000,
+    "isBlocked": false,
+    "completionRate": 0
+  },
+  {
+    "id": "TASK-006",
+    "title": "Fix mobile navigation menu overlap",
+    "status": "done",
+    "priority": "medium",
+    "category": "bug",
+    "assignees": [
+      "Frank Miller"
+    ],
+    "estimatedHours": 3,
+    "budget": 600,
+    "dueDate": 1736467200000,
+    "isBlocked": false,
+    "completionRate": 100
+  },
+  {
+    "id": "TASK-007",
+    "title": "Add dark mode support",
+    "status": "in_progress",
+    "priority": "medium",
+    "category": "feature",
+    "assignees": [
+      "Grace Kim",
+      "Henry Brown"
+    ],
+    "estimatedHours": 10,
+    "budget": 2000,
+    "dueDate": 1738713600000,
+    "isBlocked": false,
+    "completionRate": 75
+  },
+  {
+    "id": "TASK-008",
+    "title": "Set up CI/CD pipeline",
+    "status": "done",
+    "priority": "high",
+    "category": "chore",
+    "assignees": [
+      "Henry Brown",
+      "Alice Johnson",
+      "Bob Smith",
+      "Karen Taylor"
+    ],
+    "estimatedHours": 8,
+    "budget": 1600,
+    "dueDate": 1736035200000,
+    "isBlocked": false,
+    "completionRate": 100
+  },
+  {
+    "id": "TASK-009",
+    "title": "Implement real-time notifications",
+    "status": "todo",
+    "priority": "high",
+    "category": "feature",
+    "assignees": [
+      "Iris Chen"
+    ],
+    "estimatedHours": 24,
+    "budget": 4800,
+    "dueDate": 1740009600000,
+    "isBlocked": true,
+    "completionRate": 0
+  },
+  {
+    "id": "TASK-010",
+    "title": "Resolve memory leak in image processor",
+    "status": "cancelled",
+    "priority": "urgent",
+    "category": "bug",
+    "assignees": [
+      "Jack Wilson",
+      "Noah Garcia"
+    ],
+    "estimatedHours": 6,
+    "budget": 1200,
+    "dueDate": 1736640000000,
+    "isBlocked": false,
+    "completionRate": 30
+  },
+  {
+    "id": "TASK-011",
+    "title": "Write unit tests for checkout module",
+    "status": "in_progress",
+    "priority": "medium",
+    "category": "chore",
+    "assignees": [
+      "Karen Taylor"
+    ],
+    "estimatedHours": 14,
+    "budget": 2800,
+    "dueDate": 1738195200000,
+    "isBlocked": false,
+    "completionRate": 40
+  },
+  {
+    "id": "TASK-012",
+    "title": "Migrate legacy REST endpoints to GraphQL",
+    "status": "todo",
+    "priority": "low",
+    "category": "feature",
+    "assignees": [
+      "Liam Anderson",
+      "Mia Martinez",
+      "Olivia Thompson"
+    ],
+    "estimatedHours": 40,
+    "budget": 8000,
+    "dueDate": 1740787200000,
+    "isBlocked": false,
+    "completionRate": 0
+  },
+  {
+    "id": "TASK-013",
+    "title": "Add CSV export functionality",
+    "status": "done",
+    "priority": "low",
+    "category": "feature",
+    "assignees": [
+      "Mia Martinez"
+    ],
+    "estimatedHours": 5,
+    "budget": 1000,
+    "dueDate": 1736294400000,
+    "isBlocked": false,
+    "completionRate": 100
+  },
+  {
+    "id": "TASK-014",
+    "title": "Investigate slow dashboard load times",
+    "status": "in_progress",
+    "priority": "urgent",
+    "category": "bug",
+    "assignees": [
+      "Noah Garcia"
+    ],
+    "estimatedHours": 10,
+    "budget": 2000,
+    "dueDate": 1737504000000,
+    "isBlocked": false,
+    "completionRate": 55
+  },
+  {
+    "id": "TASK-015",
+    "title": "Update third-party dependencies",
+    "status": "todo",
+    "priority": "medium",
+    "category": "chore",
+    "assignees": [
+      "Olivia Thompson",
+      "Jack Wilson"
+    ],
+    "estimatedHours": 6,
+    "budget": 1200,
+    "dueDate": 1739577600000,
+    "isBlocked": false,
+    "completionRate": 0
+  }
+]

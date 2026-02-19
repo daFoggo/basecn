@@ -4,7 +4,7 @@ import { z } from "zod";
 /**
  * @description Environment variables schema and validation
  */
-export const env = createEnv({
+export const envConfig = createEnv({
   server: {
     DATABASE_URL: z.url(),
     OPEN_AI_API_KEY: z.string().min(1),
@@ -19,6 +19,7 @@ export const env = createEnv({
     DATABASE_URL: process.env.DATABASE_URL,
     OPEN_AI_API_KEY: process.env.OPEN_AI_API_KEY,
     SELINE_TOKEN: process.env.SELINE_TOKEN,
+
     NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY:
       process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY,
   },

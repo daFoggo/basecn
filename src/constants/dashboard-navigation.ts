@@ -73,7 +73,10 @@ export const getDashboardNav = (
       },
       {
         title: "Data Table",
-        href: `${baseUrl}/data-table`,
+        // href: `${baseUrl}/data-table`,
+        href: isProjectContext
+          ? `${baseUrl}/data-table`
+          : `/${orgSlug}/data-table`,
         icon: Table,
       },
     ],
