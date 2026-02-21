@@ -1,36 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# basecn
 
-## Getting Started
+## 1. Project Overview
 
-First, run the development server:
+This project serves as a comprehensive base template to help developers quickly bootstrap modern web applications. It focuses on providing a well-structured foundation, essential UI components (layouts, data tables, sidebars), and adherence to current best practices in web development.
+
+**Tech Stack**
+
+- Framework: Next.js (App Router), React
+- Language: TypeScript
+- Styling: Tailwind CSS v4, shadcn/ui
+- State Management & Data Fetching: SWR
+- Data Validation: Zod, @t3-oss/env-nextjs
+- Table: Tanstack Table, diceui
+
+**Key Features**
+
+- Ready-to-use Layout & Navigation: Out-of-the-box support for Sidebars, Headers, Breadcrumbs, and hierarchical routing.
+- Advanced Data Tables: Built-in support for filtering, sorting, and pagination.
+- Strict Type-safe Environments: Build-time environment variable validation.
+- Feature-based Architecture: Highly maintainable and scalable directory structure.
+
+---
+
+## 2. Installation Setup
+
+This project uses **pnpm** as its package manager. Please ensure you have Node.js and pnpm installed on your system.
+
+**Step 1: Clone the repository**
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/daFoggo/basecn
+cd basecn
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+**Step 2: Install dependencies**
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm approve-builds
+```
 
-## Learn More
+**Step 3: Run the development server**
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+pnpm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 3. Project Configuration
 
-## Deploy on Vercel
+### Environment Variables (.env)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The project is built with strict environment variable validation. The application will fail to start or build if required configuration variables are missing.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Start by copying the example environment file:
+
+```bash
+cp .env.example .env
+```
+
+Then, update the necessary configurations, including Database connection strings and API keys (Clerk, OpenAI, etc.).
+
+### Global Configurations (`src/configs`)
+
+All shared definitions and configurations are centralized in `src/configs`:
+
+- `env.ts`: Defines and validates the schema for all environment variables (both Server and Client). If you add a new variable to `.env`, you must define its validation logic here.
+- `site.ts`: Contains general site metadata (Site title, SEO keywords, author information).
+
+---
+
+## 4. Architecture and Code Conventions
+
+The project implements a **Feature-based architecture** to group code by its domain or feature rather than its file type.
+
+In traditional structures, all components are placed in `src/components`, `app/[route]/components` and APIs in `app/[route]/api`, making large projects difficult to navigate and maintain. The feature-based approach ensures that taking a feature out or deleting it is straightforward without affecting other parts of the system.
+
+**Directory Structure of a Feature (`src/features/...`)**
+
+Using the "Task" feature as an example (`src/features/task`), a typical feature directory looks like this:
+
+- `index.ts`: The public API of the feature. External modules must only import from this `index.ts` file.
+- `components/`: Feature-specific UI components. (Generic, reusable components belong in `src/components`).
+- `api.ts`: Client-side data fetching logic (API client) calling the backend or BFF.
+- `hooks.ts` (or `hooks/`): Custom React hooks, including SWR data-fetching hooks that wrap `api.ts` calls.
+- `server.ts`: Server-side logic (e.g., BFF implementation, direct database queries). Intended exclusively for Next.js Server Components, API routes, or Server Actions. Never import this into Client Components.
+- `types.ts`: TypeScript interfaces and types for the feature.
+- `constants.ts`: Static constant definitions.
+- `utils.ts`: Small utility and helper functions specific to the feature.
+
+**Communication Principles:**
+
+- Components outside the `task` directory should only import items explicitly exported via `src/features/task/index.ts`.
+- Avoid cross-importing between features that do not share a logical dependency to prevent tight coupling.
+
+## 5. Useful Resources
+
+- **Landing blocks:** [Efferd](https://efferd.com)
+- **Decorations:** [React Bits](https://reactbits.dev/)
+- **Components:** [shadcn/ui](https://ui.shadcn.com/), [Dice UI](https://www.diceui.com), [ElevenLabs UI](https://ui.elevenlabs.io/), [AI SDK Elements](https://elements.ai-sdk.dev/)
+- **Routing concept:** [Next.js App Router Layouts](https://app-router.vercel.app/layouts)

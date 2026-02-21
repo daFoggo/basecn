@@ -1,30 +1,12 @@
 import {
-  Activity,
-  AlertTriangle,
-  ArrowRightLeft,
-  Book,
-  Box,
-  Cloud,
-  Cpu,
-  Database,
-  Eye,
-  GitBranch,
-  Globe,
-  Image,
-  Layers,
+  Bell,
+  FileText,
   LayoutDashboard,
-  LayoutGrid,
-  LineChart,
-  List,
-  Package2,
-  RefreshCw,
-  Settings2,
-  ShieldAlert,
-  Shuffle,
-  SquareFunction,
+  Settings,
+  Shield,
   Table,
-  Timer,
-  ToggleLeft,
+  UserCircle,
+  Users,
 } from "lucide-react";
 import type { INavGroup } from "@/types/navigation";
 
@@ -37,8 +19,8 @@ export const getDashboardNav = (
     ? `/${orgSlug}/${projectSlug}`
     : `/${orgSlug}/~`;
 
-  const coreGroup: INavGroup = {
-    title: isProjectContext ? "Project" : "Organization",
+  const appGroup: INavGroup = {
+    title: "Application",
     items: [
       isProjectContext
         ? {
@@ -49,170 +31,59 @@ export const getDashboardNav = (
         : {
             title: "Projects",
             href: `/${orgSlug}/projects`,
-            icon: LayoutGrid,
+            icon: LayoutDashboard,
           },
       {
-        title: "Deployments",
-        href: `${baseUrl}/deployments`,
-        icon: Box,
-      },
-      {
-        title: "Logs",
-        href: `${baseUrl}/logs`,
-        icon: List,
-      },
-      {
-        title: "Analytics",
-        href: `${baseUrl}/analytics`,
-        icon: LineChart,
-      },
-      {
-        title: "Speed Insights",
-        href: `${baseUrl}/speed-insights`,
-        icon: Timer,
-      },
-      {
         title: "Data Table",
-        // href: `${baseUrl}/data-table`,
-        href: isProjectContext
-          ? `${baseUrl}/data-table`
-          : `/${orgSlug}/data-table`,
+        href: `/${orgSlug}/data-table`,
         icon: Table,
       },
     ],
   };
 
-  const obsGroup: INavGroup = {
-    title: "Observability",
+  const managementGroup: INavGroup = {
+    title: "Management",
     items: [
       {
-        title: "Monitoring",
+        title: "Users",
         href: "#",
-        icon: Eye,
+        icon: Users,
         items: [
           {
-            title: "Overview",
-            href: `${baseUrl}/monitoring/overview`,
-            icon: LayoutDashboard,
+            title: "Members",
+            href: `${baseUrl}/users/members`,
+            icon: UserCircle,
           },
           {
-            title: "Query",
-            href: `${baseUrl}/monitoring/query`,
-            icon: Activity,
-          },
-          {
-            title: "Notebooks",
-            href: `${baseUrl}/monitoring/notebooks`,
-            icon: Book,
-          },
-          {
-            title: "Alerts",
-            href: `${baseUrl}/monitoring/alerts`,
-            icon: AlertTriangle,
+            title: "Roles",
+            href: `${baseUrl}/users/roles`,
+            icon: Shield,
           },
         ],
       },
       {
-        title: "Compute",
-        href: "#",
-        icon: Cpu,
-        items: [
-          {
-            title: "Functions",
-            href: `${baseUrl}/compute/functions`,
-            icon: SquareFunction,
-          },
-          {
-            title: "External APIs",
-            href: `${baseUrl}/compute/external-apis`,
-            icon: Globe,
-          },
-          {
-            title: "Middleware",
-            href: `${baseUrl}/compute/middleware`,
-            icon: Layers,
-          },
-          {
-            title: "Workflows",
-            href: `${baseUrl}/compute/workflows`,
-            icon: GitBranch,
-          },
-        ],
-      },
-      {
-        title: "Edge Network",
-        href: "#",
-        icon: Cloud,
-        items: [
-          {
-            title: "Edge Requests",
-            href: `${baseUrl}/edge-network/edge-requests`,
-            icon: Globe,
-          },
-          {
-            title: "Fast Data Transfer",
-            href: `${baseUrl}/edge-network/fast-data-transfer`,
-            icon: ArrowRightLeft,
-          },
-          {
-            title: "Image Optimization",
-            href: `${baseUrl}/edge-network/image-optimization`,
-            icon: Image,
-          },
-          {
-            title: "ISR",
-            href: `${baseUrl}/edge-network/isr`,
-            icon: RefreshCw,
-          },
-          {
-            title: "External Rewrites",
-            href: `${baseUrl}/edge-network/external-rewrites`,
-            icon: Shuffle,
-          },
-          {
-            title: "Microfrontends",
-            href: `${baseUrl}/edge-network/microfrontends`,
-            icon: Package2,
-          },
-        ],
-      },
-      {
-        title: "Firewall",
-        href: `${baseUrl}/firewall`,
-        icon: ShieldAlert,
-      },
-    ],
-  };
-  const settingsGroup: INavGroup = {
-    title: "Settings",
-    items: [
-      {
-        title: "Domains",
-        href: `${baseUrl}/domains`,
-        icon: Globe,
-      },
-      {
-        title: "Integrations",
-        href: `${baseUrl}/integrations`,
-        icon: List,
-      },
-      {
-        title: "Storage",
-        href: `${baseUrl}/storage`,
-        icon: Database,
-      },
-      {
-        title: "Flags",
-        href: `${baseUrl}/flags`,
-        icon: ToggleLeft,
-      },
-      {
-        title: "General",
-        href: `${baseUrl}/settings/general`,
-        icon: Settings2,
+        title: "Reports",
+        href: `${baseUrl}/reports`,
+        icon: FileText,
       },
     ],
   };
 
-  return [coreGroup, obsGroup, settingsGroup];
+  const settingsGroup: INavGroup = {
+    title: "Settings",
+    items: [
+      {
+        title: "General",
+        href: `${baseUrl}/settings/general`,
+        icon: Settings,
+      },
+      {
+        title: "Notifications",
+        href: `${baseUrl}/settings/notifications`,
+        icon: Bell,
+      },
+    ],
+  };
+
+  return [appGroup, managementGroup, settingsGroup];
 };

@@ -6,11 +6,11 @@ interface PageParams {
   catchAll: string[];
 }
 
-interface PageProps {
+interface IPageProps {
   params: Promise<PageParams>;
 }
 
-export default async function BreadcrumbcatchAllPage({ params }: PageProps) {
+export default async function BreadcrumbcatchAllPage({ params }: IPageProps) {
   const resolvedParams = await params;
   const items = getDashboardBreadcrumb(
     resolvedParams.organizationSlug,

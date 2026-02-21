@@ -1,11 +1,11 @@
 import { Suspense } from "react";
 import { TaskDataTable, taskServer } from "@/features/task";
 
-interface PageProps {
+interface IPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
-const DataTableDemoPage = async (props: PageProps) => {
+const DataTableDemoPage = async (props: IPageProps) => {
   const searchParams = await props.searchParams;
   const p = new URLSearchParams();
   const resolvedParams = searchParams;

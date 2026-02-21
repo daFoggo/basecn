@@ -5,11 +5,11 @@ interface PageParams {
   organizationSlug: string;
 }
 
-interface PageProps {
+interface IPageProps {
   params: Promise<PageParams>;
 }
 
-export default async function BreadcrumbPage({ params }: PageProps) {
+export default async function BreadcrumbPage({ params }: IPageProps) {
   const { organizationSlug } = await params;
   const items = getDashboardBreadcrumb(organizationSlug, []);
 
