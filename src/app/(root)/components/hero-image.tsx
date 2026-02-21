@@ -12,14 +12,14 @@ const HeroImageCard = ({ className }: { className?: string }) => {
       <Image
         alt="app screen"
         className="z-2 aspect-video rounded-lg border dark:hidden w-full h-auto"
-        src="https://storage.efferd.com/screen/dashboard-light.webp"
+        src="/imgs/demo-light.png"
         width={1920}
         height={1080}
       />
       <Image
         alt="app screen"
         className="hidden aspect-video rounded-lg bg-background dark:block w-full h-auto"
-        src="https://storage.efferd.com/screen/dashboard-dark.webp"
+        src="/imgs/demo-dark.png"
         width={1920}
         height={1080}
       />
