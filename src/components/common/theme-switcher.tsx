@@ -97,7 +97,7 @@ export const ThemeSwitcher = ({
                 "relative z-10 m-auto transition-colors",
                 config.icon,
                 isActive
-                  ? "text-foreground"
+                  ? "text-secondary-foreground"
                   : "text-muted-foreground group-hover:text-foreground",
               )}
             />
